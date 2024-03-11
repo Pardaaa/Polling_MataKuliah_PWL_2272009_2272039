@@ -81,7 +81,8 @@
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div>
-                    <div class="d-grid gap-2">
+                    <div class="gap-2 col-6 d-md-inline-flex">
+                        <button type="submit" class="btn">Submit</button>
                         <button type="submit" class="btn">Submit</button>
                     </div>
                 </form>
