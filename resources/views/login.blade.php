@@ -40,7 +40,7 @@
         input[type="password"] {
             border: 2px solid lightcyan;
             border-radius: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
 
         input[type="email"]:focus,
@@ -50,13 +50,15 @@
             background: lightgrey;
             color: black;
             font-size: 16px;
-            margin: 0;
         }
 
         .btn {
+            margin-top: 20px;
             background: white;
             color: black;
-            font-size: 14px;
+            font-size: 15px;
+            font-weight: bold;
+            width: 50%;
         }
 
     </style>
@@ -70,20 +72,16 @@
             <div class="card-text">
                 <form>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <label for="exampleInputEmail1" class="form-label">Username</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
                         <input type="password" class="form-control" id="exampleInputPassword1">
                     </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                    <div class="gap-2 col-6 d-md-inline-flex">
-                        <button type="submit" class="btn">Submit</button>
-                        <button type="submit" class="btn">Submit</button>
+                    <div class=" gap-2 d-flex">
+                        <button type="submit" class="btn">Login</button>
+                        <button type="submit" class="btn">Register</button>
                     </div>
                 </form>
             </div>
