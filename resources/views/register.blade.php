@@ -93,9 +93,9 @@
                         <label for="" class="form-label">Masuk Sebagai</label>
                         <div>
                             <select class="form-control" id="" name="" required>
-                                <option selected>Choose...</option>
+                                <option selected>Sebagai</option>
                                 <option value="Mahasiswa">Mahasiswa</option>
-                                <option value="B">B</option>
+                                <option value="B"></option>
                                 <option value="O">O</option>
                                 <option value="AB">AB</option>
                             </select>
