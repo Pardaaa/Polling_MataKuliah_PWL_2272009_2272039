@@ -37,14 +37,18 @@
         }
 
         input[type="email"],
-        input[type="password"] {
+        input[type="text"],
+        input[type="password"],
+        select{
             border: 2px solid red;
             border-radius: 10px;
             margin-bottom: 10px;
         }
 
         input[type="email"]:focus,
-        input[type="password"]:focus {
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        select{
             outline: none;
             border: none;
             background: lightgrey;
@@ -85,10 +89,11 @@
                         <label for="exampleInputEmail1" class="form-label">Username</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                     </div>
-                    <div class="row form-group">
+                    <div class="form-group">
                         <label for="" class="form-label">Masuk Sebagai</label>
                         <div>
-                            <select type="option" class="form-control" id="" name="" required>
+                            <select class="form-control" id="" name="" required>
+                                <option selected>Choose...</option>
                                 <option value="Mahasiswa">Mahasiswa</option>
                                 <option value="B">B</option>
                                 <option value="O">O</option>
