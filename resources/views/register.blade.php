@@ -95,9 +95,9 @@
                             <select class="form-control" id="" name="" required>
                                 <option selected>Sebagai</option>
                                 <option value="Mahasiswa">Mahasiswa</option>
-                                <option value="B"></option>
-                                <option value="O">O</option>
-                                <option value="AB">AB</option>
+                                <option value="Admin">Admin</option>
+                                <option value=""></option>
+                                <option value=""></option>
                             </select>
                         </div>
                     </div>
