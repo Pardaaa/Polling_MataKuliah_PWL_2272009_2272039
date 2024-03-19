@@ -27,8 +27,8 @@
         }
 
         .login-form {
-            width: 380px;
-            height: 450px;
+            width: 450px;
+            height: 550px;
             padding: 20px;
             background-color: tomato  !important;
             border-radius: 10px;
@@ -40,7 +40,7 @@
         input[type="password"] {
             border: 2px solid red;
             border-radius: 10px;
-            margin-bottom: 40px;
+            margin-bottom: 10px;
         }
 
         input[type="email"]:focus,
@@ -75,19 +75,35 @@
             <h1 class="card-title text-center">REGISTER</h1>
         </div>
         <div class="card-text">
-            <form>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Username</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <form method="" action="">
+                <div class="card-body">
+                    <div class="form-group ">
+                        <label for="exampleInputEmail1" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="form-label">Username</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="row form-group">
+                        <label for="" class="form-label">Masuk Sebagai</label>
+                        <div>
+                            <select type="option" class="form-control" id="" name="" required>
+                                <option value="Mahasiswa">Mahasiswa</option>
+                                <option value="B">B</option>
+                                <option value="O">O</option>
+                                <option value="AB">AB</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn"><a href="{{ route('route-register') }}">Register</a></button>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
-                </div>
-                <div class="d-grid gap-2">
-                    <button type="submit" class="btn register"><a href="{{ route('route-register') }}">Register</a></button>
-                </div>
-
             </form>
         </div>
     </div>
