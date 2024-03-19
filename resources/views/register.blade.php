@@ -82,22 +82,21 @@
             <form method="" action="">
                 <div class="card-body">
                     <div class="form-group ">
-                        <label for="exampleInputEmail1" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label for="fullName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fullName" name="" aria-describedby="emailHelp">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1" class="form-label">Gmail</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="" aria-describedby="emailHelp">
                     </div>
                     <div class="form-group">
-                        <label for="" class="form-label">Masuk Sebagai</label>
+                        <label for="Status" class="form-label">Masuk Sebagai</label>
                         <div>
-                            <select class="form-control" id="" name="" required>
+                            <select class="form-control" id="Status" name="" required>
                                 <option selected>Sebagai</option>
-                                <option value="Mahasiswa">Mahasiswa</option>
-                                <option value="Admin">Admin</option>
-                                <option value=""></option>
-                                <option value=""></option>
+                                <option value="mahasiswa">Mahasiswa</option>
+                                <option value="admin">Admin</option>
+                                <option value="prodi">Prodi</option>
                             </select>
                         </div>
                     </div>
