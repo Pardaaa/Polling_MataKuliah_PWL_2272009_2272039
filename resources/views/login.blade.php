@@ -58,7 +58,6 @@
             color: black;
             font-size: 15px;
             font-weight: bold;
-            width: 50%;
             border: 2px solid lightcyan;
         }
 
@@ -85,9 +84,8 @@
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" name="password" id="exampleInputPassword1">
                     </div>
-                    <div class=" gap-2 d-flex">
+                    <div class="d-grid gap-2">
                         <button type="submit" class="btn login">Login</button>
-                        <button type="submit" class="btn register"><a href="{{ route('route-register') }}">Register</a></button>
                     </div>
 
                 </form>
