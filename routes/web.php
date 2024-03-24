@@ -21,10 +21,14 @@ Route::get('/login', function () {
     return view ('login');
 }) -> name('route-login');
 
-Route::get('/register', function () {
-    return view ('register');
-}) -> name('route-register');
-
 Route::get('/mahasiswa', function () {
     return view ('Mahasiswa/mahasiswa');
 }) -> name('route-mahasiswa');
+
+Route::get('/prodi', function () {
+    return view ('Prodi/prodi');
+}) -> name('route-prodi');
+
+Route::get('/admin', function () {
+    return view ('Admin/admin');
+}) -> name('route-admin');
