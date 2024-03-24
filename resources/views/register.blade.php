@@ -27,8 +27,8 @@
         }
 
         .login-form {
-            width: 450px;
-            height: 550px;
+            width: 550px;
+            height: 650px;
             padding: 20px;
             background-color: tomato  !important;
             border-radius: 10px;
@@ -81,13 +81,17 @@
         <div class="card-text">
             <form method="" action="">
                 <div class="card-body">
-                    <div class="form-group ">
-                        <label for="fullName" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="fullName" name="" aria-describedby="emailHelp">
-                    </div>
                     <div class="form-group">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" name="" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group ">
+                        <label for="id" class="form-label">User Name</label>
+                        <input type="text" class="form-control" id="id" name="" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group ">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" name="" aria-describedby="emailHelp">
                     </div>
                     <div class="form-group">
                         <label for="Status" class="form-label">Masuk Sebagai</label>
