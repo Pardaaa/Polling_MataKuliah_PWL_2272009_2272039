@@ -24,3 +24,7 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view ('register');
 }) -> name('route-register');
+
+Route::get('/mahasiswa', function () {
+    return view ('Mahasiswa/mahasiswa');
+}) -> name('route-mahasiswa');
