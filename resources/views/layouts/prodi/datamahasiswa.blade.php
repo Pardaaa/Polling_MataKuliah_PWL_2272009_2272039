@@ -50,7 +50,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="admin">
+            <a class="nav-link" href="prodi">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 Dashboard</a>
         </li>
@@ -72,6 +72,14 @@
             <a class="nav-link" href="index.html">
                 <i class="fas fa-fw fa-book-dead"></i>
                 Data Mata Kuliah</a>
+
+            <a class="nav-link" href="index.html">
+                <i class="fas fa-fw fa-calendar"></i>
+                Setting Periode</a>
+
+            <a class="nav-link" href="index.html">
+                <i class="fas fa-fw fa-vote-yea"></i>
+                Voting</a>
 
             <a class="nav-link" href="index.html">
                 <i class="fas fa-fw fa-poll"></i>
@@ -113,8 +121,6 @@
                                         <td>{{ $mhs->id }}</td>
                                         <td>{{ $mhs->name }}</td>
                                         <td>{{ $mhs->email }}</td>
-                                        <td>
-                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
