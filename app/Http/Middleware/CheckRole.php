@@ -31,8 +31,6 @@ class CheckRole
                     return $next($request);
                 }
             }
-        }else {
-            return redirect (route ('unauthorized'));
         }
 
         return redirect('/');

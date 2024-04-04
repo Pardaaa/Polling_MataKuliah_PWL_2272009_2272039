@@ -55,9 +55,6 @@
                 Dashboard</a>
         </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
-
         <!-- Heading -->
         <div class="sidebar-heading">
             Menu Data Master
@@ -65,9 +62,9 @@
 
         <!-- Nav Item -->
         <li class="nav-item">
-            <a class="nav-link" href="datamahasiswa">
+            <a class="nav-link" href="datamahasiswadankandidat">
                 <i class="fas fa-fw fa-user-graduate"></i>
-                Data Mahasiswa</a>
+                Data Mahasiswa dan Kandidat</a>
 
             <a class="nav-link" href="index.html">
                 <i class="fas fa-fw fa-book-dead"></i>

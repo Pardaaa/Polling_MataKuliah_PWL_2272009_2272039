@@ -115,7 +115,6 @@
                     <label style="color:black;" for="">Password</label>
                     <input type="text" class="form-control mb-4" name="password" id="password" aria-describedby="helpId" placeholder="">
                     <label style="color:black;" for="">Role</label>
-
                     <input type="text" class="form-control mb-4" name="role" id="role" aria-describedby="helpId" placeholder="Contoh: mahasiswa">
                     <br>
                     <button class="btn btn-primary" type="submit">Tambah Data</button>
@@ -161,6 +160,7 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
+
 </body>
 
 </html>

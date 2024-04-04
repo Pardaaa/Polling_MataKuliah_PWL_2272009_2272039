@@ -26,13 +26,6 @@ class MahasiswaController extends Controller
     public function index()
     {
         $data = Mahasiswa::where('role', 'mahasiswa')->get();
-        return view('layouts\mahasiswa\datamahasiswa', compact('data'));
-    }
-
-    public function hapus($id)
-    {
-        $data = Mahasiswa::find($id);
-        Mahasiswa::where('id', $id)->delete();
-        return redirect('datamahasiswa')->with('success', 'Data berhasil di hapus!');
+        return view('layouts\prodi\datamahasiswa', compact('data'));
     }
 }

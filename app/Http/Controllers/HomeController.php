@@ -58,6 +58,6 @@ class HomeController extends Controller
         $data->role = $role;
         $data->save();
 
-        return redirect('datamahasiswa')->with('success', 'Data berhasil di tambah!');
+        return redirect('datamahasiswadankandidat')->with('success', 'Data berhasil di tambah!');
     }
 }
