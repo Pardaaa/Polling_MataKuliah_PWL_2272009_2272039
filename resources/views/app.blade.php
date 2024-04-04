@@ -49,11 +49,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"                                        onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item logout-Item" href="{{ route('logout') }}">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -69,8 +67,27 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            $('.logout-Item').on('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                Swal.fire({
+                    title: "WARNING!!!",
+                    text: "apakah yakin ingin LogOut?",
+                    icon: "warning",
+                    showCancelButton:true,
+                    confirmButtonText: "Yes, Do it",
+                    cancelButtonText: "No, Cancelend!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('logout-form').submit();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
-
-
-
 </html>
