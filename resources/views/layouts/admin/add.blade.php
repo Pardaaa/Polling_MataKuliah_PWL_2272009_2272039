@@ -161,7 +161,6 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
-
 </body>
 
 </html>
