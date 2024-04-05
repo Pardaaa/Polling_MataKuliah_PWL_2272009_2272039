@@ -93,7 +93,6 @@
 
         <!-- Main Content -->
         <div id="content">
-
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
@@ -117,7 +116,7 @@
                     <label style="color:black;" for="">Role</label>
                     <input type="text" class="form-control mb-4" name="role" id="role" aria-describedby="helpId" placeholder="Contoh: mahasiswa">
                     <br>
-                    <button class="btn btn-primary" id="kirim-data" type="submit">Tambah Data</button>
+                    <button id="tambah" class="btn btn-primary" type="button" onclick="addData()">Tambah Data</button>
                 </div>
             </form>
         </div>
@@ -127,7 +126,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2020</span>
+                    <span>Copyright &copy; Tugas Pemrogramman Web Lanjut 2024</span>
                 </div>
             </div>
         </footer>
@@ -163,20 +162,26 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    document.getElementById('kirim-data').addEventListener('click', function(event) {
+    function addData(event) {
         event.preventDefault();
-        console.log('sukses');
         Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "{{ session('success') }}",
+            title: "Data Mahasiswa berhasil ditambahkan",
             showConfirmButton: false,
             timer: 1500
         });
-        // Selanjutnya, tambahkan kode untuk submit form secara manual
-        document.querySelector('form').submit();
-    });
+        // Get the button element by its id
+        const submitButton = document.getElementById('tambah');
+
+        // Change the type attribute to "submit"
+        submitButton.setAttribute('type', 'submit');
+
+        // Optionally, you can disable the button after changing its type to prevent multiple submissions
+        submitButton.disabled = true;
+    }
 </script>
+
 </body>
 </html>
 @endsection

@@ -127,7 +127,7 @@
                                             <form action="{{ url('hapusmatakuliah/'. $mhs->kode_mk) }}" method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-danger">Hapus</button>
+                                                <button class="btn btn-danger delete-matkul">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -201,6 +201,33 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
+
+{{-- Swal Scripts --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        $('.delete-matkul').on('click', function (event) {
+            event.preventDefault();
+            Swal.fire({
+                title: "WARNING!!!",
+                text: "apakah yakin ingin menghapus data ini?",
+                icon: "warning",
+                showCancelButton:true,
+                confirmButtonText: "Yes,delete it!",
+                cancelButtonText: "No, Canceled!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: $(this).closest('form').attr('action'),
+                        type: 'DELETE',
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    });
+                    window.location.reload();
+                }
+            });
+        });
+    });
+</script>
 </body>
 
 </html>

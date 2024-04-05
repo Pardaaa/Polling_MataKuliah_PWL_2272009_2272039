@@ -107,11 +107,11 @@
                 @method('POST')
                 <div class="card-body">
                     <label style="color:black;" for="">Kode Mata Kuliah</label>
-                    <input type="text" class="form-control mb-4" name="kode_mk" id="kode_mk" aria-describedby="helpId" placeholder="Contoh: 2272009">
+                    <input type="text" class="form-control mb-4" name="kode_mk" id="kode_mk" aria-describedby="helpId" placeholder="Contoh: IN240">
                     <label style="color:black;" for="">Nama Mata Kuliah</label>
-                    <input type="text" class="form-control mb-4" name="nama_mk" id="nama_mk" aria-describedby="helpId" placeholder="Contoh: Charles Winata" >
+                    <input type="text" class="form-control mb-4" name="nama_mk" id="nama_mk" aria-describedby="helpId" placeholder="Contoh: Pemrogramman Web Lanjut" >
                     <label style="color:black;" for="">SKS</label>
-                    <input type="text" class="form-control mb-4" name="sks" id="sks" aria-describedby="helpId" placeholder="Contoh: xxxxxxx@gmail.com">
+                    <input type="text" class="form-control mb-4" name="sks" id="sks" aria-describedby="helpId" placeholder="Contoh: 4">
                     <br>
                     <button class="btn btn-primary" type="submit">Tambah Mata Kuliah</button>
                 </div>
