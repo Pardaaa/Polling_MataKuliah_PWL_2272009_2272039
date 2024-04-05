@@ -211,7 +211,7 @@
             event.preventDefault();
             Swal.fire({
                 title: "WARNING!!!",
-                text: "apakah yakin ingin LogOut?",
+                text: "apakah yakin ingin menghapus data ini?",
                 icon: "warning",
                 showCancelButton:true,
                 confirmButtonText: "Yes,delete it!",

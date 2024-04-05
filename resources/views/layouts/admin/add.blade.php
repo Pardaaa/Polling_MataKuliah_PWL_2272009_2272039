@@ -117,7 +117,7 @@
                     <label style="color:black;" for="">Role</label>
                     <input type="text" class="form-control mb-4" name="role" id="role" aria-describedby="helpId" placeholder="Contoh: mahasiswa">
                     <br>
-                    <button class="btn btn-primary" type="submit">Tambah Data</button>
+                    <button class="btn btn-primary" id="kirim-data" type="submit">Tambah Data</button>
                 </div>
             </form>
         </div>
@@ -161,7 +161,22 @@
 <!-- Page level custom scripts -->
 <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('kirim-data').addEventListener('click', function(event) {
+        event.preventDefault();
+        console.log('sukses');
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "{{ session('success') }}",
+            showConfirmButton: false,
+            timer: 1500
+        });
+        // Selanjutnya, tambahkan kode untuk submit form secara manual
+        document.querySelector('form').submit();
+    });
+</script>
 </body>
-
 </html>
 @endsection
