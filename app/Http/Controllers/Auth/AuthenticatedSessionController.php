@@ -29,22 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $userRole = Auth::user()->role;
-
-
-        switch ($userRole) {
-            case 'admin_sistem':
-                return redirect()->route('admin.dashboard');
-                break;
-            case 'mahasiswa':
-                return redirect()->route('mahasiswa.dashboard');
-                break;
-            case 'admin_program_studi':
-                return redirect()->route('prodi.dashboard');
-                break;
-            default:
-                return redirect(RouteServiceProvider::HOME);
-        }
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**
