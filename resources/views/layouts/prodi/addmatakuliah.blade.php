@@ -65,7 +65,7 @@
 
         <!-- Nav Item -->
         <li class="nav-item">
-            <a class="nav-link" href="datamahasiswa">
+            <a class="nav-link" href="datamahasiswadankandidat">
                 <i class="fas fa-fw fa-user-graduate"></i>
                 Data Mahasiswa</a>
 
