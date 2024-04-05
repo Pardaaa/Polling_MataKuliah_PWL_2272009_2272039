@@ -14,10 +14,6 @@ class ProdiController extends Controller
      * @return void
      */
 
-    public function dashboard()
-    {
-        return view('Prodi.prodi');
-    }
     public function __construct()
     {
         $this->middleware('auth');
