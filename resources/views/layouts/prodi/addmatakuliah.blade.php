@@ -2,7 +2,7 @@
 
 @section('content')
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -50,11 +50,15 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="home">
+            <a class="nav-link" href="datamahasiswa">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 Dashboard</a>
         </li>
 
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Heading -->
         <div class="sidebar-heading">
             Menu Data Master
         </div>
@@ -69,9 +73,13 @@
                 <i class="fas fa-fw fa-book-dead"></i>
                 Data Mata Kuliah</a>
 
-            <a class="nav-link" href="polling">
+            <a class="nav-link" href="index.html">
                 <i class="fas fa-fw fa-calendar"></i>
                 Setting Periode</a>
+
+            <a class="nav-link" href="index.html">
+                <i class="fas fa-fw fa-vote-yea"></i>
+                Voting</a>
 
             <a class="nav-link" href="index.html">
                 <i class="fas fa-fw fa-poll"></i>
@@ -81,7 +89,7 @@
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content-wrapper" class="d-flex flex-column mb-5">
 
         <!-- Main Content -->
         <div id="content">
@@ -90,12 +98,24 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <br>
-                <h1 class="h3 mb-2 text-gray-800 text-center">Selamat Datang Sebagai Prodi</h1>
-                <h2 class="h3 mb-2 text-gray-800">Informasi</h2>
+                <h1 class="h3 mb-2 text-gray-800">Tambah Data Mata Kuliah</h1>
+
             </div>
             <!-- /.container-fluid -->
-
+            <form action="addmatakuliah" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                <div class="card-body">
+                    <label style="color:black;" for="">Kode Mata Kuliah</label>
+                    <input type="text" class="form-control mb-4" name="kode_mk" id="kode_mk" aria-describedby="helpId" placeholder="Contoh: 2272009">
+                    <label style="color:black;" for="">Nama Mata Kuliah</label>
+                    <input type="text" class="form-control mb-4" name="nama_mk" id="nama_mk" aria-describedby="helpId" placeholder="Contoh: Charles Winata" >
+                    <label style="color:black;" for="">SKS</label>
+                    <input type="text" class="form-control mb-4" name="sks" id="sks" aria-describedby="helpId" placeholder="Contoh: xxxxxxx@gmail.com">
+                    <br>
+                    <button class="btn btn-primary" type="submit">Tambah Mata Kuliah</button>
+                </div>
+            </form>
         </div>
         <!-- End of Main Content -->
 

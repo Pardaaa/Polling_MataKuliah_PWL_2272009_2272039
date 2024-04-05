@@ -65,11 +65,11 @@
 
         <!-- Nav Item -->
         <li class="nav-item">
-            <a class="nav-link" href="datamahasiswa">
+            <a class="nav-link" href="datamahasiswadankandidat">
                 <i class="fas fa-fw fa-user-graduate"></i>
                 Data Mahasiswa dan Kandidat</a>
 
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="datamatakuliah">
                 <i class="fas fa-fw fa-book-dead"></i>
                 Data Mata Kuliah</a>
 
