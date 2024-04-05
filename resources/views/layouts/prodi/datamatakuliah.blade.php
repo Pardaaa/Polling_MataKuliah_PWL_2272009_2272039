@@ -50,7 +50,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="prodi">
+            <a class="nav-link" onclick="window.history.back()">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 Dashboard</a>
         </li>

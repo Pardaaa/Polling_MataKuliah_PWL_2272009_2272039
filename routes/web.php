@@ -25,7 +25,7 @@ Route::post('/addmatakuliah', [\App\Http\Controllers\HomeController::class, 'sav
 Auth::routes();
 
 Route::get('datamahasiswadankandidat', function () { return view('layouts\admin\datamahasiswadankandidat'); })->middleware('checkRole:admin');
-Route::get('datamatakuliah', function () { return view('layouts\prodi\datamatakuliah'); })->middleware('checkRole:admin, prodi');
+Route::get('datamatakuliah', function () { return view('layouts\prodi\datamatakuliah'); })->middleware('checkRole:prodi,admin');
 Route::get('datamahasiswa', function () { return view('layouts\prodi\datamahasiswa'); })->middleware('checkRole:prodi');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -38,6 +38,5 @@ Route::get('admin', function () { return view('layouts\admin\admin'); })->middle
 Route::get('prodi', function () { return view('layouts\prodi\prodi'); })->middleware(['checkRole:prodi,admin']);
 Route::get('mahasiswa', function () { return view('layouts\mahasiswa\mahasiswa'); })->middleware(['checkRole:mahasiswa,admin']);
 
-Route::get('polling', function () { return view('layouts\admin\polling'); })->middleware('checkRole:admin');
 Route::delete('hapus/{id}', [App\Http\Controllers\AdminController::class, 'hapus'])->name('hapus');
 Route::delete('hapusmatakuliah/{kode_mk}', [App\Http\Controllers\ProdiController::class, 'hapusmatakuliah'])->name('hapusmatakuliah');
