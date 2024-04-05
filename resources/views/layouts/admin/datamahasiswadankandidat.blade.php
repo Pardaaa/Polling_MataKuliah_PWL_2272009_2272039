@@ -125,10 +125,10 @@
                                         <td>{{ $mhs->email }}</td>
                                         <td>{{ $mhs->role }}</td>
                                         <td>
-                                            <form action="{{ url('hapus/'. $mhs->id) }}" method="post" id="deleteForm_{{ $mhs->id }}">
+                                            <form action="{{ url('hapus/'. $mhs->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-danger delete-item" data-id="{{ $mhs->id }}">Hapus</button>
+                                                <button class="btn btn-danger delete-item">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -206,25 +206,29 @@
 {{-- Swal Scripts --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    $('.delete-item').on('click', function (event) {
-        event.preventDefault();
-        const id = $(this).data('id');
-        Swal.fire({
-            title: "WARNING!!!",
-            text: "apakah yakin ingin LogOut?",
-            icon: "warning",
-            showCancelButton:true,
-            confirmButtonText: "Yes,delete it!",
-            cancelButtonText: "No, Canceled!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $('#deleteForm_' + id).submit();
-            }
+    document.addEventListener('DOMContentLoaded', function() {
+        $('.delete-item').on('click', function (event) {
+            event.preventDefault();
+            Swal.fire({
+                title: "WARNING!!!",
+                text: "apakah yakin ingin LogOut?",
+                icon: "warning",
+                showCancelButton:true,
+                confirmButtonText: "Yes,delete it!",
+                cancelButtonText: "No, Canceled!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: $(this).closest('form').attr('action'),
+                        type: 'DELETE',
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    });
+                    window.location.reload();
+                }
+            });
         });
     });
 </script>
-
-
 </body>
 
 </html>
