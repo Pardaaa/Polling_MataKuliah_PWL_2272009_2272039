@@ -26,7 +26,7 @@
 
     <!-- Custom styles for this page -->
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body id="page-top">
@@ -116,7 +116,7 @@
                     <label style="color:black;" for="">Role</label>
                     <input type="text" class="form-control mb-4" name="role" id="role" aria-describedby="helpId" placeholder="Contoh: mahasiswa">
                     <br>
-                    <button id="tambah" class="btn btn-primary" type="button" onclick="addData()">Tambah Data</button>
+                    <button class="btn btn-primary" type="submit" onclick="tambah()">Tambah Data</button>
                 </div>
             </form>
         </div>
@@ -160,28 +160,20 @@
 <!-- Page level custom scripts -->
 <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
-    function addData(event) {
-        event.preventDefault();
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Data Mahasiswa berhasil ditambahkan",
-            showConfirmButton: false,
-            timer: 1500
-        });
-        // Get the button element by its id
-        const submitButton = document.getElementById('tambah');
-
-        // Change the type attribute to "submit"
-        submitButton.setAttribute('type', 'submit');
-
-        // Optionally, you can disable the button after changing its type to prevent multiple submissions
-        submitButton.disabled = true;
+    function tambah() {
+        setTimeout(function () {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your work has been saved",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }, 1000); // Jeda waktu dalam milidetik
     }
 </script>
-
 </body>
 </html>
 @endsection
