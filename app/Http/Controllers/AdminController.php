@@ -14,10 +14,6 @@ class AdminController extends Controller
      * @return void
      */
 
-    public function dashboard()
-    {
-        return view('Admin.admin');
-    }
     public function __construct()
     {
         $this->middleware('auth');
