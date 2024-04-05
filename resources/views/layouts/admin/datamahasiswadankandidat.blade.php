@@ -126,10 +126,10 @@
                                         <td>{{ $mhs->email }}</td>
                                         <td>{{ $mhs->role }}</td>
                                         <td>
-                                            <form action="{{ url('hapus/'. $mhs->id) }}" method="post">
+                                            <form action="{{ url('hapus/'. $mhs->id) }}" method="post" id="deleteForm_{{ $mhs->id }}">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-danger">Hapus</button>
+                                                <button class="btn btn-danger delete-item" data-id="{{ $mhs->id }}">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -150,7 +150,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2020</span>
+                    <span>Copyright &copy; Tugas Pemprograman Web Lanjut 2024</span>
                 </div>
             </div>
         </footer>
@@ -203,6 +203,29 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
+
+{{-- Swal Scripts --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $('.delete-item').on('click', function (event) {
+        event.preventDefault();
+        const id = $(this).data('id');
+        Swal.fire({
+            title: "WARNING!!!",
+            text: "apakah yakin ingin LogOut?",
+            icon: "warning",
+            showCancelButton:true,
+            confirmButtonText: "Yes,delete it!",
+            cancelButtonText: "No, Canceled!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#deleteForm_' + id).submit();
+            }
+        });
+    });
+</script>
+
+
 </body>
 
 </html>
