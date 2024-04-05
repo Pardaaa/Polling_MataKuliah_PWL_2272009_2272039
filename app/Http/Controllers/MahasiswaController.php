@@ -13,6 +13,11 @@ class MahasiswaController extends Controller
      *
      * @return void
      */
+
+    public function dashboard()
+    {
+        return view('Mahasiswa.mahasiswa');
+    }
     public function __construct()
     {
         $this->middleware('auth');
