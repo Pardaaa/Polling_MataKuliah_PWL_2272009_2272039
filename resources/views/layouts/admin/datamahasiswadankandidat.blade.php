@@ -65,11 +65,11 @@
 
         <!-- Nav Item -->
         <li class="nav-item">
-            <a class="nav-link" href="datamahasiswa">
+            <a class="nav-link" href="datamahasiswadankandidat">
                 <i class="fas fa-fw fa-user-graduate"></i>
-                Data Mahasiswa dan Kandidat</a>
+                Data Mahasiswa</a>
 
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="datamatakuliah">
                 <i class="fas fa-fw fa-book-dead"></i>
                 Data Mata Kuliah</a>
 
@@ -99,11 +99,10 @@
 
                 <!-- Page Heading -->
                 <br>
-                <h1 class="h3 mb-2 text-gray-800">Data Mahasiswa</h1>
+                <h1 class="h3 mb-2 text-gray-800">Data Mahasiswa dan Kandidat</h1>
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
+use App\Models\Matakuliah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -59,5 +60,31 @@ class HomeController extends Controller
         $data->save();
 
         return redirect('datamahasiswadankandidat')->with('success', 'Data berhasil di tambah!');
+    }
+
+    public function addmatakuliah()
+    {
+        return view('layouts\prodi\addmatakuliah');
+    }
+
+    public function savematakuliah(Request $request)
+    {
+        $this->validate($request, [
+            'kode_mk' => 'required|unique:matakuliah,kode_mk',
+            'nama_mk' => 'required|min:3',
+            'sks' =>'required',
+        ]);
+
+        $kode_mk = $request->kode_mk;
+        $nama_mk = $request->nama_mk;
+        $sks = $request->sks;
+
+        $data = new Matakuliah;
+        $data->kode_mk = $kode_mk;
+        $data->nama_mk = $nama_mk;
+        $data->sks = $sks;
+        $data->save();
+
+        return redirect('datamatakuliah')->with('success', 'Data berhasil di tambah!');
     }
 }
