@@ -50,7 +50,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="prodi">
+            <a class="nav-link" href="admin">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 Dashboard</a>
         </li>
@@ -65,11 +65,11 @@
 
         <!-- Nav Item -->
         <li class="nav-item">
-            <a class="nav-link" href="datamahasiswa">
+            <a class="nav-link" href="datamahasiswadankandidat">
                 <i class="fas fa-fw fa-user-graduate"></i>
-                Data Mahasiswa</a>
+                Data Mahasiswa dan Kandidat</a>
 
-            <a class="nav-link" href="datamatakuliah">
+            <a class="nav-link" href="datamatakuliahadmin">
                 <i class="fas fa-fw fa-book-dead"></i>
                 Data Mata Kuliah</a>
 
@@ -107,20 +107,29 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
+                        <a href="addmatakuliahadmin" class="btn btn-primary mb-3">Tambah Data</a>
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nama</th>
-                                    <th>Gmail</th>
+                                    <th>Kode Matakuliah</th>
+                                    <th>Nama MataKuliah</th>
+                                    <th>SKS</th>
+                                    <th>Aksi</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($data as $mhs)
+                                @foreach ($datamatakuliahadmin as $mhs)
                                     <tr>
-                                        <td>{{ $mhs->id }}</td>
-                                        <td>{{ $mhs->name }}</td>
-                                        <td>{{ $mhs->email }}</td>
+                                        <td>{{ $mhs->kode_mk }}</td>
+                                        <td>{{ $mhs->nama_mk }}</td>
+                                        <td>{{ $mhs->sks }}</td>
+                                        <td>
+                                            <form action="{{ url('hapusmatakuliahadmin/'. $mhs->kode_mk) }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-danger delete-matkul">Hapus</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -192,6 +201,33 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
+
+{{-- Swal Scripts --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        $('.delete-matkul').on('click', function (event) {
+            event.preventDefault();
+            Swal.fire({
+                title: "WARNING!!!",
+                text: "apakah yakin ingin menghapus data ini?",
+                icon: "warning",
+                showCancelButton:true,
+                confirmButtonText: "Yes,delete it!",
+                cancelButtonText: "No, Canceled!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: $(this).closest('form').attr('action'),
+                        type: 'DELETE',
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    });
+                    window.location.reload();
+                }
+            });
+        });
+    });
+</script>
 </body>
 
 </html>

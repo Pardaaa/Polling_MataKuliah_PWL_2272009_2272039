@@ -50,7 +50,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="prodi">
+            <a class="nav-link" href="datamatakuliahadmin">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 Dashboard</a>
         </li>
@@ -65,11 +65,11 @@
 
         <!-- Nav Item -->
         <li class="nav-item">
-            <a class="nav-link" href="datamahasiswa">
+            <a class="nav-link" href="datamahasiswadankandidat">
                 <i class="fas fa-fw fa-user-graduate"></i>
                 Data Mahasiswa</a>
 
-            <a class="nav-link" href="datamatakuliah">
+            <a class="nav-link" href="datamatakuliahadmin">
                 <i class="fas fa-fw fa-book-dead"></i>
                 Data Mata Kuliah</a>
 
@@ -102,7 +102,7 @@
 
             </div>
             <!-- /.container-fluid -->
-            <form action="addmatakuliah" method="POST" enctype="multipart/form-data">
+            <form action="addmatakuliahadmin" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                 <div class="card-body">
