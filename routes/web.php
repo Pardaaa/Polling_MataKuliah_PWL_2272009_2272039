@@ -53,9 +53,9 @@ Route::get('mahasiswa', function () {
 Route::delete('hapus/{id}', [App\Http\Controllers\AdminController::class, 'hapus'])->name('hapus');
 Route::delete('hapusmatakuliah/{kode_mk}', [App\Http\Controllers\ProdiController::class, 'hapusmatakuliah'])->name('hapusmatakuliah');
 
-
 Route::get('periode', [App\Http\Controllers\ProdiController::class, 'periode'])->middleware(['checkRole:prodi,admin']);
 Route::get('addpolling', [App\Http\Controllers\ProdiController::class, 'addpolling'])->middleware(['checkRole:prodi,admin'])->name('addpolling');
 Route::post('addpolling', [App\Http\Controllers\ProdiController::class, 'addpollingproses'])->middleware(['checkRole:prodi,admin'])->name('addpollingproses');
 
 Route::get('mahasiswapolling', [App\Http\Controllers\MahasiswaController::class, 'polling']);
+Route::get('mahasiswahasil', [\App\Http\Controllers\MahasiswaController::class, 'hasilPolling'])
