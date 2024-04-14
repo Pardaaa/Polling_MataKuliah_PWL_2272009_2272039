@@ -107,7 +107,6 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <a href="add" class="btn btn-primary mb-3">Tambah Data</a>
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>

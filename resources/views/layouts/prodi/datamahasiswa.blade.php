@@ -73,13 +73,9 @@
                 <i class="fas fa-fw fa-book-dead"></i>
                 Data Mata Kuliah</a>
 
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="periode">
                 <i class="fas fa-fw fa-calendar"></i>
-                Setting Periode</a>
-
-            <a class="nav-link" href="index.html">
-                <i class="fas fa-fw fa-vote-yea"></i>
-                Voting</a>
+                Sistem Periode</a>
 
             <a class="nav-link" href="index.html">
                 <i class="fas fa-fw fa-poll"></i>

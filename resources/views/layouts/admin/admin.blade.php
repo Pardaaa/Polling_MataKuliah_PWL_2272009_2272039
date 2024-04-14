@@ -64,7 +64,7 @@
         <li class="nav-item">
             <a class="nav-link" href="datamahasiswadankandidat">
                 <i class="fas fa-fw fa-user-graduate"></i>
-                Data Mahasiswa dan Kandidat</a>
+                Data Users</a>
 
             <a class="nav-link" href="datamatakuliahadmin">
                 <i class="fas fa-fw fa-book-dead"></i>

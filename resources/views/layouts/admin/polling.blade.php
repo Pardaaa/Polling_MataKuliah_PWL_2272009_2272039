@@ -83,7 +83,7 @@
         <li class="nav-item">
             <a class="nav-link" href="datamahasiswa">
                 <i class="fas fa-fw fa-user-graduate"></i>
-                Data Mahasiswa</a>
+                Data Users</a>
 
             <a class="nav-link" href="index.html">
                 <i class="fas fa-fw fa-book-dead"></i>
