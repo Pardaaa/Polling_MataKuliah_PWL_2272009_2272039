@@ -48,7 +48,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="prodi">
+                <a class="nav-link" href="admin">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     Dashboard</a>
             </li>
@@ -63,17 +63,21 @@
 
             <!-- Nav Item -->
             <li class="nav-item">
-                <a class="nav-link" href="datamahasiswa">
+                <a class="nav-link" href="datamahasiswadankandidat">
                     <i class="fas fa-fw fa-user-graduate"></i>
-                    Data Mahasiswa</a>
+                    Data User</a>
 
-                <a class="nav-link" href="datamatakuliah">
+                <a class="nav-link" href="datamatakuliahadmin">
                     <i class="fas fa-fw fa-book-dead"></i>
                     Data Mata Kuliah</a>
 
-                <a class="nav-link" href="periode">
+                <a class="nav-link" href="periodeadmin">
                     <i class="fas fa-fw fa-calendar"></i>
                     Setting Periode</a>
+
+                <a class="nav-link" href="pollingadmin">
+                    <i class="fas fa-fw fa-vote-yea"></i>
+                    Voting</a>
 
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-poll"></i>
@@ -98,7 +102,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex flex-row justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">Polling</h6>
-                            <a href="{{ route('addpolling') }}" class="btn btn-primary">Tambah Periode</a>
+                            <a href="{{ route('addpollingadmin') }}" class="btn btn-primary">Tambah Periode</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

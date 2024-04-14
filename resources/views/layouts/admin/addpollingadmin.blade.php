@@ -63,22 +63,26 @@
 
             <!-- Nav Item -->
             <li class="nav-item">
-                <a class="nav-link" href="datamahasiswa">
-                    <i class="fas fa-fw fa-user-graduate"></i>
-                    Data Mahasiswa</a>
+            <a class="nav-link" href="datamahasiswadankandidat">
+                <i class="fas fa-fw fa-user-graduate"></i>
+                Data User</a>
 
-                <a class="nav-link" href="datamatakuliah">
-                    <i class="fas fa-fw fa-book-dead"></i>
-                    Data Mata Kuliah</a>
+            <a class="nav-link" href="datamatakuliahadmin">
+                <i class="fas fa-fw fa-book-dead"></i>
+                Data Mata Kuliah</a>
 
-                <a class="nav-link" href="periode">
-                    <i class="fas fa-fw fa-calendar"></i>
-                    Setting Periode</a>
+            <a class="nav-link" href="periodeadmin">
+                <i class="fas fa-fw fa-calendar"></i>
+                Setting Periode</a>
 
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-poll"></i>
-                    Hasil Polling</a>
-            </li>
+            <a class="nav-link" href="pollingadmin">
+                <i class="fas fa-fw fa-vote-yea"></i>
+                Voting</a>
+
+            <a class="nav-link" href="index.html">
+                <i class="fas fa-fw fa-poll"></i>
+                Hasil Polling</a>
+        </li>
         </ul>
         <!-- End of Sidebar -->
 
@@ -96,7 +100,7 @@
 
                 </div>
                 <!-- /.container-fluid -->
-                <form action="{{ route('addpollingproses') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('addpollingprosesadmin') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
                     <div class="card-body">
