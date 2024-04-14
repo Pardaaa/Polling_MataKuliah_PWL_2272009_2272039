@@ -136,7 +136,7 @@
                                                     $diff = strtotime($end) - strtotime($now);
                                                     $diff += 3600;
                                                     $days = floor($diff / (60 * 60 * 24));
-                                                    $hours = floor(($diff - ($days * 60 * 60 * 24)) / 3600); 
+                                                    $hours = floor(($diff - ($days * 60 * 60 * 24)) / 3600);
                                                     $minutes = floor(($diff - ($days * 60 * 60 * 24) - ($hours * 3600)) / 60);
                                                 @endphp
 
