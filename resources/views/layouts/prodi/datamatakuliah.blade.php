@@ -75,7 +75,7 @@
 
             <a class="nav-link" href="periode">
                 <i class="fas fa-fw fa-calendar"></i>
-                Sistem Periode</a>
+                Setting Periode</a>
 
             <a class="nav-link" href="index.html">
                 <i class="fas fa-fw fa-poll"></i>
@@ -95,7 +95,7 @@
 
                 <!-- Page Heading -->
                 <br>
-                <h1 class="h3 mb-2 text-gray-800">Data Mata Kuliah</h1>
+                <h1 class="h3 mb-2 text-gray-800">Data MataKuliah</h1>
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
@@ -144,7 +144,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Tugas Pemrogramman Web Lanjut 2024</span>
+                    <span>Copyright &copy; Tugas Pemrograman Web Lanjut 2024</span>
                 </div>
             </div>
         </footer>

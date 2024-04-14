@@ -66,6 +66,7 @@ class ProdiController extends Controller
 
         return redirect('datamatakuliah')->with('success', 'Data berhasil di tambah!');
     }
+    
     public function periode(Request $request)
     {
         $data = Polling::orderBy('id', 'desc')->get();

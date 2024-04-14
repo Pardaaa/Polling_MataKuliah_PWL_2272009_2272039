@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use App\Models\Matakuliah;
+use App\Models\Polling;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -78,5 +79,37 @@ class AdminController extends Controller
         $data->save();
 
         return redirect('datamatakuliahadmin')->with('success', 'Data berhasil di tambah!');
+    }
+
+    public function periodeadmin(Request $request)
+    {
+        $data = Polling::orderBy('id', 'desc')->get();
+        return view('layouts\admin\periodeadmin', compact('data'));
+    }
+
+    public function addpollingadmin(Request $request)
+    {
+        return view('layouts\admin\addpollingadmin');
+    }
+
+    public function addpollingprosesadmin(Request $request)
+    {
+        $data = new Polling();
+        $data->nama_polling = $request->nama_polling;
+        $data->start_date = $request->start_date;
+        $data->end_date = $request->end_date;
+        $data->save();
+
+        return redirect('periodeadmin')->with('success', 'Data berhasil ditambahkan!');
+    }
+
+    public function pollingadmin(Request $request)
+    {
+        $data = Polling::where('start_date', '<=', date('Y-m-d H:i:s', strtotime('+8 hours')))
+            ->where('end_date', '>=', date('Y-m-d H:i:s', strtotime('+8 hours')))
+            ->first();
+        $datamatakuliah = Matakuliah::get();
+
+        return view('layouts\admin\pollingadmin', compact('data', 'datamatakuliah'));
     }
 }

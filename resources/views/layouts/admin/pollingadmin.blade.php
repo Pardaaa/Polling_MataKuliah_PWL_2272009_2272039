@@ -24,7 +24,6 @@
 
     <!-- Custom styles for this page -->
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-
 </head>
 
 <body id="page-top">
@@ -48,32 +47,32 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="periode">
+                <a class="nav-link" href="admin">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     Dashboard</a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Heading -->
             <div class="sidebar-heading">
                 Menu Data Master
             </div>
 
             <!-- Nav Item -->
             <li class="nav-item">
-                <a class="nav-link" href="datamahasiswa">
+                <a class="nav-link" href="datamahasiswadankandidat">
                     <i class="fas fa-fw fa-user-graduate"></i>
-                    Data Mahasiswa</a>
+                    Data User</a>
 
-                <a class="nav-link" href="datamatakuliah">
+                <a class="nav-link" href="datamatakuliahadmin">
                     <i class="fas fa-fw fa-book-dead"></i>
                     Data Mata Kuliah</a>
 
-                <a class="nav-link" href="periode">
+                <a class="nav-link" href="periodeadmin">
                     <i class="fas fa-fw fa-calendar"></i>
                     Setting Periode</a>
+
+                <a class="nav-link" href="pollingadmin">
+                    <i class="fas fa-fw fa-vote-yea"></i>
+                    Voting</a>
 
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-poll"></i>
@@ -83,7 +82,7 @@
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column mb-5">
+        <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
@@ -92,24 +91,42 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tambah Data Polling</h1>
-
+                    <br>
+                    <h1 class="h3 mb-2 text-gray-800 text-center">Halaman Sistem Polling</h1>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body">
+                                        @if (isset($data))
+                                        <h5 class="card-title text-center">Polling dibuka</h5>
+                                        <h4 class="card-title text-center"><b>{{ $data->nama_polling }}</b></h4>
+                                            <form action="{{ url('proses_pemilihan_matakuliah') }}" method="post">
+                                                @csrf
+                                                <h3>Pilih Mata Kuliah:</h3>
+                                                @foreach ($datamatakuliah as $matakuliah)
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $matakuliah->id }}" value="{{ $matakuliah->id }}">
+                                                        <label class="form-check-label" for="matakuliah_{{ $matakuliah->id }}">
+                                                            {{ $matakuliah->kode_mk }} |
+                                                            {{ $matakuliah->nama_mk }} |
+                                                            {{ $matakuliah->sks }} SKS
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </form>
+                                        @else
+                                        <h5 class="card-title text-center">Polling belum dibuka</h5>
+                                        @endif
+                                    </div>`
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
-                <form action="{{ route('addpollingproses') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('POST')
-                    <div class="card-body">
-                        <label style="color:black;" for="">Nama Polling</label>
-                        <input type="text" class="form-control mb-4" name="nama_polling" id="nama_polling" aria-describedby="helpId" placeholder="Masukkan Nama Polling">
-                        <label style="color:black;" for="">Waktu Dimulai</label>
-                        <input type="datetime-local" class="form-control mb-4" name="start_date" id="start_date" aria-describedby="helpId" placeholder="Masukkan Waktu Dimulai">
-                        <label style="color:black;" for="">Waktu Berakhir</label>
-                        <input type="datetime-local" class="form-control mb-4" name="end_date" id="end_date" aria-describedby="helpId" placeholder="Masukkan Waktu Berakhir">
-                        <br>
-                        <button class="btn btn-primary" type="submit">Tambah Polling</button>
-                    </div>
-                </form>
+
             </div>
             <!-- End of Main Content -->
 

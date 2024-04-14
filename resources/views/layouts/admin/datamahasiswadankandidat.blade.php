@@ -67,17 +67,17 @@
         <li class="nav-item">
             <a class="nav-link" href="datamahasiswadankandidat">
                 <i class="fas fa-fw fa-user-graduate"></i>
-                Data Users</a>
+                Data User</a>
 
             <a class="nav-link" href="datamatakuliahadmin">
                 <i class="fas fa-fw fa-book-dead"></i>
                 Data Mata Kuliah</a>
 
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="periodeadmin">
                 <i class="fas fa-fw fa-calendar"></i>
                 Setting Periode</a>
 
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="pollingadmin">
                 <i class="fas fa-fw fa-vote-yea"></i>
                 Voting</a>
 
@@ -99,7 +99,7 @@
 
                 <!-- Page Heading -->
                 <br>
-                <h1 class="h3 mb-2 text-gray-800">Data Users</h1>
+                <h1 class="h3 mb-2 text-gray-800">Data Mahasiswa dan Kandidat</h1>
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">

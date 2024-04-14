@@ -47,7 +47,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="home">
+                <a class="nav-link" href="mahasiswa">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     Dashboard</a>
             </li>
@@ -58,9 +58,9 @@
 
             <!-- Nav Item -->
             <li class="nav-item">
-                <a class="nav-link" href="mahasiswapolling">
+                <a class="nav-link" href="polling">
                     <i class="fas fa-fw fa-book-dead"></i>
-                    Polling</a>
+                    Votting</a>
 
                 <a class="nav-link" href="">
                     <i class="fas fa-fw fa-poll"></i>
@@ -122,7 +122,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Tugas Pemrograman Web Lanjut 2024</span>
                     </div>
                 </div>
             </footer>

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('login');
+    return view('welcome');
 });
 
 Route::get('/add', [\App\Http\Controllers\HomeController::class, 'add'])->name('add');
@@ -50,6 +50,9 @@ Route::get('periode', [App\Http\Controllers\ProdiController::class, 'periode'])-
 Route::get('addpolling', [App\Http\Controllers\ProdiController::class, 'addpolling'])->middleware(['checkRole:prodi,admin'])->name('addpolling');
 Route::post('addpolling', [App\Http\Controllers\ProdiController::class, 'addpollingproses'])->middleware(['checkRole:prodi,admin'])->name('addpollingproses');
 
-Route::get('mahasiswapolling', [App\Http\Controllers\MahasiswaController::class, 'polling']);
-Route::get('mahasiswapolling', [App\Http\Controllers\MahasiswaController::class, 'polling']);
-Route::get('mahasiswahasil', [\App\Http\Controllers\MahasiswaController::class, 'hasilPolling']);
+Route::get('polling', [App\Http\Controllers\MahasiswaController::class, 'polling'])->middleware(['checkRole:admin,mahasiswa']);
+Route::get('pollingadmin', [App\Http\Controllers\AdminController::class, 'pollingadmin'])->middleware(['checkRole:admin']);
+
+Route::get('periodeadmin', [App\Http\Controllers\AdminController::class, 'periodeadmin'])->middleware(['checkRole:admin']);
+Route::get('addpollingadmin', [App\Http\Controllers\AdminController::class, 'addpollingadmin'])->middleware(['checkRole:admin'])->name('addpollingadmin');
+Route::post('addpollingadmin', [App\Http\Controllers\AdminController::class, 'addpollingprosesadmin'])->middleware(['checkRole:admin'])->name('addpollingprosesadmin');
