@@ -62,7 +62,7 @@
                     <i class="fas fa-fw fa-book-dead"></i>
                     Votting</a>
 
-                <a class="nav-link" href="">
+                <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-poll"></i>
                     Hasil Polling</a>
             </li>
@@ -89,13 +89,13 @@
                                         @if (isset($data))
                                         <h5 class="card-title text-center">Polling dibuka</h5>
                                         <h4 class="card-title text-center"><b>{{ $data->nama_polling }}</b></h4>
-                                            <form action="{{ url('proses_pemilihan_matakuliah') }}" method="post">
+                                            <form action="{{ route('polling1') }}" method="post">
                                                 @csrf
                                                 <h3>Pilih Mata Kuliah:</h3>
                                                 @foreach ($datamatakuliah as $matakuliah)
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $matakuliah->id }}" value="{{ $matakuliah->id }}">
-                                                        <label class="form-check-label" for="matakuliah_{{ $matakuliah->id }}">
+                                                    <div class="form-check" >
+                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $matakuliah->kode_mk }}" value="{{ $matakuliah->kode_mk }}">
+                                                        <label class="form-check-label" for="matakuliah_{{ $matakuliah->kode_mk }}">
                                                             {{ $matakuliah->kode_mk }} |
                                                             {{ $matakuliah->nama_mk }} |
                                                             {{ $matakuliah->sks }} SKS
