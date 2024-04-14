@@ -43,7 +43,7 @@ class MahasiswaController extends Controller
     public function simpanHasilPolling(Request $request)
     {
         $request->validate([
-            
+
         ]);
 
         foreach ($request->matakuliah as $matakuliahId) {
