@@ -24,7 +24,6 @@
 
     <!-- Custom styles for this page -->
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-
 </head>
 
 <body id="page-top">
@@ -63,7 +62,7 @@
                     <i class="fas fa-fw fa-book-dead"></i>
                     Polling</a>
 
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="">
                     <i class="fas fa-fw fa-poll"></i>
                     Hasil Polling</a>
             </li>
@@ -90,6 +89,21 @@
                                         @if (isset($data))
                                         <h5 class="card-title text-center">Polling dibuka</h5>
                                         <h4 class="card-title text-center"><b>{{ $data->nama_polling }}</b></h4>
+                                            <form action="{{ url('proses_pemilihan_matakuliah') }}" method="post">
+                                                @csrf
+                                                <h3>Pilih Mata Kuliah:</h3>
+                                                @foreach ($datamatakuliah as $matakuliah)
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $matakuliah->id }}" value="{{ $matakuliah->id }}">
+                                                        <label class="form-check-label" for="matakuliah_{{ $matakuliah->id }}">
+                                                            {{ $matakuliah->kode_mk }} |
+                                                            {{ $matakuliah->nama_mk }} |
+                                                            {{ $matakuliah->sks }} SKS
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </form>
                                         @else
                                         <h5 class="card-title text-center">Polling belum dibuka</h5>
                                         @endif
