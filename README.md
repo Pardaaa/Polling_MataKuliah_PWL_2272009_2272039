@@ -67,3 +67,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Kelompok
 - 2272009 - Charles Winata - 2272009
+- 2072032 - Alvin Augus Fernando - AlvinAugusF
+- 2272039 - NATHAN RAPHAEL PARDAMEAN HUTAGALUNG - Pardaaa
