@@ -47,7 +47,7 @@ class MahasiswaController extends Controller
         ]);
 
         foreach ($request->matakuliah as $matakuliahId) {
-            HasilPolling::create([
+            hasilPolling::create([
                 'mahasiswa_id' => auth()->user()->id,
                 'matakuliah_id' => $matakuliahId,
             ]);
@@ -55,6 +55,6 @@ class MahasiswaController extends Controller
 
         return redirect()->back()->with('success', 'Hasil polling berhasil disimpan.');
     }
-    
+
 }
 
