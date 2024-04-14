@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\hasilPolling;
 use App\Models\Mahasiswa;
+use App\Models\Matakuliah;
 use App\Models\Polling;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -34,6 +36,24 @@ class MahasiswaController extends Controller
         $data = Polling::where('start_date', '<=', date('Y-m-d H:i:s', strtotime('+8 hours')))
             ->where('end_date', '>=', date('Y-m-d H:i:s', strtotime('+8 hours')))
             ->first();
-        return view('layouts\mahasiswa\polling', compact('data'));
+        $datamatakuliah = Matakuliah::get();
+
+        return view('layouts\mahasiswa\polling', compact('data', 'datamatakuliah'));
     }
+    public function simpanHasilPolling(Request $request)
+    {
+        $request->validate([
+            
+        ]);
+
+        foreach ($request->matakuliah as $matakuliahId) {
+            HasilPolling::create([
+                'mahasiswa_id' => auth()->user()->id,
+                'matakuliah_id' => $matakuliahId,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Hasil polling berhasil disimpan.');
+    }
+
 }

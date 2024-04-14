@@ -2,7 +2,7 @@
 
 @section('content')
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                        <a href="addmatakuliah" class="btn btn-primary mb-3">Tambah Data</a>
+                            <a href="addmatakuliah" class="btn btn-primary mb-3">Tambah Data</a>
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>

@@ -67,7 +67,7 @@
         <li class="nav-item">
             <a class="nav-link" href="datamahasiswadankandidat">
                 <i class="fas fa-fw fa-user-graduate"></i>
-                Data Mahasiswa dan Kandidat</a>
+                Data Users</a>
 
             <a class="nav-link" href="datamatakuliahadmin">
                 <i class="fas fa-fw fa-book-dead"></i>
@@ -99,7 +99,7 @@
 
                 <!-- Page Heading -->
                 <br>
-                <h1 class="h3 mb-2 text-gray-800">Data Mahasiswa dan Kandidat</h1>
+                <h1 class="h3 mb-2 text-gray-800">Data Users</h1>
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">

@@ -71,10 +71,6 @@
                     <i class="fas fa-fw fa-book-dead"></i>
                     Data Mata Kuliah</a>
 
-                <a class="nav-link" href="polling">
-                    <i class="fas fa-fw fa-calendar"></i>
-                    Setting Periode</a>
-
                 <a class="nav-link" href="periode">
                     <i class="fas fa-fw fa-calendar"></i>
                     Sistem Periode</a>
@@ -137,16 +133,20 @@
                                             </td>
                                             <td>
                                                 @php
-                                                $diff = strtotime($end) - strtotime($now);
-                                                $days = floor($diff / (60 * 60 * 24));
-                                                $hours = floor(($diff - $days * 60 * 60 * 24) / (60 * 60));
-                                                $minutes = floor(($diff - $days * 60 * 60 * 24 - $hours * 60 * 60) / 60);
+                                                    $diff = strtotime($end) - strtotime($now);
+                                                    $diff += 3600;
+                                                    $days = floor($diff / (60 * 60 * 24));
+                                                    $hours = floor(($diff - ($days * 60 * 60 * 24)) / 3600);
+                                                    $minutes = floor(($diff - ($days * 60 * 60 * 24) - ($hours * 3600)) / 60);
                                                 @endphp
-                                                @if ($now < $start) - @elseif ($now> $end)
+
+                                                @if ($now < $start)
                                                     -
-                                                    @else
+                                                @elseif ($now > $end)
+                                                    -
+                                                @else
                                                     {{ $days }} Hari, {{ $hours }} Jam, {{ $minutes }} Menit
-                                                    @endif
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach
