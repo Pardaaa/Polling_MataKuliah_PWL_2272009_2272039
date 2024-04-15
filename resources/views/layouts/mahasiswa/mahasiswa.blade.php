@@ -64,7 +64,6 @@
             <a class="nav-link" href="polling">
                 <i class="fas fa-fw fa-book-dead"></i>
                 Voting</a>
-            <a class="nav-link" href="hasilPolling">
             <a class="nav-link" href="hasilpolling">
                 <i class="fas fa-fw fa-poll"></i>
                 Hasil Polling</a>

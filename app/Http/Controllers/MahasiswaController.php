@@ -87,7 +87,6 @@ class MahasiswaController extends Controller
             return redirect('hasilpolling')->with('error', 'Maaf, jumlah SKS yang Anda pilih melebihi batas maksimum yang diizinkan.');
         }
 
-        // Simpan data polling jika jumlah SKS sesuai dengan batasan
         foreach ($matakuliah as $kode_mk) {
             $datamatkul = Matakuliah::where('kode_mk', $kode_mk)->first();
             $data = new HasilPolling();
