@@ -8,6 +8,7 @@ use App\Models\Matakuliah;
 use App\Models\hasilpolling;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class MahasiswaController extends Controller
@@ -64,6 +65,15 @@ class MahasiswaController extends Controller
         }
 
         return redirect()->back()->with('success', 'Polling telah berhasil terkirim.');
+    }
+    public function hasilPolling()
+    {
+        $results = DB::table('hasilpolling')
+            ->select('kode_mk','nama_mk', 'sks', DB::raw('COUNT(*) as total'))
+            ->groupBy('kode_mk','nama_mk', 'sks')
+            ->get();
+
+        return view('layouts\mahasiswa\hasilPolling', ['results' => $results]);
     }
 }
 
