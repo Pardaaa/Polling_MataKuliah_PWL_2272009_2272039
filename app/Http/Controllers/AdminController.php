@@ -8,6 +8,7 @@ use App\Models\Matakuliah;
 use App\Models\Polling;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -136,5 +137,14 @@ class AdminController extends Controller
         }
 
         return redirect()->back()->with('success', 'Polling telah berhasil terkirim.');
+    }
+    public function hasilPollingadmin()
+    {
+        $results = DB::table('hasilpolling')
+            ->select('kode_mk','nama_mk', 'sks', DB::raw('COUNT(*) as total'))
+            ->groupBy('kode_mk','nama_mk', 'sks')
+            ->get();
+
+        return view('layouts\admin\hasilPollingAdmin', ['results' => $results]);
     }
 }
