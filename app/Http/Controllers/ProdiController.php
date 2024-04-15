@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Matakuliah;
 use App\Models\Polling;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class ProdiController extends Controller
@@ -66,7 +67,7 @@ class ProdiController extends Controller
 
         return redirect('datamatakuliah')->with('success', 'Data berhasil di tambah!');
     }
-    
+
     public function periode(Request $request)
     {
         $data = Polling::orderBy('id', 'desc')->get();
@@ -87,5 +88,14 @@ class ProdiController extends Controller
         $data->save();
 
         return redirect('periode')->with('success', 'Data berhasil ditambahkan!');
+    }
+    public function hasilPollingProdi()
+    {
+        $results = DB::table('hasilpolling')
+            ->select('kode_mk','nama_mk', 'sks', DB::raw('COUNT(*) as total'))
+            ->groupBy('kode_mk','nama_mk', 'sks')
+            ->get();
+
+        return view('layouts\prodi\hasilPollingProdi', ['results' => $results]);
     }
 }
