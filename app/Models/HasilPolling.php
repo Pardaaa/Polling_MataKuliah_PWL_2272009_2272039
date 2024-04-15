@@ -11,7 +11,7 @@ class HasilPolling extends Model
     use HasFactory;
 
     protected $fillable  = [
-        'id',
+        'NRP',
         'name',
         'kode_mk',
         'nama_mk',
