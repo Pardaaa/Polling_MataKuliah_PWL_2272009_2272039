@@ -27,7 +27,7 @@
 </head>
 
 <style>
-    .diagram-table {
+    .diagram_table {
         display: table;
         width: 100%;
         border-collapse: collapse;
@@ -132,7 +132,7 @@
                                         @endforeach
                                         </tbody>
                                     </table>
-                                    <div class="diagram-table">
+                                    <div class="diagram_table">
                                         <div class="diagram-table-row">
                                             <div class="diagram-table-cell-header">Kode MK</div>
                                             <div class="diagram-table-cell-header">Nama Mata Kuliah</div>
