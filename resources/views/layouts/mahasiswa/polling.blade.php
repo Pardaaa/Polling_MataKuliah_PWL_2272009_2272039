@@ -62,7 +62,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="polling">
                     <i class="fas fa-fw fa-book-dead"></i>
-                    Votting</a>
+                    Voting</a>
 
                 <a class="nav-link" href="hasilpolling">
                     <i class="fas fa-fw fa-poll"></i>
@@ -82,7 +82,7 @@
 
                     <!-- Page Heading -->
                     <br>
-                    <h1 class="h3 mb-2 text-gray-800 text-center">Halaman Sistem Polling</h1>
+                    <h1 class="h3 mb-2 text-gray-800 text-center">Polling</h1>
                     <div class="container">
                         <div class="row">
                             <div class="col">
