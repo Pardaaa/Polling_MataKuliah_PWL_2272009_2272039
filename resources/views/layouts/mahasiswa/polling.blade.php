@@ -107,7 +107,7 @@
                                         @else
                                         <h5 class="card-title text-center">Polling belum dibuka</h5>
                                         @endif
-                                    </div>`
+                                    </div>
                                 </div>
                             </div>
                         </div>
