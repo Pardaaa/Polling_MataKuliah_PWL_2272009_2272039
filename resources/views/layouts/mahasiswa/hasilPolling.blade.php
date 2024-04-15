@@ -29,7 +29,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
-
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -81,7 +80,6 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <br>
                     <h1 class="h3 mb-2 text-gray-800 text-center">Hasil Polling</h1>
