@@ -75,7 +75,7 @@
                     <i class="fas fa-fw fa-calendar"></i>
                     Setting Periode</a>
 
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="hasilPollingProdi">
                     <i class="fas fa-fw fa-poll"></i>
                     Hasil Polling</a>
             </li>
