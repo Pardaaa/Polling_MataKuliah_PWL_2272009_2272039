@@ -12,6 +12,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function hasilPolling()
+    {
+        return $this->hasMany(HasilPolling::class, 'NRP', 'id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

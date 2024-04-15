@@ -38,7 +38,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="mahasiswa">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -65,7 +65,7 @@
                 <i class="fas fa-fw fa-book-dead"></i>
                 Votting</a>
 
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="hasilpolling">
                 <i class="fas fa-fw fa-poll"></i>
                 Hasil Polling</a>
         </li>
