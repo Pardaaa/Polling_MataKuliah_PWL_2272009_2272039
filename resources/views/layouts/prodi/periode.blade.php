@@ -75,7 +75,7 @@
                     <i class="fas fa-fw fa-calendar"></i>
                     Setting Periode</a>
 
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="hasilPollingProdi">
                     <i class="fas fa-fw fa-poll"></i>
                     Hasil Polling</a>
             </li>
@@ -97,7 +97,6 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex flex-row justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Polling</h6>
                             <a href="{{ route('addpolling') }}" class="btn btn-primary">Tambah Periode</a>
                         </div>
                         <div class="card-body">
