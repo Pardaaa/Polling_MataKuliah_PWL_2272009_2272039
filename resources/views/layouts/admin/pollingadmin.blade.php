@@ -104,13 +104,13 @@
                                             <form action="{{ route('polling1') }}" method="post">
                                                 @csrf
                                                 <h3>Pilih Mata Kuliah:</h3>
-                                                @foreach ($datamatakuliah as $matakuliah)
+                                                @foreach ($datamatakuliah as $pollings)
                                                     <div class="form-check" >
-                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $matakuliah->kode_mk }}" value="{{ $matakuliah->kode_mk }}">
-                                                        <label class="form-check-label" for="matakuliah_{{ $matakuliah->kode_mk }}">
-                                                            {{ $matakuliah->kode_mk }} |
-                                                            {{ $matakuliah->nama_mk }} |
-                                                            {{ $matakuliah->sks }} SKS
+                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $pollings->kode_mk }}" value="{{ $pollings->kode_mk }}">
+                                                        <label class="form-check-label" for="matakuliah_{{ $pollings->kode_mk }}">
+                                                            {{ $pollings->kode_mk }} |
+                                                            {{ $pollings->nama_mk }} |
+                                                            {{ $pollings->sks }} SKS
                                                         </label>
                                                     </div>
                                                 @endforeach

@@ -46,28 +46,25 @@ class MahasiswaController extends Controller
     public function polling1(Request $request)
     {
         $user = Auth::User();
-
-        $this->validate($request, [
-            'nama_mk' => 'required|min:3',
-            'sks' =>'required',
-        ]);
-
-
         $id = $user->id;
         $name = $user->name;
-        $kode_mk = $request->kode_mk;
-        $nama_mk = $request->nama_mk;
-        $sks = $request->sks;
 
-        $data = new HasilPolling();
-        $data->id = $id;
-        $data->name = $name;
-        $data->kode_mk = $kode_mk;
-        $data->nama_mk = $nama_mk;
-        $data->sks = $sks;
-        $data->save();
+
+        $matakuliah = $request->input('matakuliah');
+
+        foreach ($matakuliah as $kode_mk) {
+            $datamatkul = Matakuliah::where('kode_mk', $kode_mk)->first();
+            $data = new HasilPolling();
+            $data->idpolling = $id;
+            $data->namepolling = $name;
+            $data->kode_mkpolling = $kode_mk;
+            $data->nama_mkpolling = $datamatkul->nama_mk;
+            $data->skspolling = $datamatkul->sks;
+            $data->save();
+        }
 
         return redirect()->back()->with('success', 'Polling telah berhasil terkirim.');
     }
 }
+
 
