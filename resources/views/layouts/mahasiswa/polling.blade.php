@@ -155,6 +155,10 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
+    <script>
+        var sks = document.getElementById("matakuliah_{{ $pollings->kode_mk }}").getAttribute("data-sks");
+        console.log(sks)
+    </script>
 
 </body>
 
