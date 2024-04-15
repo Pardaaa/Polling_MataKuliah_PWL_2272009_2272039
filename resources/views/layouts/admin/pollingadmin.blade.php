@@ -92,7 +92,7 @@
 
                     <!-- Page Heading -->
                     <br>
-                    <h1 class="h3 mb-2 text-gray-800 text-center">Halaman Sistem Polling</h1>
+                    <h1 class="h3 mb-2 text-gray-800 text-center">Polling</h1>
                     <div class="container">
                         <div class="row">
                             <div class="col">
@@ -101,7 +101,7 @@
                                         @if (isset($data))
                                         <h5 class="card-title text-center">Polling dibuka</h5>
                                         <h4 class="card-title text-center"><b>{{ $data->nama_polling }}</b></h4>
-                                            <form action="{{ route('polling1') }}" method="post">
+                                            <form action="{{ route('pollingadmin1') }}" method="post">
                                                 @csrf
                                                 <h3>Pilih Mata Kuliah:</h3>
                                                 @foreach ($datamatakuliah as $pollings)
