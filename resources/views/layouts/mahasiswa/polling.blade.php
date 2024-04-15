@@ -81,7 +81,7 @@
                     <!-- Page Heading -->
                     <br>
                     <h1 class="h3 mb-2 text-gray-800 text-center">Polling</h1>
-                    <div class="container">
+                    <div class="container col-l-12">
                         <div class="row">
                             <div class="col">
                                 <div class="card">
