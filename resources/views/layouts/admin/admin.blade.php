@@ -78,7 +78,7 @@
                 <i class="fas fa-fw fa-vote-yea"></i>
                 Voting</a>
 
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="hasilPollingadmin">
                 <i class="fas fa-fw fa-poll"></i>
                 Hasil Polling</a>
         </li>
@@ -97,7 +97,6 @@
                 <!-- Page Heading -->
                 <br>
                 <h1 class="h3 mb-2 text-gray-800 text-center">Selamat Datang Sebagai Admin</h1>
-                <h2 class="h3 mb-2 text-gray-800">Informasi</h2>
             </div>
             <!-- /.container-fluid -->
 
