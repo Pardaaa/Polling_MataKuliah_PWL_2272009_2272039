@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('login');
+    return redirect('home');
 });
 
 Route::get('/add', [\App\Http\Controllers\HomeController::class, 'add'])->name('add');
