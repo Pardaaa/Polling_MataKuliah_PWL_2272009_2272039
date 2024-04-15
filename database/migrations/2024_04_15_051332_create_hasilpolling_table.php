@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('hasilpolling', function (Blueprint $table) {
             $table->id();
+            $table->string('NRP');
             $table->string('name');
-            $table->string('kode_mk')->unique();
+            $table->string('kode_mk');
             $table->string('nama_mk');
             $table->string('sks');
             $table->timestamps();
