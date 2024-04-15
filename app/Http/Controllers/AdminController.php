@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HasilPolling;
 use App\Models\Mahasiswa;
 use App\Models\Matakuliah;
 use App\Models\Polling;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -111,5 +113,28 @@ class AdminController extends Controller
         $datamatakuliah = Matakuliah::get();
 
         return view('layouts\admin\pollingadmin', compact('data', 'datamatakuliah'));
+    }
+
+    public function pollingadmin1(Request $request)
+    {
+        $user = Auth::User();
+        $id = $user->id;
+        $name = $user->name;
+
+
+        $matakuliah = $request->input('matakuliah');
+
+        foreach ($matakuliah as $kode_mk) {
+            $datamatkul = Matakuliah::where('kode_mk', $kode_mk)->first();
+            $data = new HasilPolling();
+            $data->NRP = $id;
+            $data->name = $name;
+            $data->kode_mk = $kode_mk;
+            $data->nama_mk = $datamatkul->nama_mk;
+            $data->sks = $datamatkul->sks;
+            $data->save();
+        }
+
+        return redirect()->back()->with('success', 'Polling telah berhasil terkirim.');
     }
 }
