@@ -55,7 +55,7 @@ class MahasiswaController extends Controller
         foreach ($matakuliah as $kode_mk) {
             $datamatkul = Matakuliah::where('kode_mk', $kode_mk)->first();
             $data = new HasilPolling();
-            $data->id = $id;
+            $data->NRP = $id;
             $data->name = $name;
             $data->kode_mk = $kode_mk;
             $data->nama_mk = $datamatkul->nama_mk;
