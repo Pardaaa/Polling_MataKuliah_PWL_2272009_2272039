@@ -11,10 +11,10 @@ class HasilPolling extends Model
     use HasFactory;
 
     protected $fillable  = [
-        'idpolling',
-        'namepolling',
-        'kode_mkpolling',
-        'nama_mkpolling',
-        'skspolling'
+        'id',
+        'name',
+        'kode_mk',
+        'nama_mk',
+        'sks'
     ];
 }
