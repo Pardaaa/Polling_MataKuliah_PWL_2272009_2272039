@@ -61,3 +61,5 @@ Route::post('/polling1', [\App\Http\Controllers\MahasiswaController::class, 'pol
 Route::post('/pollingadmin1', [\App\Http\Controllers\AdminController::class, 'pollingadmin1'])->name('pollingadmin1');
 
 Route::get('hasilPolling',[\App\Http\Controllers\MahasiswaController::class, 'hasilPolling'])->name('hasilPolling');
+Route::get('hasilPollingadmin',[\App\Http\Controllers\AdminController::class, 'hasilPollingadmin'])->name('hasilPollingadmin');
+Route::get('hasilPollingProdi',[\App\Http\Controllers\ProdiController::class, 'hasilPollingProdi'])->name('hasilPollingProdi');
