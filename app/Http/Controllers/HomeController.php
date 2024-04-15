@@ -45,7 +45,7 @@ class HomeController extends Controller
         ]);
 
         $id = $request->id;
-        $name = $request->name;
+        $nama = $request->name;
         $email = $request->email;
         $password = $request->password;
         $hashedPassword = Hash::make($password);
@@ -53,7 +53,7 @@ class HomeController extends Controller
 
         $data = new Mahasiswa;
         $data->id = $id;
-        $data->name = $name;
+        $data->name = $nama;
         $data->email = $email;
         $data->password = $hashedPassword;
         $data->role = $role;

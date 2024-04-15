@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('home');
+    return view('welcome');
 });
 
 Route::get('/add', [\App\Http\Controllers\HomeController::class, 'add'])->name('add');
@@ -63,3 +63,7 @@ Route::post('/pollingadmin1', [\App\Http\Controllers\AdminController::class, 'po
 Route::get('hasilPolling',[\App\Http\Controllers\MahasiswaController::class, 'hasilPolling'])->name('hasilPolling');
 Route::get('hasilPollingadmin',[\App\Http\Controllers\AdminController::class, 'hasilPollingadmin'])->name('hasilPollingadmin');
 Route::get('hasilPollingProdi',[\App\Http\Controllers\ProdiController::class, 'hasilPollingProdi'])->name('hasilPollingProdi');
+
+Route::post('savepolling', [\App\Http\Controllers\MahasiswaController::class, 'savepolling'])->name('savepolling');
+Route::get('hasilpolling', function () { return view('layouts\mahasiswa\hasilpolling'); })->middleware(['checkRole:mahasiswa,admin']);
+Route::get('hasilpolling', [\App\Http\Controllers\MahasiswaController::class, 'hasil'])->name('hasilpolling');

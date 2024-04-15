@@ -24,6 +24,8 @@
 
     <!-- Custom styles for this page -->
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body id="page-top">
@@ -35,7 +37,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="mahasiswa">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -62,7 +64,7 @@
                     <i class="fas fa-fw fa-book-dead"></i>
                     Voting</a>
 
-                <a class="nav-link" href="hasilPolling">
+                <a class="nav-link" href="hasilpolling">
                     <i class="fas fa-fw fa-poll"></i>
                     Hasil Polling</a>
             </li>
@@ -89,12 +91,13 @@
                                         @if (isset($data))
                                         <h5 class="card-title text-center">Polling dibuka</h5>
                                         <h4 class="card-title text-center"><b>{{ $data->nama_polling }}</b></h4>
-                                            <form action="{{ route('polling1') }}" method="post">
+                                            <form id="pollingForm" action="{{ route('savepolling') }}" method="post">
                                                 @csrf
                                                 <h3>Pilih Mata Kuliah:</h3>
+                                                <h6 style="color:Red;">Pilih Mata Kuliah (Maksimal 9 SKS)</h6>
                                                 @foreach ($datamatakuliah as $pollings)
                                                     <div class="form-check" >
-                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $pollings->kode_mk }}" value="{{ $pollings->kode_mk }}">
+                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $pollings->kode_mk }}" value="{{ $pollings->kode_mk }}" data-sks="{{ $pollings->sks }}">
                                                         <label class="form-check-label" for="matakuliah_{{ $pollings->kode_mk }}">
                                                             {{ $pollings->kode_mk }} |
                                                             {{ $pollings->nama_mk }} |
@@ -155,6 +158,92 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var checkboxes = document.querySelectorAll('.form-check-input');
+            var pollingForm = document.getElementById('pollingForm'); // Menambahkan ID pada form
+            var hasSelected = false; // Variabel bantuan untuk menandai apakah pengguna telah memilih
+
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    var sksTerpilih = 0;
+                    var selectedCheckboxes = document.querySelectorAll('.form-check-input:checked');
+                    selectedCheckboxes.forEach(function(cb) {
+                        sksTerpilih += parseInt(cb.getAttribute('data-sks'), 10);
+                    });
+
+                    // Memperbaiki logika pemeriksaan SKS
+                    if (sksTerpilih >= 9) {
+                        checkboxes.forEach(function(cb) {
+                            if (!cb.checked) {
+                                cb.disabled = true;
+                            }
+                        });
+                    } else {
+                        checkboxes.forEach(function(cb) {
+                            cb.disabled = false;
+                        });
+                    }
+                });
+            });
+
+            pollingForm.addEventListener('submit', function(event) {
+                var sksTerpilih = 0;
+                var selectedCheckboxes = document.querySelectorAll('.form-check-input:checked');
+                selectedCheckboxes.forEach(function(cb) {
+                    sksTerpilih += parseInt(cb.getAttribute('data-sks'), 10);
+                });
+
+                // Memperbaiki pengecekan status pemilihan
+                if (hasSelected && selectedCheckboxes.length > 0) {
+                    // Jika pengguna telah memilih sebelumnya
+                    event.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Anda telah memilih sebelumnya. Tidak dapat memilih lagi!'
+                    });
+                } else if (sksTerpilih > 9) {
+                    event.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Maaf, Anda hanya bisa memilih maksimal 9 SKS!'
+                    });
+                } else {
+                    // Jika belum pernah memilih, tampilkan konfirmasi penyimpanan data polling
+                    event.preventDefault();
+                    Swal.fire({
+                        title: 'Anda yakin?',
+                        text: "Anda akan menyimpan data polling ini!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Ya, simpan!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Jika dikonfirmasi, kirimkan formulir
+                            pollingForm.submit();
+                        }
+                    });
+                }
+            });
+
+            // Memperbaiki pengecekan status pemilihan
+            if (localStorage.getItem('hasSelected') === 'true') {
+                hasSelected = true;
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.disabled = true;
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

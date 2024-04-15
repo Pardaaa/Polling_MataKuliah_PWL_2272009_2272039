@@ -101,9 +101,9 @@
                                         @if (isset($data))
                                         <h5 class="card-title text-center">Polling dibuka</h5>
                                         <h4 class="card-title text-center"><b>{{ $data->nama_polling }}</b></h4>
-                                            <form action="{{ route('pollingadmin1') }}" method="post">
                                                 @csrf
                                                 <h3>Pilih Mata Kuliah:</h3>
+                                                <h6 style="color:Red;">Pilih Mata Kuliah (Maksimal 9 SKS)</h6>
                                                 @foreach ($datamatakuliah as $pollings)
                                                     <div class="form-check" >
                                                         <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $pollings->kode_mk }}" value="{{ $pollings->kode_mk }}">
@@ -167,7 +167,6 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
-
 </body>
 
 </html>
