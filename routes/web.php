@@ -58,3 +58,6 @@ Route::get('addpollingadmin', [App\Http\Controllers\AdminController::class, 'add
 Route::post('addpollingadmin', [App\Http\Controllers\AdminController::class, 'addpollingprosesadmin'])->middleware(['checkRole:admin'])->name('addpollingprosesadmin');
 
 Route::post('/polling1', [\App\Http\Controllers\MahasiswaController::class, 'polling1'])->name('polling1');
+Route::post('/pollingadmin1', [\App\Http\Controllers\AdminController::class, 'pollingadmin1'])->name('pollingadmin1');
+
+Route::get('hasilPolling',[\App\Http\Controllers\MahasiswaController::class, 'hasilPolling'])->name('hasilPolling');
