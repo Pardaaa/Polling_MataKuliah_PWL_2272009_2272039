@@ -67,8 +67,7 @@ class MahasiswaController extends Controller
         $data->sks = $sks;
         $data->save();
 
-
-        return redirect()->route('polling')->with('success', 'Polling telah berhasil terkirim.');
+        return redirect()->back()->with('success', 'Polling telah berhasil terkirim.');
     }
 }
 
