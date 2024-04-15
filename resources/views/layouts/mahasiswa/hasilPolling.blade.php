@@ -26,32 +26,6 @@
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 </head>
 
-<style>
-    .diagram_table {
-        display: table;
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .diagram-table-row {
-        display: table-row;
-    }
-
-    .diagram-table-cell-header {
-        display: table-cell;
-        padding: 8px;
-        font-weight: bold;
-        border: 1px solid #ddd;
-    }
-
-    .diagram-table-cell {
-        display: table-cell;
-        padding: 8px;
-        border: 1px solid #ddd;
-    }
-
-</style>
-
 <body id="page-top">
 
 <!-- Page Wrapper -->
@@ -107,49 +81,32 @@
                 <!-- Page Heading -->
                 <br>
                 <h1 class="h3 mb-2 text-gray-800 text-center">Hasil Polling</h1>
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                        <tr>
-                                            <th>Kode MK</th>
-                                            <th>Nama Mata Kuliah</th>
-                                            <th>SKS</th>
-                                            <th>Dipilih</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($results as $result)
-                                            <tr>
-                                                <td>{{ $result->kode_mk }}</td>
-                                                <td>{{ $result->nama_mk }}</td>
-                                                <td>{{ $result->sks }}</td>
-                                                <td>{{ $result->total }}</td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                    <div class="diagram_table">
-                                        <div class="diagram-table-row">
-                                            <div class="diagram-table-cell-header">Kode MK</div>
-                                            <div class="diagram-table-cell-header">Nama Mata Kuliah</div>
-                                            <div class="diagram-table-cell-header">SKS</div>
-                                            <div class="diagram-table-cell-header">Dipilih</div>
-                                        </div>
-                                        @foreach($results as $result)
-                                            <div class="diagram-table-row">
-                                                <div class="diagram-table-cell">{{ $result->kode_mk }}</div>
-                                                <div class="diagram-table-cell">{{ $result->nama_mk }}</div>
-                                                <div class="diagram-table-cell">{{ $result->sks }}</div>
-                                                <div class="diagram-table-cell">{{ $result->total }}</div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Data Hasil Polling</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Kode MK</th>
+                                    <th>Nama Mata Kuliah</th>
+                                    <th>SKS</th>
+                                    <th>Dipilih</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($results as $result)
+                                    <tr>
+                                        <td>{{ $result->kode_mk }}</td>
+                                        <td>{{ $result->nama_mk }}</td>
+                                        <td>{{ $result->sks }}</td>
+                                        <td>{{ $result->total }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
