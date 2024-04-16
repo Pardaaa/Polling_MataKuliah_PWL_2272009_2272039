@@ -60,9 +60,8 @@ Route::post('addpollingadmin', [App\Http\Controllers\AdminController::class, 'ad
 Route::post('/polling1', [\App\Http\Controllers\MahasiswaController::class, 'polling1'])->name('polling1');
 Route::post('/pollingadmin1', [\App\Http\Controllers\AdminController::class, 'pollingadmin1'])->name('pollingadmin1');
 
-Route::get('hasilPolling',[\App\Http\Controllers\MahasiswaController::class, 'hasilpolling'])->name('hasilPolling');
-Route::get('hasilPollingadmin',[\App\Http\Controllers\AdminController::class, 'hasilpollingadmin'])->name('hasilPollingadmin');
-Route::get('hasilPollingProdi',[\App\Http\Controllers\ProdiController::class, 'hasilpollingprodi'])->name('hasilPollingProdi');
+Route::get('hasilpolling',[\App\Http\Controllers\MahasiswaController::class, 'hasilpolling'])->name('hasilpolling');
+Route::get('hasilpollingadmin',[\App\Http\Controllers\AdminController::class, 'hasilpollingadmin'])->name('hasilpollingadmin');
+Route::get('hasilpollingprodi',[\App\Http\Controllers\ProdiController::class, 'hasilpollingprodi'])->name('hasilpollingprodi');
 
 Route::post('savepolling', [\App\Http\Controllers\MahasiswaController::class, 'savepolling'])->name('savepolling');
-Route::get('hasilpolling', function () { return view('layouts\mahasiswa\hasilpolling'); })->middleware(['checkRole:mahasiswa,admin']);
