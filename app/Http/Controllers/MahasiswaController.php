@@ -101,11 +101,8 @@ class MahasiswaController extends Controller
         return redirect('hasilpolling')->with('success', 'Pemilihan mata kuliah berhasil disimpan.');
     }
 
-    public function hasil()
+    public function hasilpolling()
     {
-        // Ambil data hasil polling dari database
-        $pollingData = HasilPolling::all();
-
         // Hitung jumlah suara untuk setiap pilihan
         $jumlahSuara = $pollingData->groupBy('nama_mk')->map(function ($item) {
             return $item->count();
@@ -122,7 +119,6 @@ class MahasiswaController extends Controller
             ->groupBy('kode_mk','nama_mk', 'sks')
             ->get();
 
-        // Kirim data polling ke view hasil polling
         return view('layouts.mahasiswa.hasilPolling', compact('labels', 'dataSuara', 'pollingData'), ['results' => $results]);
     }
 }
