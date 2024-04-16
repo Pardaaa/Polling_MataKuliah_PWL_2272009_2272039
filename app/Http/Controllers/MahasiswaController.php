@@ -117,7 +117,12 @@ class MahasiswaController extends Controller
         // Ambil jumlah suara untuk setiap mata kuliah
         $dataSuara = $jumlahSuara->values()->all();
 
+        $results = DB::table('hasilpolling')
+            ->select('kode_mk','nama_mk', 'sks', DB::raw('COUNT(*) as total'))
+            ->groupBy('kode_mk','nama_mk', 'sks')
+            ->get();
+
         // Kirim data polling ke view hasil polling
-        return view('layouts.mahasiswa.hasilpolling', compact('labels', 'dataSuara', 'pollingData'));
+        return view('layouts.mahasiswa.hasilPolling', compact('labels', 'dataSuara', 'pollingData'), ['results' => $results]);
     }
 }
