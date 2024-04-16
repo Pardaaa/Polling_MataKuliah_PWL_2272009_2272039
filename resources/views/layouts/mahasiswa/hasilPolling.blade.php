@@ -184,7 +184,6 @@
 
     <!-- Script for Polling Chart -->
     <script>
-        // Data polling (dari variabel yang diteruskan dari controller)
         var data = {
             labels: {!! json_encode($labels) !!},
             datasets: [{
@@ -196,7 +195,6 @@
             }]
         };
 
-        // Options untuk konfigurasi chart
         var options = {
             scales: {
                 yAxes: [{
@@ -207,7 +205,6 @@
             }
         };
 
-        // Inisialisasi chart menggunakan Chart.js
         var ctx = document.getElementById('pollingChart').getContext('2d');
         var pollingChart = new Chart(ctx, {
             type: 'bar',
