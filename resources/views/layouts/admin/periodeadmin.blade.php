@@ -79,7 +79,7 @@
                     <i class="fas fa-fw fa-vote-yea"></i>
                     Voting</a>
 
-                <a class="nav-link" href="hasilPollingadmin">
+                <a class="nav-link" href="hasilpollingadmin">
                     <i class="fas fa-fw fa-poll"></i>
                     Hasil Polling</a>
             </li>
