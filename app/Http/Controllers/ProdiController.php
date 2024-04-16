@@ -89,13 +89,14 @@ class ProdiController extends Controller
 
         return redirect('periode')->with('success', 'Data berhasil ditambahkan!');
     }
-    public function hasilPollingProdi()
+    
+    public function hasilpollingprodi()
     {
         $results = DB::table('hasilpolling')
             ->select('kode_mk','nama_mk', 'sks', DB::raw('COUNT(*) as total'))
             ->groupBy('kode_mk','nama_mk', 'sks')
             ->get();
 
-        return view('layouts\prodi\hasilPollingProdi', ['results' => $results]);
+        return view('layouts\prodi\hasilpollingprodi', ['results' => $results]);
     }
 }
