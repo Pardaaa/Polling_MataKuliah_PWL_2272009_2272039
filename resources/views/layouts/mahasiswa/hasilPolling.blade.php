@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -66,7 +66,7 @@
                 <i class="fas fa-fw fa-vote-yea"></i>
                 Voting</a>
 
-            <a class="nav-link" href="hasilPolling">
+            <a class="nav-link" href="hasilpolling">
                 <i class="fas fa-fw fa-poll"></i>
                 Hasil Polling</a>
         </li>
@@ -101,7 +101,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($results as $result)
+                                @foreach($results as $result)
                                     <tr>
                                         <td>{{ $result->kode_mk }}</td>
                                         <td>{{ $result->nama_mk }}</td>
@@ -155,36 +155,6 @@
 <script src="{{ asset('sbadmin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
-    <!-- Script for Polling Chart -->
-    <script>
-        var data = {
-            labels: {!! json_encode($labels) !!},
-            datasets: [{
-                label: 'Jumlah Suara',
-                data: {!! json_encode($dataSuara) !!},
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }]
-        };
-
-        var options = {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        };
-
-        var ctx = document.getElementById('pollingChart').getContext('2d');
-        var pollingChart = new Chart(ctx, {
-            type: 'bar',
-            data: data,
-            options: options
-        });
-    </script>
 <!-- Page level custom scripts -->
 <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
 </body>

@@ -103,22 +103,11 @@ class MahasiswaController extends Controller
 
     public function hasilpolling()
     {
-        // Hitung jumlah suara untuk setiap pilihan
-        $jumlahSuara = $pollingData->groupBy('nama_mk')->map(function ($item) {
-            return $item->count();
-        });
-
-        // Ambil data mata kuliah untuk label sumbu X
-        $labels = $jumlahSuara->keys()->all();
-
-        // Ambil jumlah suara untuk setiap mata kuliah
-        $dataSuara = $jumlahSuara->values()->all();
-
         $results = DB::table('hasilpolling')
             ->select('kode_mk','nama_mk', 'sks', DB::raw('COUNT(*) as total'))
             ->groupBy('kode_mk','nama_mk', 'sks')
             ->get();
 
-        return view('layouts.mahasiswa.hasilPolling', compact('labels', 'dataSuara', 'pollingData'), ['results' => $results]);
+        return view('layouts\mahasiswa\hasilpolling', ['results' => $results]);
     }
 }
