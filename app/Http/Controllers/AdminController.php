@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Validator;
 
 class AdminController extends Controller
 {
@@ -147,5 +148,42 @@ class AdminController extends Controller
             ->get();
 
         return view('layouts\admin\hasilpollingadmin', ['results' => $results]);
+    }
+
+    public function add()
+    {
+        return view('layouts\admin\add');
+    }
+
+    public function save(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|min:7|unique:users|numeric',
+            'name' => 'required|min:3',
+            'email' =>'required|email|unique:users',
+            'password' => 'required|min:6',
+            'role' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        $id = $request->id;
+        $nama = $request->name;
+        $email = $request->email;
+        $password = $request->password;
+        $hashedPassword = Hash::make($password);
+        $role = $request->role;
+
+        $data = new Mahasiswa;
+        $data->id = $id;
+        $data->name = $nama;
+        $data->email = $email;
+        $data->password = $hashedPassword;
+        $data->role = $role;
+        $data->save();
+
+        return response()->json(['success' => 'Data mahasiswa berhasil ditambahkan.']);
     }
 }
