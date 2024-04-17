@@ -17,8 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/add', [\App\Http\Controllers\HomeController::class, 'add'])->name('add');
-Route::post('/add', [\App\Http\Controllers\HomeController::class, 'save'])->name('save');
+Route::get('/add', [\App\Http\Controllers\AdminController::class, 'add'])->name('add');
+Route::post('/add', [\App\Http\Controllers\AdminController::class, 'save'])->name('save');
 Route::get('/addmatakuliah', [\App\Http\Controllers\ProdiController::class, 'addmatakuliah'])->name('addmatakuliah');
 Route::post('/addmatakuliah', [\App\Http\Controllers\ProdiController::class, 'savematakuliah'])->name('savematakuliah');
 Route::get('/addmatakuliahadmin', [\App\Http\Controllers\AdminController::class, 'addmatakuliahadmin'])->name('addmatakuliahadmin');
