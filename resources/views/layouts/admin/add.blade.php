@@ -28,6 +28,8 @@
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 </head>
 
 <body id="page-top">
@@ -113,7 +115,14 @@
                     <label style="color:black;" for="">Gmail</label>
                     <input type="text" class="form-control mb-4" name="email" id="email" aria-describedby="helpId" placeholder="Contoh: xxxxxxx@gmail.com">
                     <label style="color:black;" for="">Password</label>
-                    <input type="text" class="form-control mb-4" name="password" id="password" aria-describedby="helpId" placeholder="">
+                    <div class="input-group mb-4">
+                        <input type="password" class="form-control" name="password" id="password" aria-describedby="helpId" placeholder="">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                 <i class="fas fa-eye" id="togglePassword"></i>
+                            </span>
+                        </div>
+                    </div>
                     <label style="color:black;" for="">Role</label>
                     <input type="text" class="form-control mb-4" name="role" id="role" aria-describedby="helpId" placeholder="Contoh: mahasiswa">
                     <br>
