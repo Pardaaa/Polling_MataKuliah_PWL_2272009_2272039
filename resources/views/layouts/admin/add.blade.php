@@ -27,7 +27,6 @@
     <!-- Custom styles for this page -->
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 </head>
@@ -104,11 +103,11 @@
 
             </div>
             <!-- /.container-fluid -->
-            <form action="add" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('/add') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                 <div class="card-body">
-                    <label style="color:black;" for="">ID</label>
+                    <label style="color:black;" for="">NRP</label>
                     <input type="text" class="form-control mb-4" name="id" id="id" aria-describedby="helpId" placeholder="Contoh: 2272009">
                     <label style="color:black;" for="">Nama</label>
                     <input type="text" class="form-control mb-4" name="name" id="name" aria-describedby="helpId" placeholder="Contoh: Charles Winata" >
@@ -126,7 +125,7 @@
                     <label style="color:black;" for="">Role</label>
                     <input type="text" class="form-control mb-4" name="role" id="role" aria-describedby="helpId" placeholder="Contoh: mahasiswa">
                     <br>
-                    <button class="btn btn-primary" type="submit" onclick="tambah()">Tambah Data</button>
+                    <button class="btn btn-primary" type="submit">Tambah Data</button>
                 </div>
             </form>
         </div>
@@ -170,19 +169,47 @@
 <!-- Page level custom scripts -->
 <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    function tambah() {
-        setTimeout(function () {
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Your work has been saved",
-                showConfirmButton: false,
-                timer: 1500
+    $(document).ready(function() {
+        $('form').submit(function(event) {
+            event.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            var method = form.attr('method');
+            var data = form.serialize();
+
+            $.ajax({
+                url: url,
+                method: method,
+                data: data,
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: 'Data Berhasil Ditambahkan',
+                        }).then((result) => {
+                            if (result.isConfirmed || result.isDismissed) {
+                                window.location.href = '/datamahasiswadankandidat';
+                            }
+                        });
+                    } else {
+                        var errors = response.errors.join('<br>');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: errors,
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                }
             });
-        }, 1000); // Jeda waktu dalam milidetik
-    }
+        });
+    });
 </script>
 </body>
 </html>
