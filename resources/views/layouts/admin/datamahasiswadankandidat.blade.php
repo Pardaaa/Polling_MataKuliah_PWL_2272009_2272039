@@ -108,7 +108,7 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>ID/NRP</th>
                                     <th>Nama</th>
                                     <th>Gmail</th>
                                     <th>Role</th>
