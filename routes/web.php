@@ -67,3 +67,12 @@ Route::get('hasilpollingadmin',[\App\Http\Controllers\AdminController::class, 'h
 Route::get('hasilpollingprodi',[\App\Http\Controllers\ProdiController::class, 'hasilpollingprodi'])->name('hasilpollingprodi');
 
 Route::post('savepolling', [\App\Http\Controllers\MahasiswaController::class, 'savepolling'])->name('savepolling');
+
+Route::post('/change-password', [\App\Http\Controllers\MahasiswaController::class, 'changepassword'])->name('changepassword');
+Route::get('/change-password', [\App\Http\Controllers\MahasiswaController::class, 'changepasswordform'])->name('changepasswordform');
+
+Route::post('/change-passwordprodi', [\App\Http\Controllers\ProdiController::class, 'changepasswordprodi'])->name('changepasswordprodi');
+Route::get('/change-passwordprodi', [\App\Http\Controllers\ProdiController::class, 'changepasswordformprodi'])->name('changepasswordformprodi');
+
+Route::post('/change-passwordadmin', [\App\Http\Controllers\AdminController::class, 'changepasswordadmin'])->name('changepasswordadmin');
+Route::get('/change-passwordadmin', [\App\Http\Controllers\AdminController::class, 'changepasswordformadmin'])->name('changepasswordformadmin');
