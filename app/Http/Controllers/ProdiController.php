@@ -80,7 +80,7 @@ class ProdiController extends Controller
     }
 
     public function addpollingproses(Request $request)
-    {   
+    {
         $validator = Validator::make($request->all(), [
             'nama_polling' => 'required|unique:polling',
             'start_date' => 'required',
@@ -99,7 +99,7 @@ class ProdiController extends Controller
 
         return response()->json(['success' => 'Data polling berhasil ditambahkan.']);
     }
-    
+
     public function hapuspolling($nama_polling)
     {
         $tabel = Polling::find($nama_polling);
@@ -115,5 +115,29 @@ class ProdiController extends Controller
             ->get();
 
         return view('layouts\prodi\hasilpollingprodi', ['results' => $results]);
+    }
+    public function changepasswordformprodi()
+    {
+        return view('password');
+    }
+    public function changepasswordprodi(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:6|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        // Check if the current password matches the password in the database
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()->back()->with('error', 'Password saat ini salah.');
+        }
+
+        // Update the user's password
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return redirect()->back()->with('success', 'Password berhasil diubah.');
     }
 }
