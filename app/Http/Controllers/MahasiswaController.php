@@ -110,4 +110,29 @@ class MahasiswaController extends Controller
 
         return view('layouts\mahasiswa\hasilpolling', ['results' => $results]);
     }
+    public function changepasswordform()
+    {
+        return view('password');
+    }
+    public function changepassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:6|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        // Check if the current password matches the password in the database
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()->back()->with('error', 'Password saat ini salah.');
+        }
+
+        // Update the user's password
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return redirect()->back()->with('success', 'Password berhasil diubah.');
+    }
+
 }
