@@ -64,6 +64,28 @@ class AdminController extends Controller
         return view('layouts\admin\addmatakuliahadmin');
     }
 
+    public function editmatakuliahadmin(Matakuliah $matkul)
+    {
+        return view ('layouts\admin\editmatakuliahadmin', [
+            'mhs' => $matkul
+        ]);
+    }
+
+    public function updatematakuliahadmin (Request $request, Matakuliah $matkul)
+    {
+        $validatedData = validator($request->all(), [
+            'nama_mk' => 'required|min:3',
+            'sks' =>'required'
+        ], [
+            'nama_mk.required' => 'Nama Mata Kuliah harus diisi'
+        ]) -> validate();
+
+        $matkul -> nama_mk = $validatedData['nama_mk'];
+        $matkul -> sks = $validatedData['sks'];
+        $matkul -> save();
+        return redirect(route('datamatakuliahadmin'));
+    }
+
     public function savematakuliahadmin(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -101,7 +123,7 @@ class AdminController extends Controller
     }
 
     public function addpollingprosesadmin(Request $request)
-    {   
+    {
         $validator = Validator::make($request->all(), [
             'nama_polling' => 'required|unique:polling',
             'start_date' => 'required',
@@ -174,7 +196,7 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Polling telah berhasil terkirim.');
     }
-    
+
     public function hasilpollingadmin()
     {
         $results = DB::table('hasilpolling')
