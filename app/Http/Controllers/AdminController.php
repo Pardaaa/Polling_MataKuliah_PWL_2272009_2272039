@@ -66,11 +66,15 @@ class AdminController extends Controller
 
     public function savematakuliahadmin(Request $request)
     {
-        $this->validate($request, [
-            'kode_mk' => 'required|unique:matakuliah,kode_mk',
+        $validator = Validator::make($request->all(), [
+            'kode_mk' => 'required|unique:matakuliah',
             'nama_mk' => 'required|min:3',
             'sks' =>'required',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
 
         $kode_mk = $request->kode_mk;
         $nama_mk = $request->nama_mk;
@@ -82,7 +86,7 @@ class AdminController extends Controller
         $data->sks = $sks;
         $data->save();
 
-        return redirect('datamatakuliahadmin')->with('success', 'Data berhasil di tambah!');
+        return response()->json(['success' => 'Data mahasiswa berhasil ditambahkan.']);
     }
 
     public function periodeadmin(Request $request)
@@ -97,14 +101,31 @@ class AdminController extends Controller
     }
 
     public function addpollingprosesadmin(Request $request)
-    {
+    {   
+        $validator = Validator::make($request->all(), [
+            'nama_polling' => 'required|unique:polling',
+            'start_date' => 'required',
+            'end_date' =>'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
         $data = new Polling();
         $data->nama_polling = $request->nama_polling;
         $data->start_date = $request->start_date;
         $data->end_date = $request->end_date;
         $data->save();
 
-        return redirect('periodeadmin')->with('success', 'Data berhasil ditambahkan!');
+        return response()->json(['success' => 'Data polling berhasil ditambahkan.']);
+    }
+
+    public function hapuspollingadmin($nama_polling)
+    {
+        $tabel = Polling::find($nama_polling);
+        Polling::where('nama_polling', $nama_polling)->delete();
+        return redirect('periodeadmin')->with('success', 'Data berhasil di hapus!');
     }
 
     public function pollingadmin(Request $request)
@@ -114,7 +135,21 @@ class AdminController extends Controller
             ->first();
         $datamatakuliah = Matakuliah::get();
 
-        return view('layouts\admin\pollingadmin', compact('data', 'datamatakuliah'));
+        if ($datamatakuliah) {
+            // Data mata kuliah tersedia, lanjutkan
+            $count = $datamatakuliah->count(); // Periksa jumlah data
+
+            if ($count > 0) {
+                // Ada data, lanjutkan dengan tindakan yang sesuai
+                return view('layouts\admin\pollingadmin', compact('data', 'datamatakuliah'));
+            } else {
+                // Tidak ada data, tangani kasus ini sesuai kebutuhan aplikasi
+                return redirect()->back()->with('error', 'Tidak ada data mata kuliah yang tersedia.');
+            }
+        } else {
+            // Tangani jika data mata kuliah tidak tersedia
+            return redirect()->back()->with('error', 'Data mata kuliah tidak tersedia.');
+        }
     }
 
     public function pollingadmin1(Request $request)
