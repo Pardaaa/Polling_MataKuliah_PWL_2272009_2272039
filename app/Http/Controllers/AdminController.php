@@ -72,6 +72,20 @@ class AdminController extends Controller
         ]);
     }
 
+    public function updatematakuliahadmin(Request $request, Matakuliah $matkul)
+    {
+        $validatedData = validator($request->all(), [
+            'kode_mk' => 'required',
+            'nama_mk' => 'required|min:3',
+            'sks' =>'required'
+        ], [
+            'nama_mk.required' => 'Nama Mata Kuliah harus diisi'
+        ]) -> validate();
+
+        $matkul->update($validatedData);
+        return redirect(route('datamatakuliahadmin'));
+    }
+
     public function edituser(User $user)
     {
         return view ('layouts\admin\editUser', [
