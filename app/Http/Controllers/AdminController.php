@@ -6,6 +6,7 @@ use App\Models\HasilPolling;
 use App\Models\Mahasiswa;
 use App\Models\Matakuliah;
 use App\Models\Polling;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -71,14 +72,14 @@ class AdminController extends Controller
         ]);
     }
 
-    public function edituser(Mahasiswa $user)
+    public function edituser(User $user)
     {
         return view ('layouts\admin\editUser', [
             'mhs' => $user
         ]);
     }
 
-    public function updateuser (Request $request, Mahasiswa $user)
+    public function updateuser (Request $request, User $user)
     {
         $validatedData = validator($request->all(), [
             'id' => 'required|min:7|numeric',
