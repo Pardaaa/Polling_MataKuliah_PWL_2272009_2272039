@@ -108,6 +108,7 @@
                                             <th>Waktu</th>
                                             <th>Status</th>
                                             <th>Tersisa</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -144,6 +145,13 @@
                                                 @else
                                                     {{ $days }} Hari, {{ $hours }} Jam, {{ $minutes }} Menit
                                                 @endif
+                                            </td>
+                                            <td>
+                                                <form action="{{ url('hapuspolling/'. $periode->nama_polling) }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-danger delete-periode">Hapus</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -215,6 +223,33 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
+
+    {{-- Swal Scripts --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            $('.delete-periode').on('click', function (event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: "WARNING!!!",
+                    text: "apakah yakin ingin menghapus data ini?",
+                    icon: "warning",
+                    showCancelButton:true,
+                    confirmButtonText: "Yes,delete it!",
+                    cancelButtonText: "No, Canceled!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: $(this).closest('form').attr('action'),
+                            type: 'DELETE',
+                            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        });
+                        window.location.reload();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
