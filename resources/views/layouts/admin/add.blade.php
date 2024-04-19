@@ -122,6 +122,15 @@
                             </span>
                         </div>
                     </div>
+                    <label style="color:black;" for="">Confirm Password</label>
+                    <div class="input-group mb-4">
+                        <input type="password" class="form-control" name="confirm_password" id="confirmPassword" aria-describedby="helpId" placeholder="">
+                        <div class="input-group-append">
+                <span class="input-group-text">
+                    <i class="fas fa-eye" id="toggleConfirmPassword"></i>
+                </span>
+                        </div>
+                    </div>
                     <label style="color:black;" for="">Role</label>
                     <input type="text" class="form-control mb-4" name="role" id="role" aria-describedby="helpId" placeholder="Contoh: mahasiswa">
                     <br>
@@ -175,6 +184,17 @@
     $(document).ready(function() {
         $('form').submit(function(event) {
             event.preventDefault();
+            var password = $('#password').val();
+            var confirmPassword = $('#confirmPassword').val();
+
+            if (password !== confirmPassword) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Password dan Confirm Password tidak sama!',
+                });
+                return;
+            }
             var form = $(this);
             var url = form.attr('action');
             var method = form.attr('method');
@@ -222,6 +242,20 @@
             icon.classList.add('fa-eye-slash');
         } else {
             passwordInput.type = "password";
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    });
+    document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const icon = document.getElementById('toggleConfirmPassword');
+
+        if (confirmPasswordInput.type === "password") {
+            confirmPasswordInput.type = "text";
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            confirmPasswordInput.type = "password";
             icon.classList.remove('fa-eye-slash');
             icon.classList.add('fa-eye');
         }
