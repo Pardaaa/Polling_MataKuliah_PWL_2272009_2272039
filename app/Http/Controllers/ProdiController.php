@@ -47,6 +47,28 @@ class ProdiController extends Controller
         return view('layouts\prodi\addmatakuliah');
     }
 
+    public function editmatakuliah(Matakuliah $matkul)
+    {
+        return view ('layouts\admin\editmatakuliahadmin', [
+            'mhs' => $matkul
+        ]);
+    }
+
+    public function updatematakuliah(Request $request, Matakuliah $matkul)
+    {
+        $validatedData = validator($request->all(), [
+            'nama_mk' => 'required|min:3',
+            'sks' =>'required'
+        ], [
+            'nama_mk.required' => 'Nama Mata Kuliah harus diisi'
+        ]) -> validate();
+
+        $matkul -> nama_mk = $validatedData['nama_mk'];
+        $matkul -> sks = $validatedData['sks'];
+        $matkul -> save();
+        return redirect(route('datamatakuliahadmin'));
+    }
+
     public function savematakuliah(Request $request)
     {
         $this->validate($request, [
@@ -80,7 +102,7 @@ class ProdiController extends Controller
     }
 
     public function addpollingproses(Request $request)
-    {   
+    {
         $validator = Validator::make($request->all(), [
             'nama_polling' => 'required|unique:polling',
             'start_date' => 'required',
@@ -99,7 +121,7 @@ class ProdiController extends Controller
 
         return response()->json(['success' => 'Data polling berhasil ditambahkan.']);
     }
-    
+
     public function hapuspolling($nama_polling)
     {
         $tabel = Polling::find($nama_polling);

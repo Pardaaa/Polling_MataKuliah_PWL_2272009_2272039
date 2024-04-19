@@ -117,11 +117,14 @@
                                         <td>{{ $mhs->nama_mk }}</td>
                                         <td>{{ $mhs->sks }}</td>
                                         <td>
-                                            <form action="{{ url('hapusmatakuliah/'. $mhs->kode_mk) }}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger delete-matkul">Hapus</button>
-                                            </form>
+                                            <div class="d-flex">
+                                                <a href = "{{ route('editmatakuliah', ['matkul' => $mhs])}}" role="button" class="btn btn-warning fas fa-edit mr-2"></a>
+                                                <form action="{{ url('hapusmatakuliah/'. $mhs->kode_mk) }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-danger delete-matkul">Hapus</button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

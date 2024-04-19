@@ -26,6 +26,8 @@ Route::post('/addmatakuliahadmin', [\App\Http\Controllers\AdminController::class
 
 Route::get('/editmatakuliahadmin/{matkul}', [\App\Http\Controllers\AdminController::class, 'editmatakuliahadmin'])->name('editmatakuliahadmin');
 Route::PUT('/editmatakuliahadmin/{matkul}', [\App\Http\Controllers\AdminController::class, 'updatematakuliahadmin'])->name('updatematakuliahadmin');
+Route::get('/editmatakuliah/{matkul}', [\App\Http\Controllers\ProdiController::class, 'editmatakuliah'])->name('editmatakuliah');
+Route::PUT('/editmatakuliah/{matkul}', [\App\Http\Controllers\ProdiController::class, 'updatematakuliah'])->name('updatematakuliah');
 
 Auth::routes();
 
