@@ -117,19 +117,21 @@
                                 </thead>
                                 <tbody>
                                 @foreach ($tabel as $mhs)
-                                    <tr>
-                                        <td>{{ $mhs->id }}</td>
-                                        <td>{{ $mhs->name }}</td>
-                                        <td>{{ $mhs->email }}</td>
-                                        <td>{{ $mhs->role }}</td>
-                                        <td>
-                                            <form action="{{ url('hapus/'. $mhs->id) }}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger delete-item">Hapus</button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                    @if ($mhs -> role != "admin")
+                                        <tr>
+                                            <td>{{ $mhs->id }}</td>
+                                            <td>{{ $mhs->name }}</td>
+                                            <td>{{ $mhs->email }}</td>
+                                            <td>{{ $mhs->role }}</td>
+                                            <td>
+                                                <form action="{{ url('hapus/'. $mhs->id) }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-danger delete-item">Hapus</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                                 </tbody>
                             </table>

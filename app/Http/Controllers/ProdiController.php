@@ -47,6 +47,28 @@ class ProdiController extends Controller
         return view('layouts\prodi\addmatakuliah');
     }
 
+    public function editmatakuliah(Matakuliah $matkul)
+    {
+        return view ('layouts\admin\editmatakuliahadmin', [
+            'mhs' => $matkul
+        ]);
+    }
+
+    public function updatematakuliah(Request $request, Matakuliah $matkul)
+    {
+        $validatedData = validator($request->all(), [
+            'nama_mk' => 'required|min:3',
+            'sks' =>'required'
+        ], [
+            'nama_mk.required' => 'Nama Mata Kuliah harus diisi'
+        ]) -> validate();
+
+        $matkul -> nama_mk = $validatedData['nama_mk'];
+        $matkul -> sks = $validatedData['sks'];
+        $matkul -> save();
+        return redirect(route('datamatakuliahadmin'));
+    }
+
     public function savematakuliah(Request $request)
     {
         $this->validate($request, [
