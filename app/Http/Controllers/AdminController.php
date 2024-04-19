@@ -101,7 +101,7 @@ class AdminController extends Controller
     }
 
     public function addpollingprosesadmin(Request $request)
-    {   
+    {
         $validator = Validator::make($request->all(), [
             'nama_polling' => 'required|unique:polling',
             'start_date' => 'required',
@@ -174,7 +174,7 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Polling telah berhasil terkirim.');
     }
-    
+
     public function hasilpollingadmin()
     {
         $results = DB::table('hasilpolling')
@@ -220,5 +220,29 @@ class AdminController extends Controller
         $data->save();
 
         return response()->json(['success' => 'Data mahasiswa berhasil ditambahkan.']);
+    }
+    public function changepasswordformadmin()
+    {
+        return view('password');
+    }
+    public function changepasswordadmin(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:6|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        // Check if the current password matches the password in the database
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()->back()->with('error', 'Password saat ini salah.');
+        }
+
+        // Update the user's password
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return redirect()->back()->with('success', 'Password berhasil diubah.');
     }
 }
