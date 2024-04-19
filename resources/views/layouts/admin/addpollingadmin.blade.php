@@ -48,7 +48,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="periode">
+                <a class="nav-link" href="periodeadmin">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     Dashboard</a>
             </li>
@@ -100,7 +100,7 @@
 
                 </div>
                 <!-- /.container-fluid -->
-                <form action="{{ route('addpollingprosesadmin') }}" method="POST" enctype="multipart/form-data">
+                <form action="addpollingprosesadmin" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
                     <div class="card-body">
@@ -155,7 +155,48 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
 
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script>
+        $(document).ready(function() {
+            $('form').submit(function(event) {
+                event.preventDefault();
+                var form = $(this);
+                var url = form.attr('action');
+                var method = form.attr('method');
+                var data = form.serialize();
+
+                $.ajax({
+                    url: url,
+                    method: method,
+                    data: data,
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: 'Data Berhasil Ditambahkan',
+                            }).then((result) => {
+                                if (result.isConfirmed || result.isDismissed) {
+                                    window.location.href = '/periodeadmin';
+                                }
+                            });
+                        } else {
+                            var errors = response.errors.join('<br>');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                html: errors,
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
 </html>
 @endsection
