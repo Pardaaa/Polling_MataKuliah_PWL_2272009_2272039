@@ -45,17 +45,19 @@ Route::get('mahasiswa', function () { return view('layouts\mahasiswa\mahasiswa')
 Route::delete('hapus/{id}', [App\Http\Controllers\AdminController::class, 'hapus'])->name('hapus');
 Route::delete('hapusmatakuliah/{kode_mk}', [App\Http\Controllers\ProdiController::class, 'hapusmatakuliah'])->name('hapusmatakuliah');
 Route::delete('hapusmatakuliahadmin/{kode_mk}', [App\Http\Controllers\AdminController::class, 'hapusmatakuliahadmin'])->name('hapusmatakuliahadmin');
+Route::delete('hapuspollingadmin/{nama_polling}', [App\Http\Controllers\AdminController::class, 'hapuspollingadmin'])->name('hapuspollingadmin');
+Route::delete('hapuspolling/{nama_polling}', [App\Http\Controllers\ProdiController::class, 'hapuspolling'])->name('hapuspolling');
 
 Route::get('periode', [App\Http\Controllers\ProdiController::class, 'periode'])->middleware(['checkRole:prodi,admin']);
 Route::get('addpolling', [App\Http\Controllers\ProdiController::class, 'addpolling'])->middleware(['checkRole:prodi,admin'])->name('addpolling');
-Route::post('addpolling', [App\Http\Controllers\ProdiController::class, 'addpollingproses'])->middleware(['checkRole:prodi,admin'])->name('addpollingproses');
+Route::post('addpollingproses', [App\Http\Controllers\ProdiController::class, 'addpollingproses'])->middleware(['checkRole:prodi,admin'])->name('addpollingproses');
 
 Route::get('polling', [App\Http\Controllers\MahasiswaController::class, 'polling'])->middleware(['checkRole:admin,mahasiswa']);
 Route::get('pollingadmin', [App\Http\Controllers\AdminController::class, 'pollingadmin'])->middleware(['checkRole:admin']);
 
 Route::get('periodeadmin', [App\Http\Controllers\AdminController::class, 'periodeadmin'])->middleware(['checkRole:admin']);
 Route::get('addpollingadmin', [App\Http\Controllers\AdminController::class, 'addpollingadmin'])->middleware(['checkRole:admin'])->name('addpollingadmin');
-Route::post('addpollingadmin', [App\Http\Controllers\AdminController::class, 'addpollingprosesadmin'])->middleware(['checkRole:admin'])->name('addpollingprosesadmin');
+Route::post('addpollingprosesadmin', [App\Http\Controllers\AdminController::class, 'addpollingprosesadmin'])->middleware(['checkRole:admin'])->name('addpollingprosesadmin');
 
 Route::post('/polling1', [\App\Http\Controllers\MahasiswaController::class, 'polling1'])->name('polling1');
 Route::post('/pollingadmin1', [\App\Http\Controllers\AdminController::class, 'pollingadmin1'])->name('pollingadmin1');
