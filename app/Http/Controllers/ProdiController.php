@@ -57,6 +57,7 @@ class ProdiController extends Controller
     public function updatematakuliah(Request $request, Matakuliah $matkul)
     {
         $validatedData = validator($request->all(), [
+            'kode_mk' => 'required',
             'nama_mk' => 'required|min:3',
             'sks' =>'required'
         ], [
