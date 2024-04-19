@@ -63,9 +63,7 @@ class ProdiController extends Controller
             'nama_mk.required' => 'Nama Mata Kuliah harus diisi'
         ]) -> validate();
 
-        $matkul -> nama_mk = $validatedData['nama_mk'];
-        $matkul -> sks = $validatedData['sks'];
-        $matkul -> save();
+        $matkul->update($validatedData);
         return redirect(route('datamatakuliahadmin'));
     }
 

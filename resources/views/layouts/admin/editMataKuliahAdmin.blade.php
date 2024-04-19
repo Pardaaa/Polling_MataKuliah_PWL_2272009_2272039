@@ -109,7 +109,7 @@
                     <label style="color:black;" for="">SKS</label>
                     <input type="text" class="form-control mb-4" name="sks" id="sks" aria-describedby="helpId" placeholder="Contoh: 4" value="{{ $mhs -> sks }}">
                     <br>
-                    <button class="btn btn-primary" type="submit">Tambah Mata Kuliah</button>
+                    <button class="btn btn-primary" type="submit">Edit Mata Kuliah</button>
                 </div>
             </form>
         </div>

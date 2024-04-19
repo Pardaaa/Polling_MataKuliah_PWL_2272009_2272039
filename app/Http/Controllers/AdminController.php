@@ -71,19 +71,24 @@ class AdminController extends Controller
         ]);
     }
 
-    public function updatematakuliahadmin (Request $request, Matakuliah $matkul)
+    public function edituser(Mahasiswa $user)
+    {
+        return view ('layouts\admin\editUser', [
+            'mhs' => $user
+        ]);
+    }
+
+    public function updateuser (Request $request, Mahasiswa $user)
     {
         $validatedData = validator($request->all(), [
-            'nama_mk' => 'required|min:3',
-            'sks' =>'required'
-        ], [
-            'nama_mk.required' => 'Nama Mata Kuliah harus diisi'
+            'id' => 'required|min:7|numeric',
+            'name' => 'required|min:3',
+            'email' =>'required|email',
+            'role' => 'required'
         ]) -> validate();
 
-        $matkul -> nama_mk = $validatedData['nama_mk'];
-        $matkul -> sks = $validatedData['sks'];
-        $matkul -> save();
-        return redirect(route('datamatakuliahadmin'));
+        $user->update($validatedData);
+        return redirect(route('datamahasiswadankandidat'));
     }
 
     public function savematakuliahadmin(Request $request)

@@ -124,11 +124,14 @@
                                             <td>{{ $mhs->email }}</td>
                                             <td>{{ $mhs->role }}</td>
                                             <td>
-                                                <form action="{{ url('hapus/'. $mhs->id) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger delete-item">Hapus</button>
-                                                </form>
+                                                <div class="d-flex">
+                                                    <a href = "{{ route('edituser', ['user' => $mhs])}}" role="button" class="btn btn-warning fas fa-edit mr-2"></a>
+                                                    <form action="{{ url('hapus/'. $mhs->id) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button class="btn btn-danger delete-item">Hapus</button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endif
