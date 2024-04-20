@@ -84,14 +84,14 @@ class AdminController extends Controller
         return response()->json(['success' => 'Data mahasiswa berhasil diedit.']);
     }
 
-    public function edituser(User $user)
+    public function edituser(Mahasiswa $user)
     {
         return view ('layouts\admin\editUser', [
             'mhs' => $user
         ]);
     }
 
-    public function updateuser (Request $request, User $user)
+    public function updateuser (Request $request, Mahasiswa $user)
     {
         $validatedData = validator($request->all(), [
             'id' => 'required|min:7|numeric',
