@@ -215,12 +215,29 @@ class AdminController extends Controller
 
     public function pollingadmin1(Request $request)
     {
-        $user = Auth::User();
+        $user = Auth::user();
         $id = $user->id;
         $name = $user->name;
 
-
         $matakuliah = $request->input('matakuliah');
+        $total_sks = 0;
+
+        foreach ($matakuliah as $kode_mk) {
+            $datamatkul = Matakuliah::where('kode_mk', $kode_mk)->first();
+            $total_sks += $datamatkul->sks;
+        }
+
+        $batas_max_sks = 9;
+
+        if ($total_sks > $batas_max_sks) {
+            return redirect('hasilpolling')->with('error', 'Maaf, jumlah SKS yang Anda pilih melebihi batas maksimum yang diizinkan.');
+        }
+
+        $existingPolling = $user->hasilpolling;
+
+        if ($existingPolling->isNotEmpty()) {
+            $user->hasilpolling()->delete();
+        }
 
         foreach ($matakuliah as $kode_mk) {
             $datamatkul = Matakuliah::where('kode_mk', $kode_mk)->first();
@@ -233,7 +250,7 @@ class AdminController extends Controller
             $data->save();
         }
 
-        return redirect()->back()->with('success', 'Polling telah berhasil terkirim.');
+        return redirect('hasilpollingadmin')->with('success', 'Pemilihan mata kuliah berhasil disimpan.');
     }
 
     public function hasilpollingadmin()

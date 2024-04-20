@@ -105,7 +105,7 @@
                                                             $user = auth()->user();
                                                             $isChecked = $user->hasilpolling->contains('kode_mk', $polling->kode_mk);
                                                         @endphp
-                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $polling->kode_mk }}" value="{{ $polling->kode_mk }}" data-sks="{{ $polling->sks }}" {{ $isChecked ? 'checked ' : '' }}>
+                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $polling->kode_mk }}" value="{{ $polling->kode_mk }}" data-sks="{{ $polling->sks }}" {{ $isChecked ? 'checked disable' : '' }}>
                                                         <label class="form-check-label" for="matakuliah_{{ $polling->kode_mk }}">
                                                             {{ $polling->kode_mk }} | {{ $polling->nama_mk }} | {{ $polling->sks }} SKS
                                                             @if ($isChecked)

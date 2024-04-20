@@ -65,19 +65,23 @@
 
         <!-- Nav Item -->
         <li class="nav-item">
-            <a class="nav-link" href="datamahasiswa">
+            <a class="nav-link" href="datamahasiswadankandidat">
                 <i class="fas fa-fw fa-user-graduate"></i>
-                Data Mahasiswa</a>
+                Data User</a>
 
-            <a class="nav-link" href="datamatakuliah">
+            <a class="nav-link" href="datamatakuliahadmin">
                 <i class="fas fa-fw fa-book-dead"></i>
                 Data Mata Kuliah</a>
 
-            <a class="nav-link" href="periode">
+            <a class="nav-link" href="periodeadmin">
                 <i class="fas fa-fw fa-calendar"></i>
                 Setting Periode</a>
 
-            <a class="nav-link" href="hasilpollingprodi">
+            <a class="nav-link" href="pollingListAdmin">
+                <i class="fas fa-fw fa-vote-yea"></i>
+                Voting</a>
+
+            <a class="nav-link" href="hasilpollingadmin">
                 <i class="fas fa-fw fa-poll"></i>
                 Hasil Polling</a>
 

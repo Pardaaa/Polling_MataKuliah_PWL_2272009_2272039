@@ -74,7 +74,7 @@
                 <i class="fas fa-fw fa-calendar"></i>
                 Setting Periode</a>
 
-            <a class="nav-link" href="pollingadmin">
+            <a class="nav-link" href="pollingListAdmin">
                 <i class="fas fa-fw fa-vote-yea"></i>
                 Voting</a>
 
