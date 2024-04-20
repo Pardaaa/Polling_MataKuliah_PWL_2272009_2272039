@@ -114,16 +114,6 @@
                                                         </label>
                                                     </div>
                                                 @endforeach
-{{--                                                @foreach ($datamatakuliah as $pollings)--}}
-{{--                                                    <div class="form-check" >--}}
-{{--                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $pollings->kode_mk }}" value="{{ $pollings->kode_mk }}" data-sks="{{ $pollings->sks }}">--}}
-{{--                                                        <label class="form-check-label" for="matakuliah_{{ $pollings->kode_mk }}">--}}
-{{--                                                            {{ $pollings->kode_mk }} |--}}
-{{--                                                            {{ $pollings->nama_mk }} |--}}
-{{--                                                            {{ $pollings->sks }} SKS--}}
-{{--                                                        </label>--}}
-{{--                                                    </div>--}}
-{{--                                                @endforeach--}}
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </form>
                                         @else
