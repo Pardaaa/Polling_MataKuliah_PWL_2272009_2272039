@@ -81,7 +81,7 @@ class AdminController extends Controller
         ]) -> validate();
 
         $matkul->update($validatedData);
-        return redirect(route('datamatakuliahadmin'));
+        return response()->json(['success' => 'Data mahasiswa berhasil diedit.']);
     }
 
     public function edituser(User $user)
@@ -138,6 +138,25 @@ class AdminController extends Controller
     public function addpollingadmin(Request $request)
     {
         return view('layouts\admin\addpollingadmin');
+    }
+
+    public function editPeriodeAdmin(Polling $pollings)
+    {
+        return view ('layouts\admin\editPeriodeAdmin', [
+            'periode' => $pollings
+        ]);
+    }
+
+    public function updatePeriodeAdmin (Request $request, Polling $pollings)
+    {
+        $validatedData = validator($request->all(), [
+            'nama_polling' => 'required',
+            'start_date' => 'required',
+            'end_date' =>'required'
+        ]) -> validate();
+
+        $pollings->update($validatedData);
+        return response()->json(['success' => 'Data polling berhasil diedit.']);
     }
 
     public function addpollingprosesadmin(Request $request)

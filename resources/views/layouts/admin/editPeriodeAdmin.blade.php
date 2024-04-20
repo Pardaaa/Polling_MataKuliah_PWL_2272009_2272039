@@ -17,17 +17,13 @@
 
     <!-- Custom fonts for this template -->
     <link href="{{ asset('sbadmin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('sbadmin/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this page -->
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 </head>
 
@@ -52,7 +48,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="datamahasiswadankandidat">
+            <a class="nav-link" href="periodeadmin">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 Dashboard</a>
         </li>
@@ -95,28 +91,27 @@
 
         <!-- Main Content -->
         <div id="content">
+
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Edit Data Mahasiswa</h1>
+                <h1 class="h3 mb-2 text-gray-800">Edit Data Polling</h1>
 
             </div>
             <!-- /.container-fluid -->
-            <form action="{{ route('updateuser', ['user' => $mhs]) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('updatePeriodeAdmin', ['pollings' => $periode]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
-                    <label style="color:black;" for="">NRP</label>
-                    <input type="text" class="form-control mb-4" name="id" id="id" aria-describedby="helpId" placeholder="Contoh: 2272009" value="{{ $mhs -> id }}">
-                    <label style="color:black;" for="">Nama</label>
-                    <input type="text" class="form-control mb-4" name="name" id="name" aria-describedby="helpId" placeholder="Contoh: Charles Winata" value="{{ $mhs -> name }}">
-                    <label style="color:black;" for="">Gmail</label>
-                    <input type="text" class="form-control mb-4" name="email" id="email" aria-describedby="helpId" placeholder="Contoh: xxxxxxx@gmail.com" value="{{ $mhs -> email }}">
-                    <label style="color:black;" for="">Role</label>
-                    <input type="text" class="form-control mb-4" name="role" id="role" aria-describedby="helpId" placeholder="Contoh: mahasiswa" value="{{ $mhs -> role }}">
+                    <label style="color:black;" for="">Nama Polling</label>
+                    <input type="text" class="form-control mb-4" name="nama_polling" id="nama_polling" aria-describedby="helpId" placeholder="Masukkan Nama Polling" value="{{ $periode -> nama_polling }}">
+                    <label style="color:black;" for="">Waktu Dimulai</label>
+                    <input type="datetime-local" class="form-control mb-4" name="start_date" id="start_date" aria-describedby="helpId" placeholder="Masukkan Waktu Dimulai" value="{{ $periode -> start_date }}">
+                    <label style="color:black;" for="">Waktu Berakhir</label>
+                    <input type="datetime-local" class="form-control mb-4" name="end_date" id="end_date" aria-describedby="helpId" placeholder="Masukkan Waktu Berakhir" value="{{ $periode -> end_date }}">
                     <br>
-                    <button class="btn btn-primary" type="submit">Edit Data</button>
+                    <button class="btn btn-primary" type="submit">Edit Polling</button>
                 </div>
             </form>
         </div>
@@ -161,6 +156,47 @@
 <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    $(document).ready(function() {
+        $('form').submit(function(event) {
+            event.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            var method = form.attr('method');
+            var data = form.serialize();
+
+            $.ajax({
+                url: url,
+                method: method,
+                data: data,
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: 'Data Berhasil Diedit',
+                        }).then((result) => {
+                            if (result.isConfirmed || result.isDismissed) {
+                                window.location.href = '/periodeadmin';
+                            }
+                        });
+                    } else {
+                        var errors = response.errors.join('<br>');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: errors,
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
 @endsection

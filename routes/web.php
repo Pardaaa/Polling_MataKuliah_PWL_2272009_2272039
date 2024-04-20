@@ -32,6 +32,9 @@ Route::PUT('/editmatakuliah/{matkul}', [\App\Http\Controllers\ProdiController::c
 Route::get('/edituser/{user}', [\App\Http\Controllers\AdminController::class, 'edituser'])->name('edituser');
 Route::PUT('/edituser/{user}', [\App\Http\Controllers\AdminController::class, 'updateuser'])->name('updateuser');
 
+Route::get('/editPeriodeAdmin/{pollings}', [\App\Http\Controllers\AdminController::class, 'editPeriodeAdmin'])->name('editPeriodeAdmin');
+Route::PUT('/editPeriodeAdmin/{pollings}', [\App\Http\Controllers\AdminController::class, 'updatePeriodeAdmin'])->name('updatePeriodeAdmin');
+
 Auth::routes();
 
 Route::get('datamahasiswadankandidat', function () { return view('layouts\admin\datamahasiswadankandidat'); })->middleware('checkRole:admin');
