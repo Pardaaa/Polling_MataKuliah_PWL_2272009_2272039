@@ -98,7 +98,7 @@
                                             <form id="pollingForm" action="{{ route('savepolling') }}" method="post">
                                                 @csrf
                                                 <h3>Pilih Mata Kuliah:</h3>
-                                                <h6 style="color:Red;">Pilih Mata Kuliah (Maksimal 9 SKS)</h6>
+                                                <h6 style="color:Red;font-weight: bold">Pilih Mata Kuliah (Maksimal 9 SKS)</h6>
                                                 @foreach ($datamatakuliah as $polling)
                                                     <div class="form-check">
                                                         @php
