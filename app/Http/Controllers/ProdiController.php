@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Matakuliah;
 use App\Models\Polling;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -139,7 +140,7 @@ class ProdiController extends Controller
     }
     public function changepasswordformprodi()
     {
-        return view('password');
+        return view('layouts\prodi\passwordprodi');
     }
     public function changepasswordprodi(Request $request)
     {
@@ -159,6 +160,6 @@ class ProdiController extends Controller
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        return redirect()->back()->with('success', 'Password berhasil diubah.');
+        return view('layouts\prodi\prodi');
     }
 }
