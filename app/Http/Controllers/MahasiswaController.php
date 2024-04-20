@@ -78,12 +78,6 @@ class MahasiswaController extends Controller
         $id = $user->id;
         $name = $user->name;
 
-        // Periksa apakah pengguna sudah memilih
-        if ($user->hasilpolling->count() > 0) {
-            // Redirect ke halaman lain atau tampilkan pesan bahwa pengguna sudah memilih
-            return redirect('hasilpolling')->with('error', 'Anda sudah memilih. Tidak bisa memilih lagi.');
-        }
-
         $matakuliah = $request->input('matakuliah');
         $total_sks = 0;
 
@@ -99,6 +93,12 @@ class MahasiswaController extends Controller
         // Periksa apakah total SKS tidak melebihi batas maksimum
         if ($total_sks > $batas_max_sks) {
             return redirect('hasilpolling')->with('error', 'Maaf, jumlah SKS yang Anda pilih melebihi batas maksimum yang diizinkan.');
+        }
+
+        $existingPolling = $user->hasilpolling;
+
+        if ($existingPolling->isNotEmpty()) {
+            $user->hasilpolling()->delete();
         }
 
         foreach ($matakuliah as $kode_mk) {

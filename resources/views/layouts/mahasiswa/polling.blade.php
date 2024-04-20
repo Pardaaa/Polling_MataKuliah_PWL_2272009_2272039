@@ -99,16 +99,31 @@
                                                 @csrf
                                                 <h3>Pilih Mata Kuliah:</h3>
                                                 <h6 style="color:Red;">Pilih Mata Kuliah (Maksimal 9 SKS)</h6>
-                                                @foreach ($datamatakuliah as $pollings)
-                                                    <div class="form-check" >
-                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $pollings->kode_mk }}" value="{{ $pollings->kode_mk }}" data-sks="{{ $pollings->sks }}">
-                                                        <label class="form-check-label" for="matakuliah_{{ $pollings->kode_mk }}">
-                                                            {{ $pollings->kode_mk }} |
-                                                            {{ $pollings->nama_mk }} |
-                                                            {{ $pollings->sks }} SKS
+                                                @foreach ($datamatakuliah as $polling)
+                                                    <div class="form-check">
+                                                        @php
+                                                            $user = auth()->user();
+                                                            $isChecked = $user->hasilpolling->contains('kode_mk', $polling->kode_mk);
+                                                        @endphp
+                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $polling->kode_mk }}" value="{{ $polling->kode_mk }}" data-sks="{{ $polling->sks }}" {{ $isChecked ? 'checked ' : '' }}>
+                                                        <label class="form-check-label" for="matakuliah_{{ $polling->kode_mk }}">
+                                                            {{ $polling->kode_mk }} | {{ $polling->nama_mk }} | {{ $polling->sks }} SKS
+                                                            @if ($isChecked)
+                                                                <span style="color: red;font-weight: bold">| Sudah dipilih sebelumnya</span>
+                                                            @endif
                                                         </label>
                                                     </div>
                                                 @endforeach
+{{--                                                @foreach ($datamatakuliah as $pollings)--}}
+{{--                                                    <div class="form-check" >--}}
+{{--                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $pollings->kode_mk }}" value="{{ $pollings->kode_mk }}" data-sks="{{ $pollings->sks }}">--}}
+{{--                                                        <label class="form-check-label" for="matakuliah_{{ $pollings->kode_mk }}">--}}
+{{--                                                            {{ $pollings->kode_mk }} |--}}
+{{--                                                            {{ $pollings->nama_mk }} |--}}
+{{--                                                            {{ $pollings->sks }} SKS--}}
+{{--                                                        </label>--}}
+{{--                                                    </div>--}}
+{{--                                                @endforeach--}}
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </form>
                                         @else
