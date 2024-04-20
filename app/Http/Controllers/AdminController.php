@@ -132,7 +132,7 @@ class AdminController extends Controller
     public function periodeadmin(Request $request)
     {
         $data = Polling::orderBy('id', 'desc')->get();
-        return view('layouts\admin\periodeadmin', compact('data'));
+        return view('layouts\admin\periodeadmin',compact('data'));
     }
 
     public function addpollingadmin(Request $request)
@@ -189,13 +189,15 @@ class AdminController extends Controller
 
     public function pollingadmin(Request $request)
     {
-        $data = Polling::where('start_date', '<=', date('Y-m-d H:i:s', strtotime('+8 hours')))
+        $polling = $request->polling;
+
+        $data = Polling::where('id', $polling)
+            ->where('start_date', '<=', date('Y-m-d H:i:s', strtotime('+8 hours')))
             ->where('end_date', '>=', date('Y-m-d H:i:s', strtotime('+8 hours')))
             ->first();
-        $datamatakuliah = Matakuliah::get();
 
-        if ($datamatakuliah) {
-            // Data mata kuliah tersedia, lanjutkan
+        if ($data) {
+            $datamatakuliah = Matakuliah::get();
             $count = $datamatakuliah->count(); // Periksa jumlah data
 
             if ($count > 0) {
@@ -303,5 +305,16 @@ class AdminController extends Controller
         $user->save();
 
         return view('layouts\admin\admin');
+    }
+
+    public function pollingListAdmin()
+    {
+        return view('layouts\admin\pollingListAdmin');
+    }
+
+    public function periodeadmin2(Request $request)
+    {
+        $data = Polling::orderBy('id', 'desc')->get();
+        return view('layouts\admin\pollingListAdmin',compact('data'));
     }
 }

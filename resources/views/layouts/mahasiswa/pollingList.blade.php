@@ -85,12 +85,9 @@
 
                     <!-- Page Heading -->
                     <br>
-                    <h1 class="h3 mb-2 text-gray-800">Data Periode Polling</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Periode Polling</h1>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3 d-flex flex-row justify-content-between">
-                            <a href="{{ route('addpolling') }}" class="btn btn-primary">Tambah Periode</a>
-                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">

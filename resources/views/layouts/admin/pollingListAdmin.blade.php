@@ -2,7 +2,7 @@
 
 @section('content')
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -74,7 +74,7 @@
                 <i class="fas fa-fw fa-calendar"></i>
                 Setting Periode</a>
 
-            <a class="nav-link" href="pollingListAdmin">
+            <a class="nav-link" href="pollingadmin">
                 <i class="fas fa-fw fa-vote-yea"></i>
                 Voting</a>
 
@@ -100,7 +100,64 @@
 
                 <!-- Page Heading -->
                 <br>
-                <h1 class="h3 mb-2 text-gray-800 text-center">Selamat Datang Sebagai Admin</h1>
+                <h1 class="h3 mb-2 text-gray-800">Periode Polling</h1>
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Nama Polling</th>
+                                    <th>Waktu</th>
+                                    <th>Status</th>
+                                    <th>Tersisa</th>
+                                    <th>Aksi</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($data as $periode)
+                                    @php
+                                        $now = date('Y-m-d H:i:s', strtotime('+8 hours'));
+                                        $start = $periode->start_date;
+                                        $end = $periode->end_date;
+                                        $status = '';
+                                        $diff = strtotime($end) - strtotime($now);
+                                        $diff += 3600;
+                                        $days = floor($diff / (60 * 60 * 24));
+                                        $hours = floor(($diff - ($days * 60 * 60 * 24)) / 3600);
+                                        $minutes = floor(($diff - ($days * 60 * 60 * 24) - ($hours * 3600)) / 60);
+
+                                        if ($now < $start) {
+                                            $status = 'Belum Dimulai';
+                                        } elseif ($now > $end) {
+                                            $status = 'Selesai';
+                                        } else {
+                                            $status = 'Berlangsung';
+                                        }
+                                    @endphp
+                                    @if ($status == 'Berlangsung')
+                                        <tr>
+                                            <td>{{ $periode->nama_polling }}</td>
+                                            <td>{{ date('d-m-Y H:i', strtotime($periode->start_date)) }} - {{ date('d-m-Y H:i', strtotime($periode->end_date)) }}</td>
+                                            <td>
+                                                <span class="badge badge-success">{{ $status }}</span>
+                                            </td>
+                                            <td>
+                                                {{ $days }} Hari, {{ $hours }} Jam, {{ $minutes }} Menit
+                                            </td>
+                                            <td>
+                                                <a href = "{{ route('pollingadmin', ['polling' => $periode->id]) }}" role="button" class="btn btn-primary">Vote</a>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <!-- /.container-fluid -->
 

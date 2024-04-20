@@ -63,8 +63,8 @@ Route::get('periode', [App\Http\Controllers\ProdiController::class, 'periode'])-
 Route::get('addpolling', [App\Http\Controllers\ProdiController::class, 'addpolling'])->middleware(['checkRole:prodi,admin'])->name('addpolling');
 Route::post('addpollingproses', [App\Http\Controllers\ProdiController::class, 'addpollingproses'])->middleware(['checkRole:prodi,admin'])->name('addpollingproses');
 
-Route::get('polling', [App\Http\Controllers\MahasiswaController::class, 'polling'])->middleware(['checkRole:admin,mahasiswa'])->name('polling');
-Route::get('pollingadmin', [App\Http\Controllers\AdminController::class, 'pollingadmin'])->middleware(['checkRole:admin']);
+Route::get('polling', [App\Http\Controllers\MahasiswaController::class, 'polling'])->middleware(['checkRole:mahasiswa'])->name('polling');
+Route::get('pollingadmin', [App\Http\Controllers\AdminController::class, 'pollingadmin'])->middleware(['checkRole:admin'])->name('pollingadmin');
 
 Route::get('periodeadmin', [App\Http\Controllers\AdminController::class, 'periodeadmin'])->middleware(['checkRole:admin']);
 Route::get('addpollingadmin', [App\Http\Controllers\AdminController::class, 'addpollingadmin'])->middleware(['checkRole:admin'])->name('addpollingadmin');
@@ -89,4 +89,7 @@ Route::post('/change-passwordadmin', [\App\Http\Controllers\AdminController::cla
 Route::get('/change-passwordadmin', [\App\Http\Controllers\AdminController::class, 'changepasswordformadmin'])->name('changepasswordformadmin');
 
 Route::get('/pollingList',[\App\Http\Controllers\MahasiswaController::class, 'pollingList'])->name('pollingList');
-Route::get('pollingList', [App\Http\Controllers\MahasiswaController::class, 'periodemahasiswa'])->middleware(['checkRole:admin,mahasiswa']);
+Route::get('pollingList', [App\Http\Controllers\MahasiswaController::class, 'periodemahasiswa'])->middleware(['checkRole:mahasiswa']);
+
+Route::get('/pollingListAdmin',[\App\Http\Controllers\AdminController::class, 'pollingListAdmin'])->name('pollingListAdmin');
+Route::get('/pollingListAdmin',[\App\Http\Controllers\AdminController::class, 'periodeadmin2'])->middleware(['checkRole:admin']);
