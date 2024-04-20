@@ -282,7 +282,7 @@ class AdminController extends Controller
     }
     public function changepasswordformadmin()
     {
-        return view('password');
+        return view('layouts\admin\passwordadmin');
     }
     public function changepasswordadmin(Request $request)
     {
@@ -302,6 +302,6 @@ class AdminController extends Controller
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        return redirect()->back()->with('success', 'Password berhasil diubah.');
+        return view('layouts\admin\admin');
     }
 }
