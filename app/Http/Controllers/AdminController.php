@@ -78,8 +78,6 @@ class AdminController extends Controller
             'kode_mk' => 'required',
             'nama_mk' => 'required|min:3',
             'sks' =>'required'
-        ], [
-            'nama_mk.required' => 'Nama Mata Kuliah harus diisi'
         ]) -> validate();
 
         $matkul->update($validatedData);
