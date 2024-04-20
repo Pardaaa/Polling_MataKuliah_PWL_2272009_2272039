@@ -32,7 +32,6 @@ class CheckRole
                 }
             }
         }
-
         return redirect('/');
     }
 }

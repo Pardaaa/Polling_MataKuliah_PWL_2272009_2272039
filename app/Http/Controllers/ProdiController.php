@@ -57,15 +57,14 @@ class ProdiController extends Controller
     public function updatematakuliah(Request $request, Matakuliah $matkul)
     {
         $validatedData = validator($request->all(), [
+            'kode_mk' => 'required',
             'nama_mk' => 'required|min:3',
             'sks' =>'required'
         ], [
             'nama_mk.required' => 'Nama Mata Kuliah harus diisi'
         ]) -> validate();
 
-        $matkul -> nama_mk = $validatedData['nama_mk'];
-        $matkul -> sks = $validatedData['sks'];
-        $matkul -> save();
+        $matkul->update($validatedData);
         return redirect(route('datamatakuliahadmin'));
     }
 

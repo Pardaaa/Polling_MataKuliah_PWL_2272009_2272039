@@ -6,6 +6,7 @@ use App\Models\HasilPolling;
 use App\Models\Mahasiswa;
 use App\Models\Matakuliah;
 use App\Models\Polling;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -71,19 +72,36 @@ class AdminController extends Controller
         ]);
     }
 
-    public function updatematakuliahadmin (Request $request, Matakuliah $matkul)
+    public function updatematakuliahadmin(Request $request, Matakuliah $matkul)
     {
         $validatedData = validator($request->all(), [
+            'kode_mk' => 'required',
             'nama_mk' => 'required|min:3',
             'sks' =>'required'
-        ], [
-            'nama_mk.required' => 'Nama Mata Kuliah harus diisi'
         ]) -> validate();
 
-        $matkul -> nama_mk = $validatedData['nama_mk'];
-        $matkul -> sks = $validatedData['sks'];
-        $matkul -> save();
-        return redirect(route('datamatakuliahadmin'));
+        $matkul->update($validatedData);
+        return response()->json(['success' => 'Data mahasiswa berhasil diedit.']);
+    }
+
+    public function edituser(User $user)
+    {
+        return view ('layouts\admin\editUser', [
+            'mhs' => $user
+        ]);
+    }
+
+    public function updateuser (Request $request, User $user)
+    {
+        $validatedData = validator($request->all(), [
+            'id' => 'required|min:7|numeric',
+            'name' => 'required|min:3',
+            'email' =>'required|email',
+            'role' => 'required'
+        ]) -> validate();
+
+        $user->update($validatedData);
+        return redirect(route('datamahasiswadankandidat'));
     }
 
     public function savematakuliahadmin(Request $request)
@@ -120,6 +138,25 @@ class AdminController extends Controller
     public function addpollingadmin(Request $request)
     {
         return view('layouts\admin\addpollingadmin');
+    }
+
+    public function editPeriodeAdmin(Polling $pollings)
+    {
+        return view ('layouts\admin\editPeriodeAdmin', [
+            'periode' => $pollings
+        ]);
+    }
+
+    public function updatePeriodeAdmin (Request $request, Polling $pollings)
+    {
+        $validatedData = validator($request->all(), [
+            'nama_polling' => 'required',
+            'start_date' => 'required',
+            'end_date' =>'required'
+        ]) -> validate();
+
+        $pollings->update($validatedData);
+        return response()->json(['success' => 'Data polling berhasil diedit.']);
     }
 
     public function addpollingprosesadmin(Request $request)

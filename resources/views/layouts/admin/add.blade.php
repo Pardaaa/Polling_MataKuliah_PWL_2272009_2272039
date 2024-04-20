@@ -191,7 +191,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Password dan Confirm Password tidak sama!',
+                    text: 'Password dan Confirm Password tidak cocok!',
                 });
                 return;
             }

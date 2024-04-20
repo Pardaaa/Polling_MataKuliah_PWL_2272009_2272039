@@ -151,11 +151,14 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <form action="{{ url('hapuspollingadmin/'. $periode->nama_polling) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger delete-periode">Hapus</button>
-                                                </form>
+                                                <div class="d-flex">
+                                                    <a href = "{{ route('editPeriodeAdmin', ['pollings' => $periode])}}" role="button" class="btn btn-warning fas fa-edit mr-2"></a>
+                                                    <form action="{{ url('hapuspollingadmin/'. $periode->nama_polling) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button class="btn btn-danger delete-periode">Hapus</button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                         @endforeach

@@ -27,6 +27,8 @@
     <!-- Custom styles for this page -->
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 </head>
 
 <body id="page-top">
@@ -38,7 +40,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="prodi">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -50,7 +52,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="datamatakuliah">
+            <a class="nav-link" href="datamahasiswadankandidat">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 Dashboard</a>
         </li>
@@ -65,19 +67,23 @@
 
         <!-- Nav Item -->
         <li class="nav-item">
-            <a class="nav-link" href="datamahasiswa">
+            <a class="nav-link" href="datamahasiswadankandidat">
                 <i class="fas fa-fw fa-user-graduate"></i>
-                Data Mahasiswa</a>
+                Data User</a>
 
-            <a class="nav-link" href="datamatakuliah">
+            <a class="nav-link" href="datamatakuliahadmin">
                 <i class="fas fa-fw fa-book-dead"></i>
                 Data Mata Kuliah</a>
 
-            <a class="nav-link" href="periode">
+            <a class="nav-link" href="periodeadmin">
                 <i class="fas fa-fw fa-calendar"></i>
                 Setting Periode</a>
 
-            <a class="nav-link" href="hasilpollingprodi">
+            <a class="nav-link" href="pollingadmin">
+                <i class="fas fa-fw fa-vote-yea"></i>
+                Voting</a>
+
+            <a class="nav-link" href="hasilpollingadmin">
                 <i class="fas fa-fw fa-poll"></i>
                 Hasil Polling</a>
         </li>
@@ -89,27 +95,28 @@
 
         <!-- Main Content -->
         <div id="content">
-
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Edit Data Mata Kuliah</h1>
+                <h1 class="h3 mb-2 text-gray-800">Edit Data Mahasiswa</h1>
 
             </div>
             <!-- /.container-fluid -->
-            <form action=" {{ route('updatematakuliah', ['matkul' => $mhs]) }} " method="POST" enctype="multipart/form-data">
+            <form action="{{ route('updateuser', ['user' => $mhs]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
-                    <label style="color:black;" for="">Kode Mata Kuliah</label>
-                    <input type="text" class="form-control mb-4" name="kode_mk" id="kode_mk" aria-describedby="helpId" placeholder="Contoh: IN240" value="{{ $mhs -> kode_mk }}">
-                    <label style="color:black;" for="">Nama Mata Kuliah</label>
-                    <input type="text" class="form-control mb-4" name="nama_mk" id="nama_mk" aria-describedby="helpId" placeholder="Contoh: Pemrogramman Web Lanjut" value="{{ $mhs -> nama_mk }}">
-                    <label style="color:black;" for="">SKS</label>
-                    <input type="text" class="form-control mb-4" name="sks" id="sks" aria-describedby="helpId" placeholder="Contoh: 4" value="{{ $mhs -> sks }}">
+                    <label style="color:black;" for="">NRP</label>
+                    <input type="text" class="form-control mb-4" name="id" id="id" aria-describedby="helpId" placeholder="Contoh: 2272009" value="{{ $mhs -> id }}">
+                    <label style="color:black;" for="">Nama</label>
+                    <input type="text" class="form-control mb-4" name="name" id="name" aria-describedby="helpId" placeholder="Contoh: Charles Winata" value="{{ $mhs -> name }}">
+                    <label style="color:black;" for="">Gmail</label>
+                    <input type="text" class="form-control mb-4" name="email" id="email" aria-describedby="helpId" placeholder="Contoh: xxxxxxx@gmail.com" value="{{ $mhs -> email }}">
+                    <label style="color:black;" for="">Role</label>
+                    <input type="text" class="form-control mb-4" name="role" id="role" aria-describedby="helpId" placeholder="Contoh: mahasiswa" value="{{ $mhs -> role }}">
                     <br>
-                    <button class="btn btn-primary" type="submit">Edit Mata Kuliah</button>
+                    <button class="btn btn-primary" type="submit">Edit Data</button>
                 </div>
             </form>
         </div>
@@ -153,7 +160,7 @@
 <!-- Page level custom scripts -->
 <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
-
 </html>
 @endsection
