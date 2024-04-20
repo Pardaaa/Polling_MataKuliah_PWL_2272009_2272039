@@ -82,6 +82,10 @@
                 <a class="nav-link" href="hasilpollingadmin">
                     <i class="fas fa-fw fa-poll"></i>
                     Hasil Polling</a>
+
+                <a class="nav-link" href="/change-passwordadmin">
+                    <i class="fas fa-fw fa-poll"></i>
+                    Change Password</a>
             </li>
         </ul>
         <!-- End of Sidebar -->
@@ -230,6 +234,7 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
+
     {{-- Swal Scripts --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>

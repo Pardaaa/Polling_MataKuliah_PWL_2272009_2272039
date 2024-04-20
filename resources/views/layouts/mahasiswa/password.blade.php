@@ -47,28 +47,32 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-{{--            <!-- Nav Item - Dashboard -->--}}
-{{--            <li class="nav-item">--}}
-{{--                <a class="nav-link" href="mahasiswa">--}}
-{{--                    <i class="fas fa-fw fa-tachometer-alt"></i>--}}
-{{--                    Dashboard</a>--}}
-{{--            </li>--}}
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="mahasiswa">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    Dashboard</a>
+            </li>
 
-{{--            <div class="sidebar-heading">--}}
-{{--                Menu Data Master--}}
-{{--            </div>--}}
+            <div class="sidebar-heading">
+                Menu Data Master
+            </div>
 
             <!-- Nav Item -->
-{{--            <li class="nav-item">--}}
-{{--                <a class="nav-link" href="polling">--}}
-{{--                    <i class="fas fa-fw fa-book-dead"></i>--}}
-{{--                    Voting</a>--}}
+            <li class="nav-item">
+                <a class="nav-link" href="polling">
+                    <i class="fas fa-fw fa-book-dead"></i>
+                    Voting</a>
 
-{{--                <a class="nav-link" href="hasilpolling">--}}
-{{--                    <i class="fas fa-fw fa-poll"></i>--}}
-{{--                    Hasil Polling</a>--}}
+                <a class="nav-link" href="hasilpolling">
+                    <i class="fas fa-fw fa-poll"></i>
+                    Hasil Polling</a>
 
-{{--            </li>--}}
+                <a class="nav-link" href="/change-password">
+                    <i class="fas fa-fw fa-poll"></i>
+                    Change Password</a>
+
+            </li>
         </ul>
         <!-- End of Sidebar -->
 
@@ -197,6 +201,37 @@
                     const targetId = this.getAttribute('data-target');
                     togglePasswordVisibility(targetId);
                 });
+            });
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const currentPassword = document.getElementById('current_password').value;
+                const newPassword = document.getElementById('new_password').value;
+                const newPasswordConfirmation = document.getElementById('new_password_confirmation').value;
+
+                // Check if current password is correct (you should replace this with an actual check in your backend)
+                if (currentPassword !== "correct_current_password") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Password saat ini salah!'
+                    });
+                    return;
+                }
+
+                // Check if new password and confirmation match
+                if (newPassword !== newPasswordConfirmation) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Password baru dan konfirmasi password tidak cocok!'
+                    });
+                    return;
+                }
+
+                // Submit the form if all checks passed
+                form.submit();
             });
         });
     </script>

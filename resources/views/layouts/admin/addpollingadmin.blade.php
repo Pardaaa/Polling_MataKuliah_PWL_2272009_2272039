@@ -82,6 +82,10 @@
             <a class="nav-link" href="hasilpollingadmin">
                 <i class="fas fa-fw fa-poll"></i>
                 Hasil Polling</a>
+
+            <a class="nav-link" href="/change-passwordadmin">
+                <i class="fas fa-fw fa-poll"></i>
+                Change Password</a>
         </li>
         </ul>
         <!-- End of Sidebar -->

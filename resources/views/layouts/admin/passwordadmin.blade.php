@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>POLLING</title>
+    <title>PASSWORD</title>
 
     <!-- Custom fonts for this template -->
     <link href="{{ asset('sbadmin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -24,6 +24,8 @@
 
     <!-- Custom styles for this page -->
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body id="page-top">
@@ -35,7 +37,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="mahasiswa">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -45,13 +47,17 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
+{{--            <!-- Nav Item - Dashboard -->--}}
             <li class="nav-item">
                 <a class="nav-link" href="admin">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     Dashboard</a>
             </li>
 
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Heading -->
             <div class="sidebar-heading">
                 Menu Data Master
             </div>
@@ -96,36 +102,48 @@
 
                     <!-- Page Heading -->
                     <br>
-                    <h1 class="h3 mb-2 text-gray-800 text-center">Polling</h1>
-                    <div class="container col-l-12">
-                        <div class="row">
-                            <div class="col">
-                                <div class="card">
-                                    <div class="card-body">
-                                        @if (isset($data))
-                                        <h5 class="card-title text-center">Polling dibuka</h5>
-                                        <h4 class="card-title text-center"><b>{{ $data->nama_polling }}</b></h4>
-                                                @csrf
-                                                <h3>Pilih Mata Kuliah:</h3>
-                                                <h6 style="color:Red;">Pilih Mata Kuliah (Maksimal 9 SKS)</h6>
-                                                @foreach ($datamatakuliah as $pollings)
-                                                    <div class="form-check" >
-                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $pollings->kode_mk }}" value="{{ $pollings->kode_mk }}">
-                                                        <label class="form-check-label" for="matakuliah_{{ $pollings->kode_mk }}">
-                                                            {{ $pollings->kode_mk }} |
-                                                            {{ $pollings->nama_mk }} |
-                                                            {{ $pollings->sks }} SKS
-                                                        </label>
-                                                    </div>
-                                                @endforeach
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                            </form>
-                                        @else
-                                        <h5 class="card-title text-center">Polling belum dibuka</h5>
-                                        @endif
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <form method="POST" action="{{ route('changepasswordadmin') }}">
+                                @csrf
+
+                                <div class="mb-3">
+                                    <label for="current_password" class="form-label">Password Saat Ini</label>
+                                    <div class="input-group">
+                                        <input type="password" name="current_password" id="current_password" class="form-control" required>
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="current_password">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+
+                                <div class="mb-3">
+                                    <label for="new_password" class="form-label">Password Baru</label>
+                                    <div class="input-group">
+                                        <input type="password" name="new_password" id="new_password" class="form-control" required>
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="new_password">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="new_password_confirmation" class="form-label">Konfirmasi Password Baru</label>
+                                    <div class="input-group">
+                                        <input type="password" name="new_password_confirmation" id="new_password_confirmation" class="form-control" required>
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="new_password_confirmation">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Ubah Password</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -171,6 +189,36 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function togglePasswordVisibility(targetId) {
+                const targetInput = document.getElementById(targetId);
+                const icon = document.querySelector(`[data-target="${targetId}"] i`);
+
+                if (targetInput.type === "password") {
+                    targetInput.type = "text";
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    targetInput.type = "password";
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            }
+
+            const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+            togglePasswordButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    togglePasswordVisibility(targetId);
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

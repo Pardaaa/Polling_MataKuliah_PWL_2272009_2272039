@@ -67,6 +67,9 @@
             <a class="nav-link" href="hasilpolling">
                 <i class="fas fa-fw fa-poll"></i>
                 Hasil Polling</a>
+            <a class="nav-link" href="/change-password">
+                <i class="fas fa-fw fa-poll"></i>
+                Change Password</a>
         </li>
     </ul>
     <!-- End of Sidebar -->
@@ -83,6 +86,8 @@
                 <!-- Page Heading -->
                 <br>
                 <h1 class="h3 mb-2 text-gray-800 text-center">Selamat Datang Sebagai Mahasiswa</h1>
+
+
             </div>
             <!-- /.container-fluid -->
 
