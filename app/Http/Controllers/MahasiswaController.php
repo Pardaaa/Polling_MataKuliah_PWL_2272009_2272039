@@ -34,6 +34,13 @@ class MahasiswaController extends Controller
         return view('layouts\prodi\datamahasiswa', compact('data'));
     }
 
+    public function pollingList()
+    {
+        return view('layouts\mahasiswa\pollingList');
+    }
+
+
+
     public function polling(Request $request)
     {
         $data = Polling::where('start_date', '<=', date('Y-m-d H:i:s', strtotime('+8 hours')))

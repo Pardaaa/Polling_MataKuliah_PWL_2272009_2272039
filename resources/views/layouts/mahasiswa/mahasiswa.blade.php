@@ -61,7 +61,7 @@
 
         <!-- Nav Item -->
         <li class="nav-item">
-            <a class="nav-link" href="polling">
+            <a class="nav-link" href="pollingList">
                 <i class="fas fa-fw fa-book-dead"></i>
                 Voting</a>
             <a class="nav-link" href="hasilpolling">

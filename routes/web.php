@@ -87,3 +87,5 @@ Route::get('/change-passwordprodi', [\App\Http\Controllers\ProdiController::clas
 
 Route::post('/change-passwordadmin', [\App\Http\Controllers\AdminController::class, 'changepasswordadmin'])->name('changepasswordadmin');
 Route::get('/change-passwordadmin', [\App\Http\Controllers\AdminController::class, 'changepasswordformadmin'])->name('changepasswordformadmin');
+
+Route::get('/pollingList',[\App\Http\Controllers\MahasiswaController::class, 'pollingList'])->name('pollingList');
