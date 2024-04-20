@@ -112,7 +112,7 @@ class MahasiswaController extends Controller
     }
     public function changepasswordform()
     {
-        return view('password');
+        return view('layouts\mahasiswa\password');
     }
     public function changepassword(Request $request)
     {
@@ -132,7 +132,7 @@ class MahasiswaController extends Controller
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        return redirect()->back()->with('success', 'Password berhasil diubah.');
+        return view('layouts\mahasiswa\mahasiswa');
     }
 
 }
