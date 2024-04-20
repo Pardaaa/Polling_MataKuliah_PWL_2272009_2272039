@@ -39,29 +39,32 @@ class MahasiswaController extends Controller
         return view('layouts\mahasiswa\pollingList');
     }
 
+    public function periodemahasiswa(Request $request)
+    {
+        $data = Polling::orderBy('id', 'desc')->get();
+        return view('layouts\mahasiswa\pollingList', compact('data'));
+    }
 
 
     public function polling(Request $request)
     {
-        $data = Polling::where('start_date', '<=', date('Y-m-d H:i:s', strtotime('+8 hours')))
+        $polling = $request->polling;
+
+        $data = Polling::where('id', $polling)
+            ->where('start_date', '<=', date('Y-m-d H:i:s', strtotime('+8 hours')))
             ->where('end_date', '>=', date('Y-m-d H:i:s', strtotime('+8 hours')))
             ->first();
-        $datamatakuliah = Matakuliah::get();
 
-        if ($datamatakuliah) {
-            // Data mata kuliah tersedia, lanjutkan
-            $count = $datamatakuliah->count(); // Periksa jumlah data
 
-            if ($count > 0) {
-                // Ada data, lanjutkan dengan tindakan yang sesuai
-                return view('layouts\mahasiswa\polling', compact('data', 'datamatakuliah'));
-            } else {
-                // Tidak ada data, tangani kasus ini sesuai kebutuhan aplikasi
-                return redirect()->back()->with('error', 'Tidak ada data mata kuliah yang tersedia.');
-            }
+        if ($data) {
+            // Ambil data mata kuliah yang sesuai dengan periode polling
+            $datamatakuliah = Matakuliah::get();
+
+            // Kirim data ke blade template
+            return view('layouts.mahasiswa.polling', compact('data', 'datamatakuliah'));
         } else {
-            // Tangani jika data mata kuliah tidak tersedia
-            return redirect()->back()->with('error', 'Data mata kuliah tidak tersedia.');
+            // Jika tidak ada data polling yang berlangsung
+            return view('layouts.mahasiswa.polling')->with('error', 'Polling belum tersedia.');
         }
     }
 

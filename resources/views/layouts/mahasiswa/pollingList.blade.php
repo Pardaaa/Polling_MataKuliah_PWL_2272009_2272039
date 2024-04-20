@@ -105,47 +105,40 @@
                                     </thead>
                                     <tbody>
                                     @foreach ($data as $periode)
-                                        <tr>
-                                            <td>{{ $periode->nama_polling }}</td>
-                                            <td>{{ date('d-m-Y H:i', strtotime($periode->start_date)) }} - {{ date('d-m-Y H:i', strtotime($periode->end_date)) }}</td>
-                                            <td>
-                                                @php
-                                                    $now = date('Y-m-d H:i:s', strtotime('+8 hours'));
-                                                    $start = $periode->start_date;
-                                                    $end = $periode->end_date;
-                                                @endphp
-                                                @if ($now < $start) <span class="badge badge-warning">Belum Dimulai</span>
-                                                @elseif ($now> $end)
-                                                    <span class="badge badge-danger">Selesai</span>
-                                                @else
-                                                    <span class="badge badge-success">Berlangsung</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @php
-                                                    $diff = strtotime($end) - strtotime($now);
-                                                    $diff += 3600;
-                                                    $days = floor($diff / (60 * 60 * 24));
-                                                    $hours = floor(($diff - ($days * 60 * 60 * 24)) / 3600);
-                                                    $minutes = floor(($diff - ($days * 60 * 60 * 24) - ($hours * 3600)) / 60);
-                                                @endphp
+                                        @php
+                                            $now = date('Y-m-d H:i:s', strtotime('+8 hours'));
+                                            $start = $periode->start_date;
+                                            $end = $periode->end_date;
+                                            $status = '';
+                                            $diff = strtotime($end) - strtotime($now);
+                                            $diff += 3600;
+                                            $days = floor($diff / (60 * 60 * 24));
+                                            $hours = floor(($diff - ($days * 60 * 60 * 24)) / 3600);
+                                            $minutes = floor(($diff - ($days * 60 * 60 * 24) - ($hours * 3600)) / 60);
 
-                                                @if ($now < $start)
-                                                    -
-                                                @elseif ($now > $end)
-                                                    -
-                                                @else
+                                            if ($now < $start) {
+                                                $status = 'Belum Dimulai';
+                                            } elseif ($now > $end) {
+                                                $status = 'Selesai';
+                                            } else {
+                                                $status = 'Berlangsung';
+                                            }
+                                        @endphp
+                                        @if ($status == 'Berlangsung')
+                                            <tr>
+                                                <td>{{ $periode->nama_polling }}</td>
+                                                <td>{{ date('d-m-Y H:i', strtotime($periode->start_date)) }} - {{ date('d-m-Y H:i', strtotime($periode->end_date)) }}</td>
+                                                <td>
+                                                    <span class="badge badge-success">{{ $status }}</span>
+                                                </td>
+                                                <td>
                                                     {{ $days }} Hari, {{ $hours }} Jam, {{ $minutes }} Menit
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <form action="{{ url('hapuspolling/'. $periode->nama_polling) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger delete-periode">Hapus</button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                                <td>
+                                                    <a href = "{{ route('polling', ['polling' => $periode->id]) }}" role="button" class="btn btn-primary">Vote</a>
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                     </tbody>
                                 </table>

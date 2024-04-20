@@ -59,11 +59,11 @@ Route::delete('hapusmatakuliahadmin/{kode_mk}', [App\Http\Controllers\AdminContr
 Route::delete('hapuspollingadmin/{nama_polling}', [App\Http\Controllers\AdminController::class, 'hapuspollingadmin'])->name('hapuspollingadmin');
 Route::delete('hapuspolling/{nama_polling}', [App\Http\Controllers\ProdiController::class, 'hapuspolling'])->name('hapuspolling');
 
-Route::get('periode', [App\Http\Controllers\ProdiController::class, 'periode'])->middleware(['checkRole:prodi,admin']);
+Route::get('periode', [App\Http\Controllers\ProdiController::class, 'periode'])->middleware(['checkRole:prodi,admin,mahasiswa']);
 Route::get('addpolling', [App\Http\Controllers\ProdiController::class, 'addpolling'])->middleware(['checkRole:prodi,admin'])->name('addpolling');
 Route::post('addpollingproses', [App\Http\Controllers\ProdiController::class, 'addpollingproses'])->middleware(['checkRole:prodi,admin'])->name('addpollingproses');
 
-Route::get('polling', [App\Http\Controllers\MahasiswaController::class, 'polling'])->middleware(['checkRole:admin,mahasiswa']);
+Route::get('polling', [App\Http\Controllers\MahasiswaController::class, 'polling'])->middleware(['checkRole:admin,mahasiswa'])->name('polling');
 Route::get('pollingadmin', [App\Http\Controllers\AdminController::class, 'pollingadmin'])->middleware(['checkRole:admin']);
 
 Route::get('periodeadmin', [App\Http\Controllers\AdminController::class, 'periodeadmin'])->middleware(['checkRole:admin']);
@@ -89,3 +89,4 @@ Route::post('/change-passwordadmin', [\App\Http\Controllers\AdminController::cla
 Route::get('/change-passwordadmin', [\App\Http\Controllers\AdminController::class, 'changepasswordformadmin'])->name('changepasswordformadmin');
 
 Route::get('/pollingList',[\App\Http\Controllers\MahasiswaController::class, 'pollingList'])->name('pollingList');
+Route::get('pollingList', [App\Http\Controllers\MahasiswaController::class, 'periodemahasiswa'])->middleware(['checkRole:admin,mahasiswa']);

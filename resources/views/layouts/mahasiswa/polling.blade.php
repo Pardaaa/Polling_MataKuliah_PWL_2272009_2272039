@@ -93,27 +93,47 @@
                                 <div class="card">
                                     <div class="card-body">
                                         @if (isset($data))
-                                        <h5 class="card-title text-center">Polling dibuka</h5>
-                                        <h4 class="card-title text-center"><b>{{ $data->nama_polling }}</b></h4>
+                                            <h5 class="card-title text-center">Polling dibuka</h5>
+                                            <h4 class="card-title text-center"><b>{{ $data->nama_polling }}</b></h4>
                                             <form id="pollingForm" action="{{ route('savepolling') }}" method="post">
                                                 @csrf
                                                 <h3>Pilih Mata Kuliah:</h3>
                                                 <h6 style="color:Red;">Pilih Mata Kuliah (Maksimal 9 SKS)</h6>
-                                                @foreach ($datamatakuliah as $pollings)
-                                                    <div class="form-check" >
-                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $pollings->kode_mk }}" value="{{ $pollings->kode_mk }}" data-sks="{{ $pollings->sks }}">
-                                                        <label class="form-check-label" for="matakuliah_{{ $pollings->kode_mk }}">
-                                                            {{ $pollings->kode_mk }} |
-                                                            {{ $pollings->nama_mk }} |
-                                                            {{ $pollings->sks }} SKS
+                                                @foreach ($datamatakuliah as $matakuliah)
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $matakuliah->id }}" value="{{ $matakuliah->id }}" data-sks="{{ $matakuliah->sks }}">
+                                                        <label class="form-check-label" for="matakuliah_{{ $matakuliah->id }}">
+                                                            {{ $matakuliah->kode_mk }} | {{ $matakuliah->nama_mk }} | {{ $matakuliah->sks }} SKS
                                                         </label>
                                                     </div>
                                                 @endforeach
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </form>
                                         @else
-                                        <h5 class="card-title text-center">Polling belum dibuka</h5>
+                                            <h5 class="card-title text-center">Polling belum dibuka</h5>
                                         @endif
+{{--                                        @if (isset($data))--}}
+{{--                                        <h5 class="card-title text-center">Polling dibuka</h5>--}}
+{{--                                        <h4 class="card-title text-center"><b>{{ $data->nama_polling }}</b></h4>--}}
+{{--                                            <form id="pollingForm" action="{{ route('savepolling') }}" method="post">--}}
+{{--                                                @csrf--}}
+{{--                                                <h3>Pilih Mata Kuliah:</h3>--}}
+{{--                                                <h6 style="color:Red;">Pilih Mata Kuliah (Maksimal 9 SKS)</h6>--}}
+{{--                                                @foreach ($datamatakuliah as $pollings)--}}
+{{--                                                    <div class="form-check" >--}}
+{{--                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $pollings->kode_mk }}" value="{{ $pollings->kode_mk }}" data-sks="{{ $pollings->sks }}">--}}
+{{--                                                        <label class="form-check-label" for="matakuliah_{{ $pollings->kode_mk }}">--}}
+{{--                                                            {{ $pollings->kode_mk }} |--}}
+{{--                                                            {{ $pollings->nama_mk }} |--}}
+{{--                                                            {{ $pollings->sks }} SKS--}}
+{{--                                                        </label>--}}
+{{--                                                    </div>--}}
+{{--                                                @endforeach--}}
+{{--                                                <button type="submit" class="btn btn-primary">Submit</button>--}}
+{{--                                            </form>--}}
+{{--                                        @else--}}
+{{--                                        <h5 class="card-title text-center">Polling belum dibuka</h5>--}}
+{{--                                        @endif--}}
                                     </div>
                                 </div>
                             </div>
