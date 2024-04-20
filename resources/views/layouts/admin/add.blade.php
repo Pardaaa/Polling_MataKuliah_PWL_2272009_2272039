@@ -236,32 +236,32 @@
     });
 </script>
 <script>
-    document.getElementById('togglePassword').addEventListener('click', function() {
-        const passwordInput = document.getElementById('password');
-        const icon = document.getElementById('togglePassword');
+    $(document).ready(function() {
+        $('#togglePassword').click(function() {
+            togglePasswordVisibility('password', 'togglePassword');
+        });
 
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-            icon.classList.remove('fa-eye');
-            icon.classList.add('fa-eye-slash');
-        } else {
-            passwordInput.type = "password";
-            icon.classList.remove('fa-eye-slash');
-            icon.classList.add('fa-eye');
-        }
-    });
-    document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
-        const confirmPasswordInput = document.getElementById('confirmPassword');
-        const icon = document.getElementById('toggleConfirmPassword');
+        $('#toggleConfirmPassword').click(function() {
+            togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword');
+        });
 
-        if (confirmPasswordInput.type === "password") {
-            confirmPasswordInput.type = "text";
-            icon.classList.remove('fa-eye');
-            icon.classList.add('fa-eye-slash');
-        } else {
-            confirmPasswordInput.type = "password";
-            icon.classList.remove('fa-eye-slash');
-            icon.classList.add('fa-eye');
+        function togglePasswordVisibility(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+
+            if (input.type === "password") {
+                const inputValue = input.value;
+                input.type = "text";
+                input.value = inputValue; // Restore the input value
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                const inputValue = input.value;
+                input.type = "password";
+                input.value = inputValue; // Restore the input value
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
         }
     });
 </script>
