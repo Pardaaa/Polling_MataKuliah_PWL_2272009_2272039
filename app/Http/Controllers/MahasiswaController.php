@@ -29,6 +29,12 @@ class MahasiswaController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    public function mahasiswa()
+    {
+        return view('layouts/mahasiswa/mahasiswa');
+    }
+    
     public function index()
     {
         $data = Mahasiswa::where('role', 'mahasiswa')->get();
