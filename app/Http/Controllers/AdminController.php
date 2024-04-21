@@ -224,6 +224,7 @@ class AdminController extends Controller
         $user = Auth::user();
         $id = $user->id;
         $name = $user->name;
+        $polling_id = $request->input('polling_id');
 
         $matakuliah = $request->input('matakuliah');
         $total_sks = 0;
@@ -235,15 +236,15 @@ class AdminController extends Controller
 
         $batas_max_sks = 9;
 
+        // Periksa apakah total SKS tidak melebihi batas maksimum
         if ($total_sks > $batas_max_sks) {
             return redirect('hasilpolling')->with('error', 'Maaf, jumlah SKS yang Anda pilih melebihi batas maksimum yang diizinkan.');
         }
 
-        $existingPolling = $user->hasilpolling;
-
-        if ($existingPolling->isNotEmpty()) {
-            $user->hasilpolling()->delete();
-        }
+        // Hapus hasil polling yang ada berdasarkan polling_id
+        $existingPolling = HasilPolling::where('NRP', $id)->whereHas('polling', function($query) use ($polling_id) {
+            $query->where('id', $polling_id);
+        })->delete();
 
         foreach ($matakuliah as $kode_mk) {
             $datamatkul = Matakuliah::where('kode_mk', $kode_mk)->first();
@@ -253,6 +254,7 @@ class AdminController extends Controller
             $data->kode_mk = $kode_mk;
             $data->nama_mk = $datamatkul->nama_mk;
             $data->sks = $datamatkul->sks;
+            $data->polling_id = $polling_id;
             $data->save();
         }
 
@@ -262,8 +264,9 @@ class AdminController extends Controller
     public function hasilpollingadmin()
     {
         $results = DB::table('hasilpolling')
-            ->select('kode_mk','nama_mk', 'sks', DB::raw('COUNT(*) as total'))
-            ->groupBy('kode_mk','nama_mk', 'sks')
+            ->select('hasilpolling.kode_mk', 'hasilpolling.nama_mk', 'hasilpolling.sks', DB::raw('COUNT(*) as total'), 'polling.nama_polling')
+            ->leftJoin('polling', 'polling.id', '=', 'hasilpolling.polling_id')
+            ->groupBy('hasilpolling.kode_mk', 'hasilpolling.nama_mk', 'hasilpolling.sks', 'polling.nama_polling')
             ->get();
 
         return view('layouts\admin\hasilpollingAdmin', ['results' => $results]);
@@ -322,7 +325,7 @@ class AdminController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
-        
+
         $user->password = Hash::make($request->new_password);
         $user->save();
 
