@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class MahasiswaController extends Controller
 {
@@ -34,7 +35,7 @@ class MahasiswaController extends Controller
     {
         return view('layouts/mahasiswa/mahasiswa');
     }
-    
+
     public function index()
     {
         $data = Mahasiswa::where('role', 'mahasiswa')->get();
@@ -156,7 +157,7 @@ class MahasiswaController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
-        // Update the user's password
+
         $user->password = Hash::make($request->new_password);
         $user->save();
 
