@@ -160,16 +160,38 @@ class ProdiController extends Controller
         return redirect('periode')->with('success', 'Data berhasil di hapus!');
     }
 
-    public function hasilpollingprodi()
+    public function hasilpollingprodi(Request $request)
     {
-        $results = DB::table('hasilpolling')
-            ->select('kode_mk','nama_mk', 'sks', DB::raw('COUNT(*) as total'))
-            ->groupBy('kode_mk','nama_mk', 'sks')
+        $periodeId = $request->input('periode');
+
+        $resultsQuery = DB::table('hasilpolling')
+            ->select('hasilpolling.kode_mk', 'hasilpolling.nama_mk', 'hasilpolling.sks', DB::raw('COUNT(*) as total'), 'polling.nama_polling')
+            ->leftJoin('polling', 'polling.id', '=', 'hasilpolling.polling_id');
+
+        if ($periodeId) {
+            $resultsQuery->where('hasilpolling.polling_id', $periodeId);
+        }
+
+        $results = $resultsQuery->groupBy('hasilpolling.kode_mk', 'hasilpolling.nama_mk', 'hasilpolling.sks', 'polling.nama_polling')
             ->get();
 
-        return view('layouts\prodi\hasilpollingprodi', ['results' => $results]);
+        // Query untuk mendapatkan daftar nama mahasiswa yang sudah melakukan polling
+        $mahasiswaPolling = DB::table('hasilpolling')
+            ->select('users.name')
+            ->leftJoin('users', 'users.id', '=', 'hasilpolling.NRP')
+            ->groupBy('users.name')
+            ->get();
+
+        $periodes = Polling::all(); // Ambil semua periode untuk dropdown
+
+        return view('layouts.mahasiswa.hasilpolling', [
+            'results' => $results,
+            'periodes' => $periodes,
+            'selectedPeriode' => $periodeId,
+            'mahasiswaPolling' => $mahasiswaPolling
+        ]);
     }
-    
+
     public function changepasswordformprodi()
     {
         return view('layouts\prodi\passwordprodi');
