@@ -179,6 +179,32 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function togglePasswordVisibility(targetId) {
+                const targetInput = document.getElementById(targetId);
+                const icon = document.querySelector(`[data-target="${targetId}"] i`);
+
+                if (targetInput.type === "password") {
+                    targetInput.type = "text";
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    targetInput.type = "password";
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            }
+
+            const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+            togglePasswordButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    togglePasswordVisibility(targetId);
+                });
+            });
+        });
+    </script>
+    <script>
         $(document).ready(function() {
             $('form').submit(function(event) {
                 event.preventDefault();
@@ -210,7 +236,7 @@
                                 text: response.success, // Menggunakan pesan sukses dari respons JSON
                             }).then((result) => {
                                 if (result.isConfirmed || result.isDismissed) {
-                                    window.location.href = '/mahasiswa';
+                                    window.location.href = '/admin';
                                 }
                             });
                         } else {
