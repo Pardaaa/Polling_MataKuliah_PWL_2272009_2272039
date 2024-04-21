@@ -51,9 +51,9 @@ Route::get('/datamahasiswadankandidat', [App\Http\Controllers\AdminController::c
 Route::get('/datamatakuliah', [App\Http\Controllers\ProdiController::class, 'index'])->name('datamatakuliah');
 Route::get('/datamatakuliahadmin', [App\Http\Controllers\AdminController::class, 'index1'])->name('datamatakuliahadmin');
 
-Route::get('admin', function () { return view('layouts\admin\admin'); })->middleware('checkRole:admin');
-Route::get('prodi', function () { return view('layouts\prodi\prodi'); })->middleware(['checkRole:prodi,admin']);
-Route::get('mahasiswa', function () { return view('layouts\mahasiswa\mahasiswa'); })->middleware(['checkRole:mahasiswa,admin']);
+Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'admin'])->name('admin');
+Route::get('/prodi', [\App\Http\Controllers\ProdiController::class, 'prodi'])->name('prodi');
+Route::get('/mahasiswa', [\App\Http\Controllers\MahasiswaController::class, 'mahasiswa'])->name('mahasiswa');
 
 Route::delete('hapus/{id}', [App\Http\Controllers\AdminController::class, 'hapus'])->name('hapus');
 Route::delete('hapusmatakuliah/{kode_mk}', [App\Http\Controllers\ProdiController::class, 'hapusmatakuliah'])->name('hapusmatakuliah');
