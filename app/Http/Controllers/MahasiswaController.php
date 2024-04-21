@@ -77,6 +77,7 @@ class MahasiswaController extends Controller
         $user = Auth::user();
         $id = $user->id;
         $name = $user->name;
+        $polling_id = $request->input('polling_id');
 
         $matakuliah = $request->input('matakuliah');
         $total_sks = 0;
@@ -95,11 +96,10 @@ class MahasiswaController extends Controller
             return redirect('hasilpolling')->with('error', 'Maaf, jumlah SKS yang Anda pilih melebihi batas maksimum yang diizinkan.');
         }
 
-        $existingPolling = $user->hasilpolling;
-
-        if ($existingPolling->isNotEmpty()) {
-            $user->hasilpolling()->delete();
-        }
+        // Hapus hasil polling yang ada berdasarkan polling_id
+        $existingPolling = HasilPolling::where('NRP', $id)->whereHas('polling', function($query) use ($polling_id) {
+            $query->where('id', $polling_id);
+        })->delete();
 
         foreach ($matakuliah as $kode_mk) {
             $datamatkul = Matakuliah::where('kode_mk', $kode_mk)->first();
@@ -109,6 +109,7 @@ class MahasiswaController extends Controller
             $data->kode_mk = $kode_mk;
             $data->nama_mk = $datamatkul->nama_mk;
             $data->sks = $datamatkul->sks;
+            $data->polling_id = $polling_id; // Tambahkan polling_id
             $data->save();
         }
 
@@ -118,12 +119,26 @@ class MahasiswaController extends Controller
     public function hasilpolling()
     {
         $results = DB::table('hasilpolling')
-            ->select('kode_mk','nama_mk', 'sks', DB::raw('COUNT(*) as total'))
-            ->groupBy('kode_mk','nama_mk', 'sks')
-            ->get();
+        ->select('hasilpolling.kode_mk', 'hasilpolling.nama_mk', 'hasilpolling.sks', DB::raw('COUNT(*) as total'), 'polling.nama_polling')
+        ->leftJoin('polling', 'polling.id', '=', 'hasilpolling.polling_id')
+        ->groupBy('hasilpolling.kode_mk', 'hasilpolling.nama_mk', 'hasilpolling.sks', 'polling.nama_polling')
+        ->get();
 
-        return view('layouts\mahasiswa\hasilpolling', ['results' => $results]);
+
+
+        // Jika Anda ingin melihat hasil query, Anda bisa menghapus atau mengomentari dd() berikut
+        // dd($results);
+
+        return view('layouts.mahasiswa.hasilpolling', ['results' => $results]);
     }
+
+
+
+
+
+
+
+
     public function changepasswordform()
     {
         return view('layouts\mahasiswa\password');
