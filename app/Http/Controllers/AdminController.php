@@ -285,7 +285,7 @@ class AdminController extends Controller
 
         $periodes = Polling::all(); // Ambil semua periode untuk dropdown
 
-        return view('layouts.mahasiswa.hasilpolling', [
+        return view('layouts.admin.hasilpollingadmin', [
             'results' => $results,
             'periodes' => $periodes,
             'selectedPeriode' => $periodeId,
