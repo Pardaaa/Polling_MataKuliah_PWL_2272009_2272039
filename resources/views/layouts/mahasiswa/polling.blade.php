@@ -97,6 +97,7 @@
                                         <h4 class="card-title text-center"><b>{{ $data->nama_polling }}</b></h4>
                                             <form id="pollingForm" action="{{ route('savepolling') }}" method="post">
                                                 @csrf
+                                                <input type="hidden" name="polling_id" value="{{ $data->id }}">
                                                 <h3>Pilih Mata Kuliah:</h3>
                                                 <h6 style="color:Red;font-weight: bold">Pilih Mata Kuliah (Maksimal 9 SKS)</h6>
                                                 @foreach ($datamatakuliah as $polling)
