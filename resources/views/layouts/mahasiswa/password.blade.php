@@ -236,7 +236,7 @@
                                 text: response.success, // Menggunakan pesan sukses dari respons JSON
                             }).then((result) => {
                                 if (result.isConfirmed || result.isDismissed) {
-                                    window.location.href = '/admin';
+                                    window.location.href = '/mahasiswa';
                                 }
                             });
                         } else {
