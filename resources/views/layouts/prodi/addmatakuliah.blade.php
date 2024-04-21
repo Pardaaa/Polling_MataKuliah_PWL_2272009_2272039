@@ -103,9 +103,8 @@
 
             </div>
             <!-- /.container-fluid -->
-            <form action="addmatakuliah" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('savematakuliah') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('POST')
                 <div class="card-body">
                     <label style="color:black;" for="">Kode Mata Kuliah</label>
                     <input type="text" class="form-control mb-4" name="kode_mk" id="kode_mk" aria-describedby="helpId" placeholder="Contoh: IN240">
@@ -157,6 +156,49 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    $(document).ready(function() {
+        $('form').submit(function(event) {
+            event.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            var method = form.attr('method');
+            var data = form.serialize();
+
+            $.ajax({
+                url: url,
+                method: method,
+                data: data,
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: 'Data Berhasil Ditambahkan',
+                        }).then((result) => {
+                            if (result.isConfirmed || result.isDismissed) {
+                                window.location.href = '/datamatakuliah';
+                            }
+                        });
+                    } else {
+                        var errors = response.errors.join('<br>');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: errors,
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 

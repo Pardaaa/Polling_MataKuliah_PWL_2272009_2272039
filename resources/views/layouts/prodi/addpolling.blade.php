@@ -178,7 +178,7 @@
                                 text: 'Data Berhasil Ditambahkan',
                             }).then((result) => {
                                 if (result.isConfirmed || result.isDismissed) {
-                                    window.location.href = '/periodeadmin';
+                                    window.location.href = '/periode';
                                 }
                             });
                         } else {

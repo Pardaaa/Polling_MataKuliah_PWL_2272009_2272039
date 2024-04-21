@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Validator;
 
 class ProdiController extends Controller
 {
@@ -50,7 +51,7 @@ class ProdiController extends Controller
 
     public function editmatakuliah(Matakuliah $matkul)
     {
-        return view ('layouts\admin\editmatakuliahadmin', [
+        return view ('layouts\prodi\editMatakuliah', [
             'mhs' => $matkul
         ]);
     }
@@ -61,21 +62,23 @@ class ProdiController extends Controller
             'kode_mk' => 'required',
             'nama_mk' => 'required|min:3',
             'sks' =>'required'
-        ], [
-            'nama_mk.required' => 'Nama Mata Kuliah harus diisi'
         ]) -> validate();
 
         $matkul->update($validatedData);
-        return redirect(route('datamatakuliahadmin'));
+        return response()->json(['success' => 'Data polling berhasil diedit.']);
     }
 
     public function savematakuliah(Request $request)
     {
-        $this->validate($request, [
-            'kode_mk' => 'required|unique:matakuliah,kode_mk',
+        $validator = Validator::make($request->all(), [
+            'kode_mk' => 'required|unique:matakuliah',
             'nama_mk' => 'required|min:3',
             'sks' =>'required',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
 
         $kode_mk = $request->kode_mk;
         $nama_mk = $request->nama_mk;
@@ -87,7 +90,7 @@ class ProdiController extends Controller
         $data->sks = $sks;
         $data->save();
 
-        return redirect('datamatakuliah')->with('success', 'Data berhasil di tambah!');
+        return response()->json(['success' => 'Data mahasiswa berhasil ditambahkan.']);
     }
 
     public function periode(Request $request)
@@ -99,6 +102,25 @@ class ProdiController extends Controller
     public function addpolling(Request $request)
     {
         return view('layouts\prodi\addpolling');
+    }
+
+    public function editPeriode(Polling $pollings)
+    {
+        return view ('layouts\prodi\editPeriode', [
+            'periode' => $pollings
+        ]);
+    }
+
+    public function updatePeriode (Request $request, Polling $pollings)
+    {
+        $validatedData = validator($request->all(), [
+            'nama_polling' => 'required',
+            'start_date' => 'required',
+            'end_date' =>'required'
+        ]) -> validate();
+
+        $pollings->update($validatedData);
+        return response()->json(['success' => 'Data polling berhasil diedit.']);
     }
 
     public function addpollingproses(Request $request)

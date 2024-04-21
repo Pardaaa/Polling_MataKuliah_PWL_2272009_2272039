@@ -81,7 +81,7 @@ class AdminController extends Controller
         ]) -> validate();
 
         $matkul->update($validatedData);
-        return response()->json(['success' => 'Data mahasiswa berhasil diedit.']);
+        return response()->json(['success' => 'Data polling berhasil diedit.']);
     }
 
     public function edituser(Mahasiswa $user)
@@ -101,12 +101,12 @@ class AdminController extends Controller
         ]) -> validate();
 
         $user->update($validatedData);
-        return redirect(route('datamahasiswadankandidat'));
+        return response()->json(['success' => 'Data polling berhasil diedit.']);
     }
 
     public function savematakuliahadmin(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = validator::make($request->all(), [
             'kode_mk' => 'required|unique:matakuliah',
             'nama_mk' => 'required|min:3',
             'sks' =>'required',
@@ -260,7 +260,7 @@ class AdminController extends Controller
             ->groupBy('kode_mk','nama_mk', 'sks')
             ->get();
 
-        return view('layouts\admin\hasilpollingadmin', ['results' => $results]);
+        return view('layouts\admin\hasilpollingAdmin', ['results' => $results]);
     }
 
     public function add()

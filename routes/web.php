@@ -34,6 +34,8 @@ Route::PUT('/edituser/{user}', [\App\Http\Controllers\AdminController::class, 'u
 
 Route::get('/editPeriodeAdmin/{pollings}', [\App\Http\Controllers\AdminController::class, 'editPeriodeAdmin'])->name('editPeriodeAdmin');
 Route::PUT('/editPeriodeAdmin/{pollings}', [\App\Http\Controllers\AdminController::class, 'updatePeriodeAdmin'])->name('updatePeriodeAdmin');
+Route::get('/editPeriode/{pollings}', [\App\Http\Controllers\ProdiController::class, 'editPeriode'])->name('editPeriode');
+Route::PUT('/editPeriode/{pollings}', [\App\Http\Controllers\ProdiController::class, 'updatePeriode'])->name('updatePeriode');
 
 Auth::routes();
 
@@ -63,7 +65,7 @@ Route::get('periode', [App\Http\Controllers\ProdiController::class, 'periode'])-
 Route::get('addpolling', [App\Http\Controllers\ProdiController::class, 'addpolling'])->middleware(['checkRole:prodi,admin'])->name('addpolling');
 Route::post('addpollingproses', [App\Http\Controllers\ProdiController::class, 'addpollingproses'])->middleware(['checkRole:prodi,admin'])->name('addpollingproses');
 
-Route::get('polling', [App\Http\Controllers\MahasiswaController::class, 'polling'])->middleware(['checkRole:mahasiswa'])->name('polling');
+Route::get('polling', [App\Http\Controllers\MahasiswaController::class, 'polling'])->middleware(['checkRole:mahasiswa,admin'])->name('polling');
 Route::get('pollingadmin', [App\Http\Controllers\AdminController::class, 'pollingadmin'])->middleware(['checkRole:admin'])->name('pollingadmin');
 
 Route::get('periodeadmin', [App\Http\Controllers\AdminController::class, 'periodeadmin'])->middleware(['checkRole:admin']);
@@ -89,7 +91,7 @@ Route::post('/change-passwordadmin', [\App\Http\Controllers\AdminController::cla
 Route::get('/change-passwordadmin', [\App\Http\Controllers\AdminController::class, 'changepasswordformadmin'])->name('changepasswordformadmin');
 
 Route::get('/pollingList',[\App\Http\Controllers\MahasiswaController::class, 'pollingList'])->name('pollingList');
-Route::get('pollingList', [App\Http\Controllers\MahasiswaController::class, 'periodemahasiswa'])->middleware(['checkRole:mahasiswa']);
+Route::get('pollingList', [App\Http\Controllers\MahasiswaController::class, 'periodemahasiswa'])->middleware(['checkRole:mahasiswa,admin']);
 
 Route::get('/pollingListAdmin',[\App\Http\Controllers\AdminController::class, 'pollingListAdmin'])->name('pollingListAdmin');
 Route::get('/pollingListAdmin',[\App\Http\Controllers\AdminController::class, 'periodeadmin2'])->middleware(['checkRole:admin']);

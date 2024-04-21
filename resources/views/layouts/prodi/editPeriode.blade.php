@@ -50,50 +50,42 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="datamatakuliah">
+            <a class="nav-link" href="home">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 Dashboard</a>
         </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
-
-        <!-- Heading -->
         <div class="sidebar-heading">
             Menu Data Master
         </div>
 
         <!-- Nav Item -->
         <li class="nav-item">
-            <a class="nav-link" href="datamahasiswadankandidat">
+            <a class="nav-link" href="datamahasiswa">
                 <i class="fas fa-fw fa-user-graduate"></i>
-                Data User</a>
+                Data Mahasiswa</a>
 
-            <a class="nav-link" href="datamatakuliahadmin">
+            <a class="nav-link" href="datamatakuliah">
                 <i class="fas fa-fw fa-book-dead"></i>
                 Data Mata Kuliah</a>
 
-            <a class="nav-link" href="periodeadmin">
+            <a class="nav-link" href="periode">
                 <i class="fas fa-fw fa-calendar"></i>
                 Setting Periode</a>
 
-            <a class="nav-link" href="pollingListAdmin">
-                <i class="fas fa-fw fa-vote-yea"></i>
-                Voting</a>
-
-            <a class="nav-link" href="hasilpollingadmin">
+            <a class="nav-link" href="hasilpollingprodi">
                 <i class="fas fa-fw fa-poll"></i>
                 Hasil Polling</a>
 
-            <a class="nav-link" href="/change-passwordadmin">
-                <i class="fas fa-fw fa-poll"></i>
+            <a class="nav-link" href="/change-passwordprodi">
+                <i class="fas fa-fw fa-lock"></i>
                 Change Password</a>
         </li>
     </ul>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column mb-5">
+    <div id="content-wrapper" class="d-flex flex-column">
 
         <!-- Main Content -->
         <div id="content">
@@ -102,22 +94,22 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Edit Data Mata Kuliah</h1>
+                <h1 class="h3 mb-2 text-gray-800">Edit Data Polling</h1>
 
             </div>
             <!-- /.container-fluid -->
-            <form action=" {{ route('updatematakuliahadmin', ['matkul' => $mhs]) }} " method="POST" enctype="multipart/form-data">
+            <form action="{{ route('updatePeriode', ['pollings' => $periode]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
-                    <label style="color:black;" for="">Kode Mata Kuliah</label>
-                    <input type="text" class="form-control mb-4" name="kode_mk" id="kode_mk" aria-describedby="helpId" placeholder="Contoh: IN240" value="{{ $mhs -> kode_mk }}">
-                    <label style="color:black;" for="">Nama Mata Kuliah</label>
-                    <input type="text" class="form-control mb-4" name="nama_mk" id="nama_mk" aria-describedby="helpId" placeholder="Contoh: Pemrogramman Web Lanjut" value="{{ $mhs -> nama_mk }}">
-                    <label style="color:black;" for="">SKS</label>
-                    <input type="text" class="form-control mb-4" name="sks" id="sks" aria-describedby="helpId" placeholder="Contoh: 4" value="{{ $mhs -> sks }}">
+                    <label style="color:black;" for="">Nama Polling</label>
+                    <input type="text" class="form-control mb-4" name="nama_polling" id="nama_polling" aria-describedby="helpId" placeholder="Masukkan Nama Polling" value="{{ $periode -> nama_polling }}">
+                    <label style="color:black;" for="">Waktu Dimulai</label>
+                    <input type="datetime-local" class="form-control mb-4" name="start_date" id="start_date" aria-describedby="helpId" placeholder="Masukkan Waktu Dimulai" value="{{ $periode -> start_date }}">
+                    <label style="color:black;" for="">Waktu Berakhir</label>
+                    <input type="datetime-local" class="form-control mb-4" name="end_date" id="end_date" aria-describedby="helpId" placeholder="Masukkan Waktu Berakhir" value="{{ $periode -> end_date }}">
                     <br>
-                    <button class="btn btn-primary" type="submit">Edit Mata Kuliah</button>
+                    <button class="btn btn-primary" type="submit">Edit Polling</button>
                 </div>
             </form>
         </div>
@@ -184,7 +176,7 @@
                             text: 'Data Berhasil Diedit',
                         }).then((result) => {
                             if (result.isConfirmed || result.isDismissed) {
-                                window.location.href = '/datamatakuliahadmin';
+                                window.location.href = '/periode';
                             }
                         });
                     } else {
