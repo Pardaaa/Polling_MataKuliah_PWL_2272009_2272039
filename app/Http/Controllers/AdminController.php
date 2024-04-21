@@ -312,9 +312,8 @@ class AdminController extends Controller
 
         $user = Auth::user();
 
-        // Check if the current password matches the password in the database
         if (!Hash::check($request->current_password, $user->password)) {
-            return redirect()->back()->with('error', 'Password saat ini salah.');
+            return response()->json(['error' => 'Password saat ini tidak sesuai.']);
         }
 
         // Update the user's password
