@@ -2,7 +2,7 @@
 
 @section('content')
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -89,6 +89,19 @@
                 <!-- Page Heading -->
                 <br>
                 <h1 class="h3 mb-2 text-gray-800 text-center">Hasil Polling</h1>
+
+                <!-- Dropdown Periode -->
+                <div class="form-group">
+                    <label for="periode">Pilih Periode:</label>
+                    <select class="form-control" id="periode" onchange="changePeriode()">
+                        <option value="" {{ $selectedPeriode ? '' : 'selected' }}>Semua Periode</option>
+                        @foreach($periodes as $periode)
+                            <option value="{{ $periode->id }}" {{ $selectedPeriode == $periode->id ? 'selected' : '' }}>{{ $periode->nama_polling }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+
                 <div class="card shadow mb-4">
                     <div class="card-body">
                         <div class="table-responsive">
@@ -110,16 +123,39 @@
                                         <td>{{ $result->sks }}</td>
                                         <td>{{ $result->total }}</td>
                                         <td>{{ $result->nama_polling }}</td>
-
                                     </tr>
                                 @endforeach
-
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Tabel Nama Mahasiswa yang sudah melakukan polling -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Daftar Nama Mahasiswa yang Sudah Melakukan Polling</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="mahasiswaTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Nama Mahasiswa</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($mahasiswaPolling as $mahasiswa)
+                                <tr>
+                                    <td>{{ $mahasiswa->name }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             <!-- /.container-fluid -->
 
         </div>
@@ -162,6 +198,22 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
+
+<!-- Custom script for dropdown -->
+<script>
+    function changePeriode() {
+        var selectedPeriode = document.getElementById("periode").value;
+        var baseUrl = window.location.origin;
+        var newUrl = baseUrl + "/hasilpolling";
+
+        if(selectedPeriode) {
+            newUrl += "?periode=" + selectedPeriode;
+        }
+
+        window.location.href = newUrl;
+    }
+</script>
+
 </body>
 
 </html>
