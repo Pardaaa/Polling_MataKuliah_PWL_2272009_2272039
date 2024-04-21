@@ -336,15 +336,15 @@ class AdminController extends Controller
 
     public function changepasswordadmin(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'current_password' => 'required',
-            'new_password' => 'required|min:6|confirmed',
+            'new_password' => 'required|min:8|confirmed',
         ]);
 
         $user = Auth::user();
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()->all()]);
+        if (!Hash::check($request->current_password, $user->password)) {
+            return response()->json(['errors' => ['Password saat ini salah']], 422);
         }
 
         $user->password = Hash::make($request->new_password);
