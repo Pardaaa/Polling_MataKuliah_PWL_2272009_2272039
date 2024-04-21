@@ -95,3 +95,4 @@ Route::get('pollingList', [App\Http\Controllers\MahasiswaController::class, 'per
 
 Route::get('/pollingListAdmin',[\App\Http\Controllers\AdminController::class, 'pollingListAdmin'])->name('pollingListAdmin');
 Route::get('/pollingListAdmin',[\App\Http\Controllers\AdminController::class, 'periodeadmin2'])->middleware(['checkRole:admin']);
+
