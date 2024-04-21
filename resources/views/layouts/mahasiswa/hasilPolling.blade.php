@@ -102,6 +102,7 @@
                                     <th>Nama Mata Kuliah</th>
                                     <th>SKS</th>
                                     <th>Dipilih</th>
+                                    <th>Periode</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -111,8 +112,11 @@
                                         <td>{{ $result->nama_mk }}</td>
                                         <td>{{ $result->sks }}</td>
                                         <td>{{ $result->total }}</td>
+                                        <td>{{ $result->nama_polling }}</td>
+
                                     </tr>
                                 @endforeach
+
                                 </tbody>
                             </table>
                         </div>
