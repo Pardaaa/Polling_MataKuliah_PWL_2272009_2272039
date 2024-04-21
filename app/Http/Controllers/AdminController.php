@@ -30,6 +30,12 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    public function admin()
+    {
+        return view('layouts/admin/admin');
+    }
+
     public function index()
     {
         $tabel = Mahasiswa::get();
