@@ -212,7 +212,7 @@
     function changePeriode() {
         var selectedPeriode = document.getElementById("periode").value;
         var baseUrl = window.location.origin;
-        var newUrl = baseUrl + "/hasilpolling";
+        var newUrl = baseUrl + "/hasilpollingadmin";
 
         if(selectedPeriode) {
             newUrl += "?periode=" + selectedPeriode;
