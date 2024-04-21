@@ -30,6 +30,12 @@ class ProdiController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    public function prodi()
+    {
+        return view('layouts/prodi/prodi');
+    }
+
     public function index()
     {
         $datamatakuliah = Matakuliah::get();
