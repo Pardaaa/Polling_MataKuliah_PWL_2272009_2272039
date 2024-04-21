@@ -160,28 +160,28 @@ class ProdiController extends Controller
 
         return view('layouts\prodi\hasilpollingprodi', ['results' => $results]);
     }
+    
     public function changepasswordformprodi()
     {
         return view('layouts\prodi\passwordprodi');
     }
+
     public function changepasswordprodi(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'current_password' => 'required',
             'new_password' => 'required|min:6|confirmed',
         ]);
 
         $user = Auth::user();
 
-        // Check if the current password matches the password in the database
-        if (!Hash::check($request->current_password, $user->password)) {
-            return redirect()->back()->with('error', 'Password saat ini salah.');
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
         }
-
         // Update the user's password
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        return view('layouts\prodi\prodi');
+        return response()->json(['success' => 'Password berhasil diubah']);
     }
 }
