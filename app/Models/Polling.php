@@ -7,15 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Polling extends Model
 {
-    protected $table = 'polling';
     use HasFactory;
 
+    protected $table = 'polling';
+
     protected $fillable = [
-        'id',
         'nama_polling',
         'start_date',
         'end_date'
     ];
 
-
+    public function hasilpolling()
+    {
+        return $this->hasMany(HasilPolling::class, 'polling_id', 'id');
+    }
 }
+
