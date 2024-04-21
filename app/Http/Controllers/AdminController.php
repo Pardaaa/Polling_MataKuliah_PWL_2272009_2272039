@@ -316,7 +316,6 @@ class AdminController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
-        // Update the user's password
         $user->password = Hash::make($request->new_password);
         $user->save();
 
