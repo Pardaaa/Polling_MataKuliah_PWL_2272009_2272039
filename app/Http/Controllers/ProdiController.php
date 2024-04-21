@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Matakuliah;
+use App\Models\Mahasiswa;
+use App\Models\HasilPolling;
 use App\Models\Polling;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
