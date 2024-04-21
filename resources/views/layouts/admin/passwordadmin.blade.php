@@ -248,13 +248,14 @@
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Success!',
-                                text: 'Password berhasil dirubah.',
+                                text: response.success, // Menggunakan pesan sukses dari respons JSON
                             }).then((result) => {
                                 if (result.isConfirmed || result.isDismissed) {
-                                    window.location.href = '/datamahasiswadankandidat';
+                                    window.location.href = '/admin';
                                 }
                             });
                         } else {
+                            // Menampilkan pesan kesalahan validasi
                             var errors = response.errors.join('<br>');
                             Swal.fire({
                                 icon: 'error',
