@@ -219,6 +219,57 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            $('form').submit(function(event) {
+                event.preventDefault();
+                var newPassword = $('#new_password').val();
+                var confirmPassword = $('#new_password_confirmation').val();
+
+                if (newPassword !== confirmPassword) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'New Password dan Confirm Password tidak cocok!',
+                    });
+                    return;
+                }
+                var form = $(this);
+                var url = form.attr('action');
+                var method = form.attr('method');
+                var data = form.serialize();
+
+                $.ajax({
+                    url: url,
+                    method: method,
+                    data: data,
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: 'Password berhasil dirubah.',
+                            }).then((result) => {
+                                if (result.isConfirmed || result.isDismissed) {
+                                    window.location.href = '/datamahasiswadankandidat';
+                                }
+                            });
+                        } else {
+                            var errors = response.errors.join('<br>');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                html: errors,
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

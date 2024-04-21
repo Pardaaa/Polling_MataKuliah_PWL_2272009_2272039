@@ -321,7 +321,7 @@ class AdminController extends Controller
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        return view('layouts\admin\admin');
+        return response()->json(['success' => 'Password berhasil dirubah.']);
     }
 
     public function pollingListAdmin()
