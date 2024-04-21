@@ -7,14 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class HasilPolling extends Model
 {
-    protected $table = 'hasilpolling';
     use HasFactory;
 
-    protected $fillable  = [
+    protected $table = 'hasilpolling';
+
+    protected $fillable = [
         'NRP',
         'name',
         'kode_mk',
         'nama_mk',
-        'sks'
+        'sks',
+        'polling_id'
     ];
+
+    public function polling()
+    {
+        return $this->belongsTo(Polling::class, 'kode_mk', 'id');
+    }
 }
