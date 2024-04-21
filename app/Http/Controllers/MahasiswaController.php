@@ -124,22 +124,39 @@ class MahasiswaController extends Controller
         return redirect('hasilpolling')->with('success', 'Pemilihan mata kuliah berhasil disimpan.');
     }
 
-    public function hasilpolling()
+    public function hasilpolling(Request $request)
     {
-        $results = DB::table('hasilpolling')
-        ->select('hasilpolling.kode_mk', 'hasilpolling.nama_mk', 'hasilpolling.sks', DB::raw('COUNT(*) as total'), 'polling.nama_polling')
-        ->leftJoin('polling', 'polling.id', '=', 'hasilpolling.polling_id')
-        ->groupBy('hasilpolling.kode_mk', 'hasilpolling.nama_mk', 'hasilpolling.sks', 'polling.nama_polling')
-        ->get();
+        $periodeId = $request->input('periode');
 
+        $resultsQuery = DB::table('hasilpolling')
+            ->select('hasilpolling.kode_mk', 'hasilpolling.nama_mk', 'hasilpolling.sks', DB::raw('COUNT(*) as total'), 'polling.nama_polling')
+            ->leftJoin('polling', 'polling.id', '=', 'hasilpolling.polling_id');
 
+        if ($periodeId) {
+            $resultsQuery->where('hasilpolling.polling_id', $periodeId);
+        }
 
-        // Jika Anda ingin melihat hasil query, Anda bisa menghapus atau mengomentari dd() berikut
-        // dd($results);
+        $results = $resultsQuery->groupBy('hasilpolling.kode_mk', 'hasilpolling.nama_mk', 'hasilpolling.sks', 'polling.nama_polling')
+            ->get();
 
-        return view('layouts.mahasiswa.hasilpolling', ['results' => $results]);
+        // Query untuk mendapatkan daftar nama mahasiswa yang sudah melakukan polling
+        $mahasiswaPolling = DB::table('hasilpolling')
+            ->select('users.name')
+            ->leftJoin('users', 'users.id', '=', 'hasilpolling.NRP')
+            ->groupBy('users.name')
+            ->get();
+
+        $periodes = Polling::all(); // Ambil semua periode untuk dropdown
+
+        return view('layouts.mahasiswa.hasilpolling', [
+            'results' => $results,
+            'periodes' => $periodes,
+            'selectedPeriode' => $periodeId,
+            'mahasiswaPolling' => $mahasiswaPolling
+        ]);
     }
 
+    
     public function changepasswordform()
     {
         return view('layouts\mahasiswa\password');
