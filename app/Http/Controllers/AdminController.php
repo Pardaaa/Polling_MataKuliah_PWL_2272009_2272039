@@ -229,11 +229,13 @@ class AdminController extends Controller
         $matakuliah = $request->input('matakuliah');
         $total_sks = 0;
 
+        // Hitung total SKS yang dipilih
         foreach ($matakuliah as $kode_mk) {
             $datamatkul = Matakuliah::where('kode_mk', $kode_mk)->first();
             $total_sks += $datamatkul->sks;
         }
 
+        // Batasan maksimum SKS
         $batas_max_sks = 9;
 
         // Periksa apakah total SKS tidak melebihi batas maksimum
@@ -254,7 +256,7 @@ class AdminController extends Controller
             $data->kode_mk = $kode_mk;
             $data->nama_mk = $datamatkul->nama_mk;
             $data->sks = $datamatkul->sks;
-            $data->polling_id = $polling_id;
+            $data->polling_id = $polling_id; // Tambahkan polling_id
             $data->save();
         }
 

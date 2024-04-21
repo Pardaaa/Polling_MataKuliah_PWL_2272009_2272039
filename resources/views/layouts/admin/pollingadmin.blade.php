@@ -107,6 +107,7 @@
                                             <h4 class="card-title text-center"><b>{{ $data->nama_polling }}</b></h4>
                                             <form id="pollingForm" action="{{ route('pollingadmin1') }}" method="post">
                                                 @csrf
+                                                <input type="hidden" name="polling_id" value="{{ $data->id }}">
                                                 <h3>Pilih Mata Kuliah:</h3>
                                                 <h6 style="color:Red;font-weight: bold">Pilih Mata Kuliah (Maksimal 9 SKS)</h6>
                                                 @foreach ($datamatakuliah as $polling)
@@ -178,6 +179,8 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
 
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var checkboxes = document.querySelectorAll('.form-check-input');
