@@ -179,59 +179,54 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function togglePasswordVisibility(targetId) {
-                const targetInput = document.getElementById(targetId);
-                const icon = document.querySelector(`[data-target="${targetId}"] i`);
-
-                if (targetInput.type === "password") {
-                    targetInput.type = "text";
-                    icon.classList.remove('fa-eye');
-                    icon.classList.add('fa-eye-slash');
-                } else {
-                    targetInput.type = "password";
-                    icon.classList.remove('fa-eye-slash');
-                    icon.classList.add('fa-eye');
-                }
-            }
-
-            const togglePasswordButtons = document.querySelectorAll('.toggle-password');
-            togglePasswordButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const targetId = this.getAttribute('data-target');
-                    togglePasswordVisibility(targetId);
-                });
-            });
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function(event) {
+        $(document).ready(function() {
+            $('form').submit(function(event) {
                 event.preventDefault();
+                var newPassword = $('#new_password').val();
+                var confirmPassword = $('#new_password_confirmation').val();
 
-                const currentPassword = document.getElementById('current_password').value;
-                const newPassword = document.getElementById('new_password').value;
-                const newPasswordConfirmation = document.getElementById('new_password_confirmation').value;
-
-                // Check if current password is correct (you should replace this with an actual check in your backend)
-                if (currentPassword !== "correct_current_password") {
+                if (newPassword !== confirmPassword) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Password saat ini salah!'
+                        text: 'New Password dan Confirm Password tidak cocok!',
                     });
                     return;
                 }
+                var form = $(this);
+                var url = form.attr('action');
+                var method = form.attr('method');
+                var data = form.serialize();
 
-                // Check if new password and confirmation match
-                if (newPassword !== newPasswordConfirmation) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Password baru dan konfirmasi password tidak cocok!'
-                    });
-                    return;
-                }
-
-                // Submit the form if all checks passed
-                form.submit();
+                $.ajax({
+                    url: url,
+                    method: method,
+                    data: data,
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: response.success, // Menggunakan pesan sukses dari respons JSON
+                            }).then((result) => {
+                                if (result.isConfirmed || result.isDismissed) {
+                                    window.location.href = '/mahasiswa';
+                                }
+                            });
+                        } else {
+                            // Menampilkan pesan kesalahan validasi
+                            var errors = response.errors.join('<br>');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                html: errors,
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
             });
         });
     </script>
