@@ -190,27 +190,53 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function togglePasswordVisibility(targetId) {
-                const targetInput = document.getElementById(targetId);
-                const icon = document.querySelector(`[data-target="${targetId}"] i`);
+        $(document).ready(function() {
+            $('form').submit(function(event) {
+                event.preventDefault();
+                var newPassword = $('#new_password').val();
+                var confirmPassword = $('#new_password_confirmation').val();
 
-                if (targetInput.type === "password") {
-                    targetInput.type = "text";
-                    icon.classList.remove('fa-eye');
-                    icon.classList.add('fa-eye-slash');
-                } else {
-                    targetInput.type = "password";
-                    icon.classList.remove('fa-eye-slash');
-                    icon.classList.add('fa-eye');
+                if (newPassword !== confirmPassword) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'New Password dan Confirm Password tidak cocok!',
+                    });
+                    return;
                 }
-            }
+                var form = $(this);
+                var url = form.attr('action');
+                var method = form.attr('method');
+                var data = form.serialize();
 
-            const togglePasswordButtons = document.querySelectorAll('.toggle-password');
-            togglePasswordButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const targetId = this.getAttribute('data-target');
-                    togglePasswordVisibility(targetId);
+                $.ajax({
+                    url: url,
+                    method: method,
+                    data: data,
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: response.success, // Menggunakan pesan sukses dari respons JSON
+                            }).then((result) => {
+                                if (result.isConfirmed || result.isDismissed) {
+                                    window.location.href = '/prodi';
+                                }
+                            });
+                        } else {
+                            // Menampilkan pesan kesalahan validasi
+                            var errors = response.errors.join('<br>');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                html: errors,
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
                 });
             });
         });
