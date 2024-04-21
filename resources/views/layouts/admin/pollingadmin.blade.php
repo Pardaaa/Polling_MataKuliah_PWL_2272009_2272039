@@ -105,19 +105,19 @@
                                         @if (isset($data))
                                             <h5 class="card-title text-center">Polling dibuka</h5>
                                             <h4 class="card-title text-center"><b>{{ $data->nama_polling }}</b></h4>
-                                            @csrf
-                                            <h3>Pilih Mata Kuliah:</h3>
-                                            <h6 style="color:Red;font-weight: bold">Pilih Mata Kuliah (Maksimal 9 SKS)</h6>
                                             <form id="pollingForm" action="{{ route('pollingadmin1') }}" method="post">
-                                                @foreach ($datamatakuliah as $pollings)
+                                                @csrf
+                                                <h3>Pilih Mata Kuliah:</h3>
+                                                <h6 style="color:Red;font-weight: bold">Pilih Mata Kuliah (Maksimal 9 SKS)</h6>
+                                                @foreach ($datamatakuliah as $polling)
                                                     <div class="form-check">
                                                         @php
                                                             $user = auth()->user();
-                                                            $isChecked = $user->hasilpolling->contains('kode_mk', $pollings->kode_mk);
+                                                            $isChecked = $user->hasilpolling->contains('kode_mk', $polling->kode_mk);
                                                         @endphp
-                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $pollings->kode_mk }}" value="{{ $pollings->kode_mk }}" data-sks="{{ $pollings->sks }}" {{ $isChecked ? 'checked disable' : '' }}>
-                                                        <label class="form-check-label" for="matakuliah_{{ $pollings->kode_mk }}">
-                                                            {{ $pollings->kode_mk }} | {{ $pollings->nama_mk }} | {{ $pollings->sks }} SKS
+                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $polling->kode_mk }}" value="{{ $polling->kode_mk }}" data-sks="{{ $polling->sks }}" {{ $isChecked ? 'checked ' : '' }}>
+                                                        <label class="form-check-label" for="matakuliah_{{ $polling->kode_mk }}">
+                                                            {{ $polling->kode_mk }} | {{ $polling->nama_mk }} | {{ $polling->sks }} SKS
                                                             @if ($isChecked)
                                                                 <span style="color: red;font-weight: bold">| Sudah dipilih sebelumnya</span>
                                                             @endif
@@ -181,8 +181,8 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var checkboxes = document.querySelectorAll('.form-check-input');
-            var pollingForm = document.getElementById('pollingForm'); // Menambahkan ID pada form
-            var hasSelected = false; // Variabel bantuan untuk menandai apakah pengguna telah memilih
+            var pollingForm = document.getElementById('pollingForm');
+            var hasSelected = false;
 
             checkboxes.forEach(function(checkbox) {
                 checkbox.addEventListener('change', function() {
@@ -215,13 +215,13 @@
                 });
 
                 // Memperbaiki pengecekan status pemilihan
-                if (hasSelected && selectedCheckboxes.length > 0) {
-                    // Jika pengguna telah memilih sebelumnya
+                if (selectedCheckboxes.length === 0) {
+                    // Jika pengguna tidak memilih apapun
                     event.preventDefault();
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Anda telah memilih sebelumnya. Tidak dapat memilih lagi!'
+                        text: 'Anda harus memilih setidaknya satu mata kuliah!'
                     });
                 } else if (sksTerpilih > 9) {
                     event.preventDefault();

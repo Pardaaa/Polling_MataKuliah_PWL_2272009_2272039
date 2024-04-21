@@ -105,7 +105,7 @@
                                                             $user = auth()->user();
                                                             $isChecked = $user->hasilpolling->contains('kode_mk', $polling->kode_mk);
                                                         @endphp
-                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $polling->kode_mk }}" value="{{ $polling->kode_mk }}" data-sks="{{ $polling->sks }}" {{ $isChecked ? 'checked disable' : '' }}>
+                                                        <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $polling->kode_mk }}" value="{{ $polling->kode_mk }}" data-sks="{{ $polling->sks }}" {{ $isChecked ? 'checked ' : '' }}>
                                                         <label class="form-check-label" for="matakuliah_{{ $polling->kode_mk }}">
                                                             {{ $polling->kode_mk }} | {{ $polling->nama_mk }} | {{ $polling->sks }} SKS
                                                             @if ($isChecked)
@@ -175,7 +175,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             var checkboxes = document.querySelectorAll('.form-check-input');
             var pollingForm = document.getElementById('pollingForm'); // Menambahkan ID pada form
-            var hasSelected = false; // Variabel bantuan untuk menandai apakah pengguna telah memilih
 
             checkboxes.forEach(function(checkbox) {
                 checkbox.addEventListener('change', function() {
@@ -208,13 +207,13 @@
                 });
 
                 // Memperbaiki pengecekan status pemilihan
-                if (hasSelected && selectedCheckboxes.length > 0) {
-                    // Jika pengguna telah memilih sebelumnya
+                if (selectedCheckboxes.length === 0) {
+                    // Jika pengguna tidak memilih apapun
                     event.preventDefault();
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Anda telah memilih sebelumnya. Tidak dapat memilih lagi!'
+                        text: 'Anda harus memilih setidaknya satu mata kuliah!'
                     });
                 } else if (sksTerpilih > 9) {
                     event.preventDefault();
