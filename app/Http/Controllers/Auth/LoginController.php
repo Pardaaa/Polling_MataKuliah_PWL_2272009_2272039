@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -35,5 +36,27 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Determine the redirect path based on the user's role.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param mixed $user
+     * @return string
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        // Determine user role and redirect accordingly
+        if ($user->isAdmin()) {
+            return redirect()->route('admin');
+        } elseif ($user->isProdi()) {
+            return redirect()->route('prodi');
+        } elseif ($user->isMahasiswa()) {
+            return redirect()->route('mahasiswa');
+        }
+
+        // Default redirect if user role is not recognized
+        return redirect()->intended($this->redirectTo);
     }
 }
