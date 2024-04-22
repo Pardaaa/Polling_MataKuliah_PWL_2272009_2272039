@@ -136,11 +136,17 @@ class MahasiswaController extends Controller
         $results = $resultsQuery->groupBy('hasilpolling.kode_mk', 'hasilpolling.nama_mk', 'hasilpolling.sks', 'polling.nama_polling')
             ->get();
 
-        // Query untuk mendapatkan daftar nama mahasiswa yang sudah melakukan polling
-        $mahasiswaPolling = DB::table('hasilpolling')
+        // Query untuk mendapatkan daftar nama mahasiswa yang sudah melakukan polling sesuai periode
+        $mahasiswaPollingQuery = DB::table('hasilpolling')
             ->select('users.name')
             ->leftJoin('users', 'users.id', '=', 'hasilpolling.NRP')
-            ->groupBy('users.name')
+            ->leftJoin('polling', 'polling.id', '=', 'hasilpolling.polling_id');
+
+        if ($periodeId) {
+            $mahasiswaPollingQuery->where('hasilpolling.polling_id', $periodeId);
+        }
+
+        $mahasiswaPolling = $mahasiswaPollingQuery->groupBy('users.name')
             ->get();
 
         $periodes = Polling::all(); // Ambil semua periode untuk dropdown
@@ -152,7 +158,6 @@ class MahasiswaController extends Controller
             'mahasiswaPolling' => $mahasiswaPolling
         ]);
     }
-
 
     public function changepasswordform()
     {
