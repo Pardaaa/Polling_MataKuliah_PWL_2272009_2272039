@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Validator;
+use Illuminate\Validation\ValidationException;
 
 class AdminController extends Controller
 {
@@ -99,15 +100,19 @@ class AdminController extends Controller
 
     public function updateuser (Request $request, Mahasiswa $user)
     {
-        $validatedData = validator($request->all(), [
-            'id' => 'required|numeric|unique:users,id'. $users->id,
-            'name' => 'required|min:3',
-            'email' =>'required|email',
-            'role' => 'required'
-        ]) -> validate();
+        try {
+            $validatedData = validator::make($request->all(), [
+                'id' => 'required|numeric|unique:users,id,'.$user->id,
+                'name' => 'required|min:3',
+                'email' =>'required|email',
+                'role' => 'required'
+            ])->validate();
 
-        $user->update($validatedData);
-        return response()->json(['success' => 'Data polling berhasil diedit.']);
+            $user->update($validatedData);
+            return response()->json(['success' => true]);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()->all()], 422);
+        }
     }
 
     public function savematakuliahadmin(Request $request)

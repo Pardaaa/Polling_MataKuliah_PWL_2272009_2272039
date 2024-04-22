@@ -52,7 +52,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="datamahasiswadankandidat">
+            <a class="nav-link" href="{{ route('datamahasiswadankandidat') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 Dashboard</a>
         </li>
@@ -67,23 +67,23 @@
 
         <!-- Nav Item -->
         <li class="nav-item">
-            <a class="nav-link" href="datamahasiswadankandidat">
+            <a class="nav-link" href="{{ route('datamahasiswadankandidat') }}">
                 <i class="fas fa-fw fa-user-graduate"></i>
                 Data User</a>
 
-            <a class="nav-link" href="datamatakuliahadmin">
+            <a class="nav-link" href="{{route('datamatakuliahadmin')}}">
                 <i class="fas fa-fw fa-book-dead"></i>
                 Data Mata Kuliah</a>
 
-            <a class="nav-link" href="periodeadmin">
+            <a class="nav-link" href="/periodeadmin">
                 <i class="fas fa-fw fa-calendar"></i>
                 Setting Periode</a>
 
-            <a class="nav-link" href="pollingListAdmin">
+            <a class="nav-link" href="/pollingListAdmin">
                 <i class="fas fa-fw fa-vote-yea"></i>
                 Voting</a>
 
-            <a class="nav-link" href="hasilpollingadmin">
+            <a class="nav-link" href="/hasilpollingadmin">
                 <i class="fas fa-fw fa-poll"></i>
                 Hasil Polling</a>
 

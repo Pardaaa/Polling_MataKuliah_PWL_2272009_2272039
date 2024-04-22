@@ -65,19 +65,19 @@
 
         <!-- Nav Item -->
         <li class="nav-item">
-            <a class="nav-link" href="datamahasiswa">
+            <a class="nav-link" href="{{ route('datamahasiswa') }}">
                 <i class="fas fa-fw fa-user-graduate"></i>
                 Data Mahasiswa</a>
 
-            <a class="nav-link" href="datamatakuliah">
+            <a class="nav-link" href="{{ route('datamatakuliah') }}">
                 <i class="fas fa-fw fa-book-dead"></i>
                 Data Mata Kuliah</a>
 
-            <a class="nav-link" href="periode">
+            <a class="nav-link" href="/periode">
                 <i class="fas fa-fw fa-calendar"></i>
                 Setting Periode</a>
 
-            <a class="nav-link" href="hasilpollingprodi">
+            <a class="nav-link" href="/hasilpollingprodi">
                 <i class="fas fa-fw fa-poll"></i>
                 Hasil Polling</a>
 
