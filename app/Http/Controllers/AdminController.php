@@ -280,14 +280,18 @@ class AdminController extends Controller
         $results = $resultsQuery->groupBy('hasilpolling.kode_mk', 'hasilpolling.nama_mk', 'hasilpolling.sks', 'polling.nama_polling')
             ->get();
 
-        // Query untuk mendapatkan daftar nama mahasiswa yang sudah melakukan polling
-        $mahasiswaPolling = DB::table('hasilpolling')
+        $mahasiswaPollingQuery = DB::table('hasilpolling')
             ->select('users.name')
-            ->leftJoin('users', 'users.id', '=', 'hasilpolling.NRP')
-            ->groupBy('users.name')
+            ->leftJoin('users', 'users.id', '=', 'hasilpolling.NRP');
+
+        if ($periodeId) {
+            $mahasiswaPollingQuery->where('hasilpolling.polling_id', $periodeId);
+        }
+
+        $mahasiswaPolling = $mahasiswaPollingQuery->groupBy('users.name')
             ->get();
 
-        $periodes = Polling::all(); // Ambil semua periode untuk dropdown
+        $periodes = Polling::all();
 
         return view('layouts.admin.hasilpollingadmin', [
             'results' => $results,
