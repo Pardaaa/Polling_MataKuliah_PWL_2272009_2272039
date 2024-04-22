@@ -258,7 +258,7 @@ class AdminController extends Controller
             $data->kode_mk = $kode_mk;
             $data->nama_mk = $datamatkul->nama_mk;
             $data->sks = $datamatkul->sks;
-            $data->polling_id = $polling_id; // Tambahkan polling_id
+            $data->polling_id = $polling_id;
             $data->save();
         }
 
