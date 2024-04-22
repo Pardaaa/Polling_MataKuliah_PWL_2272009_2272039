@@ -114,7 +114,7 @@
                                                     <div class="form-check">
                                                         @php
                                                             $user = auth()->user();
-                                                            $isChecked = $user->hasilpolling->contains('kode_mk', $polling->kode_mk);
+                                                            $isChecked = $user->hasilpolling->where('polling_id', $data->id)->contains('kode_mk', $polling->kode_mk);
                                                         @endphp
                                                         <input class="form-check-input" type="checkbox" name="matakuliah[]" id="matakuliah_{{ $polling->kode_mk }}" value="{{ $polling->kode_mk }}" data-sks="{{ $polling->sks }}" {{ $isChecked ? 'checked ' : '' }}>
                                                         <label class="form-check-label" for="matakuliah_{{ $polling->kode_mk }}">
@@ -125,6 +125,7 @@
                                                         </label>
                                                     </div>
                                                 @endforeach
+
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </form>
                                         @endif
