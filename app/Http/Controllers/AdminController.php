@@ -211,9 +211,12 @@ class AdminController extends Controller
             $datamatakuliah = Matakuliah::get();
             $count = $datamatakuliah->count(); // Periksa jumlah data
 
+            $user = Auth::user();
+            $selectedMataKuliah = $user->hasilpolling->where('polling_id', $data->id)->pluck('kode_mk')->toArray();
+
             if ($count > 0) {
                 // Ada data, lanjutkan dengan tindakan yang sesuai
-                return view('layouts\admin\pollingadmin', compact('data', 'datamatakuliah'));
+                return view('layouts\admin\pollingadmin', compact('data', 'datamatakuliah', 'selectedMataKuliah'));
             } else {
                 // Tidak ada data, tangani kasus ini sesuai kebutuhan aplikasi
                 return redirect()->back()->with('error', 'Tidak ada data mata kuliah yang tersedia.');
@@ -223,6 +226,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Data mata kuliah tidak tersedia.');
         }
     }
+
 
     public function pollingadmin1(Request $request)
     {
