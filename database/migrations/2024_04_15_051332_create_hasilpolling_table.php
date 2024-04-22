@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('kode_mk');
             $table->string('nama_mk');
             $table->string('sks');
+            $table->unsignedBigInteger('polling_id');
+            $table->foreign('polling_id')->references('id')->on('polling')->onDelete('cascade');
             $table->timestamps();
         });
     }
