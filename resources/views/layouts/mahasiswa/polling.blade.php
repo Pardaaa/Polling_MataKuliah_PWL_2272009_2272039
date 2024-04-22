@@ -118,8 +118,6 @@
 
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </form>
-                                        @else
-                                        <h5 class="card-title text-center">Polling belum dibuka</h5>
                                         @endif
                                     </div>
                                 </div>
