@@ -100,7 +100,7 @@ class AdminController extends Controller
     public function updateuser (Request $request, Mahasiswa $user)
     {
         $validatedData = validator($request->all(), [
-            'id' => 'required|min:7|numeric',
+            'id' => 'required|numeric|unique:users,id'. $users->id,
             'name' => 'required|min:3',
             'email' =>'required|email',
             'role' => 'required'
@@ -303,7 +303,7 @@ class AdminController extends Controller
     public function save(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id' => 'required|min:7|unique:users|numeric',
+            'id' => 'required|unique:users|numeric',
             'name' => 'required|min:3',
             'email' =>'required|email|unique:users',
             'password' => 'required|min:6',
