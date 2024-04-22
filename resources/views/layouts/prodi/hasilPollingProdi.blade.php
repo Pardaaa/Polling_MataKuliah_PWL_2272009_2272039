@@ -98,7 +98,6 @@
                 <br>
                 <h1 class="h3 mb-2 text-gray-800 text-center">Hasil Polling</h1>
 
-                <!-- Dropdown Periode -->
                 <div class="form-group">
                     <label for="periode">Pilih Periode:</label>
                     <select class="form-control" id="periode" onchange="changePeriode()">
@@ -108,7 +107,6 @@
                         @endforeach
                     </select>
                 </div>
-
 
                 <div class="card shadow mb-4">
                     <div class="card-body">
@@ -139,7 +137,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Tabel Nama Mahasiswa yang sudah melakukan polling -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Daftar Nama Mahasiswa yang Sudah Melakukan Polling</h6>

@@ -188,7 +188,7 @@ class ProdiController extends Controller
         $mahasiswaPolling = $mahasiswaPollingQuery->groupBy('users.name')
             ->get();
 
-        $periodes = Polling::all(); // Ambil semua periode untuk dropdown
+        $periodes = Polling::all();
 
         return view('layouts.prodi.hasilpollingprodi', [
             'results' => $results,
