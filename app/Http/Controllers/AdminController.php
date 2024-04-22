@@ -248,10 +248,7 @@ class AdminController extends Controller
             return redirect('hasilpolling')->with('error', 'Maaf, jumlah SKS yang Anda pilih melebihi batas maksimum yang diizinkan.');
         }
 
-        // Hapus hasil polling yang ada berdasarkan polling_id
-        $existingPolling = HasilPolling::where('NRP', $id)->whereHas('polling', function($query) use ($polling_id) {
-            $query->where('id', $polling_id);
-        })->delete();
+        HasilPolling::where('NRP', $id)->where('polling_id', $polling_id)->delete();
 
         foreach ($matakuliah as $kode_mk) {
             $datamatkul = Matakuliah::where('kode_mk', $kode_mk)->first();
